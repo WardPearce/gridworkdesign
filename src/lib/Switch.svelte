@@ -32,8 +32,12 @@
 		height: 1.75rem;
 		flex: 0 0 auto;
 		border: 2px solid var(--text);
-		background: transparent;
+		background: var(--background-darker);
 		cursor: pointer;
+	}
+
+	:global(.switch-root[data-state='checked']) {
+		background: transparent;
 	}
 
 	:global(.switch-root:focus-visible) {
@@ -52,13 +56,12 @@
 		left: 0.2rem;
 		width: 1rem;
 		height: 1rem;
-		background: var(--text);
+		background: var(--white);
 	}
 
 	:global(.switch-root[data-state='checked'] .switch-thumb) {
 		left: auto;
 		right: 0.2rem;
 		background: var(--background-darker);
-		box-shadow: inset 0 0 0 1px var(--white);
 	}
 </style>

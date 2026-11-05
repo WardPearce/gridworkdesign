@@ -87,13 +87,20 @@
 	}
 	:global(.date-trigger),
 	:global(.calendar-nav) {
+		display: inline-flex;
 		min-width: 2.5rem;
 		min-height: 2.5rem;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
 		border: 1px solid var(--text);
 		background: transparent;
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+	}
+	:global(.calendar-nav:hover:not(:disabled)) {
+		border-style: dashed;
 	}
 	:global(.date-content) {
 		z-index: 50;

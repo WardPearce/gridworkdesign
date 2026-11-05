@@ -31,8 +31,11 @@
 		gap: 0.25rem;
 	}
 	:global(.rating-item) {
+		display: inline-flex;
 		min-width: 2.75rem;
 		min-height: 2.75rem;
+		align-items: center;
+		justify-content: center;
 		border: 2px solid var(--text);
 		background: transparent;
 		color: var(--text);
@@ -42,7 +45,18 @@
 	}
 	:global(.rating-item[data-highlighted]),
 	:global(.rating-item[data-state='active']) {
-		color: var(--background-darker);
+		background: var(--background-darker);
+		color: var(--white);
+	}
+	:global(.rating-item:hover:not(:disabled)) {
+		background: color-mix(in srgb, var(--background-darker) 50%, var(--white));
+		color: var(--text);
+		border-style: dashed;
+	}
+	:global(.rating-item[data-highlighted]:hover:not(:disabled)),
+	:global(.rating-item[data-state='active']:hover:not(:disabled)) {
+		color: var(--text);
+		background: color-mix(in srgb, var(--background-darker) 50%, var(--white));
 	}
 	:global(.rating-item:focus-visible) {
 		outline: 2px dashed var(--text);

@@ -92,7 +92,11 @@
 		margin-top: 0.5rem;
 	}
 	:global(.dialog-close) {
+		display: inline-flex;
 		min-width: 2.75rem;
+		min-height: 2.75rem;
+		align-items: center;
+		justify-content: center;
 		padding: 0;
 		font-size: 1.25rem;
 		line-height: 1;

@@ -26,8 +26,11 @@
 		gap: 0.2rem;
 	}
 	:global(.rating-item) {
+		display: inline-flex;
 		min-width: 2.75rem;
 		min-height: 2.75rem;
+		align-items: center;
+		justify-content: center;
 		border: 2px solid var(--text);
 		background: transparent;
 		color: var(--text);
@@ -40,6 +43,8 @@
 		color: var(--white);
 	}
 	:global(.rating-item:hover:not(:disabled)) {
+		background: color-mix(in srgb, var(--background-darker) 50%, var(--white));
+		color: var(--text);
 		border-style: dashed;
 	}
 	:global(.rating-item:focus-visible) {

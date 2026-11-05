@@ -78,6 +78,15 @@
 		font: inherit;
 		cursor: pointer;
 	}
+	:global(.calendar-nav) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+	}
+	:global(.calendar-nav:hover:not(:disabled)) {
+		border-style: dashed;
+	}
 	:global(.calendar-grid) {
 		border-collapse: collapse;
 	}
