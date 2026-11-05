@@ -34,9 +34,6 @@
 		flex-wrap: wrap;
 		border-bottom: 2px solid var(--text);
 	}
-	:global(.tabs-list:has(.tabs-trigger:hover)) {
-		border-bottom-style: dashed;
-	}
 	:global(.tabs-trigger) {
 		min-height: 2.75rem;
 		padding: 0.5rem 0.9rem;
@@ -53,8 +50,9 @@
 		font-weight: 700;
 	}
 	:global(.tabs-trigger:hover:not(:disabled)) {
-		border-color: var(--text);
-		border-style: dashed;
+		text-decoration: underline;
+		text-decoration-style: dashed;
+		text-underline-offset: 0.2em;
 	}
 	:global(.tabs-trigger[data-state='active']:hover:not(:disabled)) {
 		border-bottom-color: var(--background);
