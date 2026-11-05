@@ -66,5 +66,8 @@
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"
+	},
+	"dependencies": {
+		"bits-ui": "^2.20.6"
 	}
 }
