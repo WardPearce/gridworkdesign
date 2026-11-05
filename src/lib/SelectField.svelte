@@ -8,7 +8,13 @@
 		value = $bindable(''),
 		placeholder = 'Choose an option',
 		name
-	}: { label: string; options: Option[]; value?: string; placeholder?: string; name?: string } = $props();
+	}: {
+		label: string;
+		options: Option[];
+		value?: string;
+		placeholder?: string;
+		name?: string;
+	} = $props();
 </script>
 
 <div class="select-field">
@@ -60,8 +66,7 @@
 	}
 
 	:global(.select-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		border-style: dotted;
 	}
 
 	:global(.select-content) {

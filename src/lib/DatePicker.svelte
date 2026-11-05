@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { DatePicker as BitsDatePicker } from 'bits-ui';
 	import type { DateValue } from '@internationalized/date';
-	let { label = 'Choose date', value = $bindable() }: { label?: string; value?: DateValue } = $props();
+	let { label = 'Choose date', value = $bindable() }: { label?: string; value?: DateValue } =
+		$props();
 </script>
 
 <BitsDatePicker.Root bind:value weekdayFormat="short" fixedWeeks>
@@ -11,27 +12,40 @@
 			{#each segments as { part, value: segmentValue }, index (`${part}-${index}`)}
 				<BitsDatePicker.Segment {part} class="date-segment">{segmentValue}</BitsDatePicker.Segment>
 			{/each}
-			<BitsDatePicker.Trigger class="date-trigger" aria-label="Open calendar">▦</BitsDatePicker.Trigger>
+			<BitsDatePicker.Trigger class="date-trigger" aria-label="Open calendar"
+				>▦</BitsDatePicker.Trigger
+			>
 		{/snippet}
 	</BitsDatePicker.Input>
 	<BitsDatePicker.Content class="date-content" sideOffset={4}>
 		<BitsDatePicker.Calendar class="date-calendar">
 			{#snippet children({ months, weekdays })}
 				<BitsDatePicker.Header class="calendar-header">
-					<BitsDatePicker.PrevButton class="calendar-nav" aria-label="Previous month">←</BitsDatePicker.PrevButton>
+					<BitsDatePicker.PrevButton class="calendar-nav" aria-label="Previous month"
+						>←</BitsDatePicker.PrevButton
+					>
 					<BitsDatePicker.Heading class="calendar-heading" />
-					<BitsDatePicker.NextButton class="calendar-nav" aria-label="Next month">→</BitsDatePicker.NextButton>
+					<BitsDatePicker.NextButton class="calendar-nav" aria-label="Next month"
+						>→</BitsDatePicker.NextButton
+					>
 				</BitsDatePicker.Header>
 				{#each months as month (month.value)}
 					<BitsDatePicker.Grid class="calendar-grid">
-						<BitsDatePicker.GridHead><BitsDatePicker.GridRow class="calendar-row">
-							{#each weekdays as day (day)}<BitsDatePicker.HeadCell class="calendar-weekday">{day}</BitsDatePicker.HeadCell>{/each}
-						</BitsDatePicker.GridRow></BitsDatePicker.GridHead>
+						<BitsDatePicker.GridHead
+							><BitsDatePicker.GridRow class="calendar-row">
+								{#each weekdays as day (day)}<BitsDatePicker.HeadCell class="calendar-weekday"
+										>{day}</BitsDatePicker.HeadCell
+									>{/each}
+							</BitsDatePicker.GridRow></BitsDatePicker.GridHead
+						>
 						<BitsDatePicker.GridBody>
 							{#each month.weeks as week (week)}
 								<BitsDatePicker.GridRow class="calendar-row">
 									{#each week as date (date)}
-										<BitsDatePicker.Cell {date} month={month.value} class="calendar-cell"><BitsDatePicker.Day class="calendar-day">{date.day}</BitsDatePicker.Day></BitsDatePicker.Cell>
+										<BitsDatePicker.Cell {date} month={month.value} class="calendar-cell"
+											><BitsDatePicker.Day class="calendar-day">{date.day}</BitsDatePicker.Day
+											></BitsDatePicker.Cell
+										>
 									{/each}
 								</BitsDatePicker.GridRow>
 							{/each}
@@ -44,21 +58,97 @@
 </BitsDatePicker.Root>
 
 <style>
-	:global(.date-label) { display: block; margin-bottom: 0.35rem; color: var(--text); font-weight: 700; }
-	:global(.date-input) { display: flex; flex-wrap: wrap; width: fit-content; min-height: 2.75rem; align-items: center; gap: 0.15rem; padding: 0.4rem 0.65rem; border: 2px solid var(--text); background: transparent; color: var(--text); font: inherit; }
-	:global(.date-input:focus-within) { outline: 2px dashed var(--text); outline-offset: 3px; }
-	:global(.date-segment[data-focused]) { background: var(--background-darker); color: var(--white); }
-	:global(.date-trigger), :global(.calendar-nav) { min-width: 2.5rem; min-height: 2.5rem; border: 1px solid var(--text); background: transparent; color: var(--text); font: inherit; cursor: pointer; }
-	:global(.date-content) { z-index: 50; border: 2px solid var(--text); background: var(--background); color: var(--text); box-shadow: 3px 3px 0 var(--text); }
-	:global(.date-calendar) { padding: 1rem; }
-	:global(.calendar-header) { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
-	:global(.calendar-heading) { font-weight: 700; }
-	:global(.calendar-grid) { border-collapse: collapse; }
-	:global(.calendar-row) { display: flex; }
-	:global(.calendar-weekday), :global(.calendar-cell) { width: 2.5rem; height: 2.5rem; text-align: center; }
-	:global(.calendar-weekday) { font-size: 0.75rem; }
-	:global(.calendar-day) { min-width: 2.5rem; min-height: 2.5rem; border: 1px solid transparent; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
-	:global(.calendar-day[data-selected]) { background: var(--background-darker); color: var(--white); }
-	:global(.calendar-day[data-today]) { border-color: var(--text); }
-	:global(.calendar-day:focus-visible), :global(.calendar-nav:focus-visible), :global(.date-trigger:focus-visible) { outline: 2px dashed var(--text); outline-offset: 2px; }
+	:global(.date-label) {
+		display: block;
+		margin-bottom: 0.35rem;
+		color: var(--text);
+		font-weight: 700;
+	}
+	:global(.date-input) {
+		display: flex;
+		flex-wrap: wrap;
+		width: fit-content;
+		min-height: 2.75rem;
+		align-items: center;
+		gap: 0.15rem;
+		padding: 0.4rem 0.65rem;
+		border: 2px solid var(--text);
+		background: transparent;
+		color: var(--text);
+		font: inherit;
+	}
+	:global(.date-input:focus-within) {
+		border-style: dotted;
+	}
+	:global(.date-segment[data-focused]) {
+		background: var(--background-darker);
+		color: var(--white);
+	}
+	:global(.date-trigger),
+	:global(.calendar-nav) {
+		min-width: 2.5rem;
+		min-height: 2.5rem;
+		border: 1px solid var(--text);
+		background: transparent;
+		color: var(--text);
+		font: inherit;
+		cursor: pointer;
+	}
+	:global(.date-content) {
+		z-index: 50;
+		border: 2px solid var(--text);
+		background: var(--background);
+		color: var(--text);
+		box-shadow: 3px 3px 0 var(--text);
+	}
+	:global(.date-calendar) {
+		padding: 1rem;
+	}
+	:global(.calendar-header) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.75rem;
+	}
+	:global(.calendar-heading) {
+		font-weight: 700;
+	}
+	:global(.calendar-grid) {
+		border-collapse: collapse;
+	}
+	:global(.calendar-row) {
+		display: flex;
+	}
+	:global(.calendar-weekday),
+	:global(.calendar-cell) {
+		width: 2.5rem;
+		height: 2.5rem;
+		text-align: center;
+	}
+	:global(.calendar-weekday) {
+		font-size: 0.75rem;
+	}
+	:global(.calendar-day) {
+		min-width: 2.5rem;
+		min-height: 2.5rem;
+		border: 1px solid transparent;
+		background: transparent;
+		color: var(--text);
+		font: inherit;
+		cursor: pointer;
+	}
+	:global(.calendar-day[data-selected]) {
+		background: var(--background-darker);
+		color: var(--white);
+	}
+	:global(.calendar-day[data-today]) {
+		border-color: var(--text);
+	}
+	:global(.calendar-day:focus-visible),
+	:global(.calendar-nav:focus-visible),
+	:global(.date-trigger:focus-visible) {
+		outline: 2px dashed var(--text);
+		outline-offset: 2px;
+	}
 </style>

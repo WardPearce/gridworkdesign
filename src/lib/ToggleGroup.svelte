@@ -9,7 +9,13 @@
 	}: { options: Option[]; value?: string; disabled?: boolean } = $props();
 </script>
 
-<BitsToggleGroup.Root type="single" bind:value {disabled} class="toggle-group" aria-label="Choose an option">
+<BitsToggleGroup.Root
+	type="single"
+	bind:value
+	{disabled}
+	class="toggle-group"
+	aria-label="Choose an option"
+>
 	{#each options as option (option.value)}
 		<BitsToggleGroup.Item value={option.value} disabled={option.disabled} class="toggle-group-item">
 			{option.label}
@@ -37,6 +43,10 @@
 	:global(.toggle-group-item[data-state='on']) {
 		background: var(--background-darker);
 		color: var(--white);
+	}
+
+	:global(.toggle-group-item:hover:not(:disabled)) {
+		border-style: dotted;
 	}
 
 	:global(.toggle-group-item:focus-visible) {

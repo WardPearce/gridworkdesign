@@ -1,0 +1,14 @@
+/* Default theme tokens used by the component library and its examples. */
+:root {
+	--background: rgb(182 180 180);
+	--text: rgb(56 56 56);
+	--white: rgb(236 236 236);
+	--light: #999999;
+	--background-darker: rgb(71 70 70);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}

@@ -20,34 +20,36 @@ Keep these qualities in balance:
 
 Use these five base values for the default palette. These are the values used by the reference styles, recorded here so components can reproduce its contrast and hierarchy:
 
-| Token | Default value | Strict usage |
-| --- | --- | --- |
-| `--background` | `rgb(182 180 180)` (`#b6b4b4`) | Page background and transparent control surfaces. Do not use it for text, borders, or shadows. |
-| `--text` | `rgb(56 56 56)` (`#383838`) | Primary text, control borders, dotted outlines, focus treatment, and hard offset shadows. This is the default ink color. |
-| `--white` | `rgb(236 236 236)` (`#ececec`) | Foreground text/icons on `--background-darker` surfaces. Despite its name, never use it as the default page background. |
-| `--light` | `#999999` | Muted track/surface color, specifically progress tracks. Do not use for body copy or important boundaries. |
-| `--background-darker` | `rgb(71 70 70)` (`#474646`) | Alternate filled button and inset surface. Pair with `--white` foreground. Do not use as the page background in the default theme. |
+| Token                 | Default value                  | Strict usage                                                                                                                       |
+| --------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `--background`        | `rgb(182 180 180)` (`#b6b4b4`) | Page background and transparent control surfaces. Do not use it for text, borders, or shadows.                                     |
+| `--text`              | `rgb(56 56 56)` (`#383838`)    | Primary text, control borders, dotted outlines, focus treatment, and hard offset shadows. This is the default ink color.           |
+| `--white`             | `rgb(236 236 236)` (`#ececec`) | Foreground text/icons on `--background-darker` surfaces. Despite its name, never use it as the default page background.            |
+| `--light`             | `#999999`                      | Muted track/surface color, specifically progress tracks. Do not use for body copy or important boundaries.                         |
+| `--background-darker` | `rgb(71 70 70)` (`#474646`)    | Alternate filled button and inset surface. Pair with `--white` foreground. Do not use as the page background in the default theme. |
 
 The reference palettes are:
 
-| Theme | `--white` | `--background` | `--light` | `--text` | `--background-darker` |
-| --- | --- | --- | --- | --- | --- |
-| IBM (default) | `rgb(236 236 236)` | `rgb(182 180 180)` | `#999999` | `rgb(56 56 56)` | `rgb(71 70 70)` |
-| NewsPaper | `rgb(170 166 166)` | `rgb(136 135 135)` | `#747373` | `rgb(27 27 27)` | `rgb(49 49 49)` |
-| BurntWood | `rgb(255 255 255)` | `rgb(26 25 25)` | `#494444` | `rgb(240 232 232)` | `rgb(26 25 25)` |
-| Hacker | `rgb(236 236 236)` | `#072004` | `#0f3813` | `rgb(178 230 176)` | `rgb(11 78 8)` |
-| PurpleDaydream | `rgb(236 236 236)` | `rgb(34 3 75)` | `#6734aa` | `rgb(201 172 235)` | `rgb(43 13 112)` |
-| BloodRed | `rgb(236 236 236)` | `rgb(54 12 12)` | `#863434` | `rgb(194 122 122)` | `rgb(88 14 14)` |
+| Theme          | `--white`          | `--background`     | `--light` | `--text`           | `--background-darker` |
+| -------------- | ------------------ | ------------------ | --------- | ------------------ | --------------------- |
+| IBM (default)  | `rgb(236 236 236)` | `rgb(182 180 180)` | `#999999` | `rgb(56 56 56)`    | `rgb(71 70 70)`       |
+| NewsPaper      | `rgb(170 166 166)` | `rgb(136 135 135)` | `#747373` | `rgb(27 27 27)`    | `rgb(49 49 49)`       |
+| BurntWood      | `rgb(255 255 255)` | `rgb(26 25 25)`    | `#494444` | `rgb(240 232 232)` | `rgb(26 25 25)`       |
+| Hacker         | `rgb(236 236 236)` | `#072004`          | `#0f3813` | `rgb(178 230 176)` | `rgb(11 78 8)`        |
+| PurpleDaydream | `rgb(236 236 236)` | `rgb(34 3 75)`     | `#6734aa` | `rgb(201 172 235)` | `rgb(43 13 112)`      |
+| BloodRed       | `rgb(236 236 236)` | `rgb(54 12 12)`    | `#863434` | `rgb(194 122 122)` | `rgb(88 14 14)`       |
 
 Apply the roles consistently:
 
 1. Set the page to `--background`; default text, borders, and hard shadows use `--text`.
 2. Keep ordinary fields and primary button surfaces transparent so the page color shows through. Their border and label use `--text`.
-3. Filled alternate actions use `--background-darker` with `--white` text/icons. Keep their border and shadow tied to the foreground ink; on hover, use the page background for the dashed border.
+3. Filled alternate actions use `--background-darker` with `--white` text/icons. Keep their border and shadow tied to the foreground ink; on hover, replace the solid border with a same-width dotted border using the page background.
 4. Use `--light` only for low-priority tracks or muted surface regions. Progress fill uses `--text`, matching the reference progress bar. Never set paragraph text in `--light`.
 5. Use `--white` only as foreground on dark/alternate surfaces. It is not a generic “surface” token.
 6. Do not invent additional colors for hover, focus, errors, or selection. Derive them from these roles, and add semantic tokens only when a role cannot be expressed accessibly from the base palette.
 7. Never hard-code a theme’s RGB values inside a component. Components consume CSS custom properties so palette switching changes the whole component family together.
+
+The library ships its IBM defaults in `src/lib/theme.css`. Import this stylesheet once at the application root, or import the package entry point so its defaults are included. A host theme can override the five custom properties on `:root` or a theme container. Do not rely on fallback values declared only on the page body: portaled Bits UI content is rendered outside component subtrees and must inherit the same defined tokens.
 
 When translating to library tokens, map `--background` to page/surface, `--text` to foreground/border/focus, `--white` to inverse foreground, `--light` to muted surface/track, and `--background-darker` to alternate surface. Keep semantic aliases if needed, but preserve these base-role meanings. Check text and control contrast in every shipped theme before adding it; some reference palette combinations may need adjustment for accessible small text while preserving their hue and contrast character.
 
@@ -67,7 +69,7 @@ Fonts are optional assets. Components must remain legible with fallback fonts an
 - Use solid 2px ink borders for buttons and fields.
 - Use a small, hard, offset shadow (about 3px) to give primary actions a tactile edge. The shadow color follows the foreground/border role.
 - Use dotted or dashed borders for upload/drop areas, article-like sections, and secondary separators. Reserve solid borders for controls and important boundaries.
-- Hover may switch a solid outline to dashed, as an optional interaction detail. Keep dimensions stable so the control does not jump; use an outline or same-width border style change.
+- On hover, replace the solid control border with a same-width dotted border. Do not keep the solid border and add a dotted/dashed outline around it. Change only `border-style` so dimensions do not shift. Reserve outlines for `:focus-visible`, where they provide a separate keyboard focus indicator.
 - Avoid soft elevation, translucent glass, and oversized shadows.
 
 ### Spacing and layout
@@ -81,17 +83,21 @@ Use fluid width and sensible max-widths. On narrow viewports, stack side-by-side
 ### Buttons and links
 
 - Buttons are rectangular, outlined, and text-forward, with a small hard offset shadow for the primary treatment.
+- Every button has a visible 2px `--text` border, including buttons inside toolbars, menubars, dialogs, and date controls. Use a transparent fill for ordinary actions and `--background-darker` with `--white` text for alternate actions. Add a 3px hard `--text` shadow to primary actions; do not leave a button looking like unframed text.
+- Match Uploadly’s control treatment: compact, uppercase action labels may use the display face, 2px solid borders become 2px dotted on hover without changing dimensions, and disabled controls retain their solid boundary. Keep body and field text in FragmentMono.
 - Primary and alternate buttons should differ through semantic surface/foreground tokens, not unrelated visual systems.
 - Keep button text concise. Icon-only buttons need an accessible name and a visible focus indicator.
-- Hover can use a dashed border. Disabled controls remain visually stable and use a not-allowed cursor where appropriate.
+- Hover replaces the solid border with a same-width dotted border; do not add a dotted outline while leaving the solid border in place. Disabled controls remain visually stable and use a not-allowed cursor where appropriate.
 - Links remain recognizable as links: underline by default or another persistent non-color cue. A dashed underline on hover is consistent with the reference.
 - Provide clear focus-visible styling. Do not make hover the only indication that a control is interactive.
 
 ### Fields and selection controls
 
 - Use transparent or theme-surface backgrounds, square 2px borders, and monospace input text.
+- Inputs, selects, comboboxes, date/time segments, PIN cells, and other editable controls must have a visible 2px `--text` border. A transparent fill is intentional for fields because the page background shows through; the border is still required. If a primitive is split into parts, give its outer field or each independently operable part a clear boundary.
+- On hover and keyboard focus, replace the solid 2px field border with a dotted 2px border. Keep the control dimensions fixed and do not layer an outline over the solid border. This dotted border is the field’s visible focus treatment.
 - Labels must be persistent and programmatically associated; placeholders are examples, not labels.
-- Focus uses a strong visible outline or dashed border plus a non-color cue. Never remove the browser focus indicator without replacing it.
+- Fields show keyboard focus by changing their solid border to dotted. Other interactive controls retain a clear `:focus-visible` outline. Never remove the browser focus indicator without replacing it.
 - Error, success, and disabled states must be explicit and themeable, with text or icons in addition to color.
 
 ### Panels, cards, and separators
@@ -107,6 +113,9 @@ The reference presents progress as plain status copy paired with a prominent nat
 ### Overlays and composite controls (Bits UI)
 
 Use Bits UI for behavior such as dialogs, popovers, menus, tabs, accordions, and selects. Keep its keyboard handling, focus management, and ARIA relationships. Style the exposed parts with this document’s tokens and geometry. Do not replace accessible primitives with custom behavior just to match an appearance. Menus and dialogs should use square borders, flat surfaces, visible focus, and restrained shadows; their positioning and dismissal behavior should remain predictable.
+
+- Dialogs, alert dialogs, popovers, menus, tooltips, and date-picker panels must use a solid `--background` surface and a visible 2px `--text` border. Never leave portaled content transparent: it must remain legible over both the page and the dimmed overlay. Use `--background-darker` only for an intentional alternate/inverse surface with `--white` foreground.
+- Give overlay panels a small hard `--text` shadow where it helps separate the panel from its surroundings. Keep the backdrop distinct from the panel, and derive its tint from `--text` rather than adding a new palette color.
 
 ## 4. Interaction and motion
 

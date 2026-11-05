@@ -18,7 +18,14 @@
 
 <div class="pin-field">
 	<span class="pin-label">{label}</span>
-	<BitsPinInput.Root bind:value maxlength={length} {disabled} {onComplete} class="pin-input" aria-label={label}>
+	<BitsPinInput.Root
+		bind:value
+		maxlength={length}
+		{disabled}
+		{onComplete}
+		class="pin-input"
+		aria-label={label}
+	>
 		{#snippet children({ cells })}
 			{#each cells as cell, index (index)}
 				<BitsPinInput.Cell {cell} class="pin-cell">{cell.char}</BitsPinInput.Cell>
@@ -53,6 +60,10 @@
 		background: transparent;
 		font: inherit;
 		font-size: 1.25rem;
+	}
+
+	:global(.pin-input:not([data-disabled]) .pin-cell:hover) {
+		border-style: dotted;
 	}
 
 	:global(.pin-cell[data-active]) {

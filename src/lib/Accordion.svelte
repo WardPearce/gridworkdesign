@@ -68,9 +68,8 @@
 		cursor: pointer;
 	}
 
-	:global(.accordion-trigger:hover) {
-		outline: 1px dashed var(--text);
-		outline-offset: -5px;
+	:global(.accordion-item:has(.accordion-trigger:hover)) {
+		border-style: dotted;
 	}
 
 	:global(.accordion-trigger:focus-visible) {

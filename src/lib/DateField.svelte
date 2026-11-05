@@ -12,9 +12,31 @@
 </div>
 
 <style>
-	:global(.date-field) { display: grid; gap: 0.35rem; }
-	:global(.date-label) { font-weight: 700; }
-	:global(.date-input) { display: flex; width: fit-content; min-height: 2.75rem; align-items: center; gap: 0.15rem; padding: 0.4rem 0.65rem; border: 2px solid var(--text); background: transparent; color: var(--text); font: inherit; }
-	:global(.date-input:focus-visible) { outline: 2px dashed var(--text); outline-offset: 3px; }
-	:global(.date-input [data-focused]) { outline: 1px dashed var(--text); background: var(--background-darker); color: var(--white); }
+	:global(.date-field) {
+		display: grid;
+		gap: 0.35rem;
+	}
+	:global(.date-label) {
+		font-weight: 700;
+	}
+	:global(.date-input) {
+		display: flex;
+		width: fit-content;
+		min-height: 2.75rem;
+		align-items: center;
+		gap: 0.15rem;
+		padding: 0.4rem 0.65rem;
+		border: 2px solid var(--text);
+		background: transparent;
+		color: var(--text);
+		font: inherit;
+	}
+	:global(.date-input:focus-within) {
+		border-style: dotted;
+	}
+	:global(.date-input [data-focused]) {
+		outline: 1px dashed var(--text);
+		background: var(--background-darker);
+		color: var(--white);
+	}
 </style>

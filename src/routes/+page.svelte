@@ -530,8 +530,8 @@
 	}
 
 	.sample-input:focus-visible {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		border-style: dotted;
+		outline: none;
 	}
 
 	.ratio-placeholder {

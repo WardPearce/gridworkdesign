@@ -1,4 +1,6 @@
 // Re-export the themed Bits UI wrappers.
+import './theme.css';
+
 export { default as Accordion } from './Accordion.svelte';
 export { default as AlertDialog } from './AlertDialog.svelte';
 export { default as AspectRatio } from './AspectRatio.svelte';

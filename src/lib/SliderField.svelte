@@ -23,7 +23,16 @@
 		<span>{label}</span>
 		<output>{value}</output>
 	</div>
-	<Slider.Root type="single" bind:value {min} {max} {step} {disabled} class="slider-root" aria-label={label}>
+	<Slider.Root
+		type="single"
+		bind:value
+		{min}
+		{max}
+		{step}
+		{disabled}
+		class="slider-root"
+		aria-label={label}
+	>
 		<Slider.Range class="slider-range" />
 		<Slider.Thumb index={0} class="slider-thumb" />
 	</Slider.Root>
@@ -78,6 +87,10 @@
 	:global(.slider-thumb:focus-visible) {
 		outline: 2px dashed var(--text);
 		outline-offset: 3px;
+	}
+
+	:global(.slider-thumb:hover) {
+		border-style: dotted;
 	}
 
 	:global(.slider-root[data-disabled]) {
