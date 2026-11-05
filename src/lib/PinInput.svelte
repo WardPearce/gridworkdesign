@@ -63,12 +63,11 @@
 	}
 
 	:global(.pin-input:not([data-disabled]) .pin-cell:hover) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 
 	:global(.pin-cell[data-active]) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		border-style: dashed;
 	}
 
 	:global(.pin-input[data-disabled]) {

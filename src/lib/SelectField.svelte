@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Select } from 'bits-ui';
+	import { ChevronDown } from '@lucide/svelte';
 
 	type Option = { value: string; label: string; disabled?: boolean };
 	let {
@@ -22,7 +23,7 @@
 	<Select.Root type="single" bind:value {name}>
 		<Select.Trigger class="select-trigger" aria-label={label}>
 			<Select.Value {placeholder} />
-			<span aria-hidden="true">⌄</span>
+			<ChevronDown size={16} aria-hidden="true" />
 		</Select.Trigger>
 		<Select.Portal>
 			<Select.Content class="select-content" sideOffset={4}>
@@ -66,7 +67,7 @@
 	}
 
 	:global(.select-trigger:focus-visible) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 
 	:global(.select-content) {

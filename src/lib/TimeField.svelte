@@ -32,7 +32,7 @@
 		font: inherit;
 	}
 	:global(.time-input:focus-within) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 	:global(.time-input [data-focused]) {
 		outline: 1px dashed var(--text);

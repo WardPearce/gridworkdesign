@@ -39,7 +39,7 @@
 		color: var(--white);
 	}
 	:global(.pagination-button:hover:not(:disabled)) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 	:global(.pagination-button:focus-visible) {
 		outline: 2px dashed var(--text);

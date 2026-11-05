@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { ArrowUpRight } from '@lucide/svelte';
 	import Accordion from '../lib/Accordion.svelte';
 	import AlertDialog from '../lib/AlertDialog.svelte';
 	import AspectRatio from '../lib/AspectRatio.svelte';
@@ -114,7 +115,7 @@
 				<p class="eyebrow">01 / DISCLOSURE</p>
 				<h2 id="accordion-title">Accordion</h2>
 			</div>
-			<a href="/demo/accordion">Open full example ↗</a>
+			<a href="/demo/accordion">Open full example <ArrowUpRight size={16} aria-hidden="true" /></a>
 		</div>
 
 		<div class="examples">
@@ -530,7 +531,7 @@
 	}
 
 	.sample-input:focus-visible {
-		border-style: dotted;
+		border-style: dashed;
 		outline: none;
 	}
 

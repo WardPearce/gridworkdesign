@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { DateRangePicker as BitsPicker } from 'bits-ui';
+	import { CalendarDays, ChevronLeft, ChevronRight } from '@lucide/svelte';
 	import type { DateRange } from 'bits-ui';
 	let { label = 'Choose dates', value = $bindable() }: { label?: string; value?: DateRange } =
 		$props();
@@ -20,7 +21,7 @@
 			{#if type === 'start'}<span aria-hidden="true">–</span>{/if}
 		{/each}
 		<BitsPicker.Trigger class="range-trigger" aria-label="Open date range calendar"
-			>▦</BitsPicker.Trigger
+			><CalendarDays size={18} aria-hidden="true" /></BitsPicker.Trigger
 		>
 	</div>
 	<BitsPicker.Content class="range-content" sideOffset={4}>
@@ -28,11 +29,11 @@
 			{#snippet children({ months, weekdays })}
 				<BitsPicker.Header class="calendar-header">
 					<BitsPicker.PrevButton class="calendar-nav" aria-label="Previous month"
-						>←</BitsPicker.PrevButton
+						><ChevronLeft size={18} aria-hidden="true" /></BitsPicker.PrevButton
 					>
 					<BitsPicker.Heading class="calendar-heading" />
 					<BitsPicker.NextButton class="calendar-nav" aria-label="Next month"
-						>→</BitsPicker.NextButton
+						><ChevronRight size={18} aria-hidden="true" /></BitsPicker.NextButton
 					>
 				</BitsPicker.Header>
 				{#each months as month (month.value)}
@@ -90,7 +91,7 @@
 		font: inherit;
 	}
 	:global(.range-input:focus-within) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 	:global(.range-segment[data-focused]) {
 		background: var(--background-darker);

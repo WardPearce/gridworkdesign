@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Checkbox as BitsCheckbox } from 'bits-ui';
+	import { Check } from '@lucide/svelte';
 
 	let {
 		label,
@@ -18,7 +19,7 @@
 
 <label class="check-control">
 	<BitsCheckbox.Root bind:checked {disabled} {name} {value} class="check-box">
-		<span class="check-mark" aria-hidden="true">✓</span>
+		<span class="check-mark" aria-hidden="true"><Check size={16} strokeWidth={2.5} /></span>
 	</BitsCheckbox.Root>
 	<span>{label}</span>
 </label>
@@ -47,8 +48,7 @@
 	}
 
 	:global(.check-box:hover:not(:disabled)) {
-		outline: 1px dashed var(--text);
-		outline-offset: 2px;
+		border-style: dashed;
 	}
 
 	:global(.check-box:focus-visible) {

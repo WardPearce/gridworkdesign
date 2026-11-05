@@ -43,7 +43,7 @@ Apply the roles consistently:
 
 1. Set the page to `--background`; default text, borders, and hard shadows use `--text`.
 2. Keep ordinary fields and primary button surfaces transparent so the page color shows through. Their border and label use `--text`.
-3. Filled alternate actions use `--background-darker` with `--white` text/icons. Keep their border and shadow tied to the foreground ink; on hover, replace the solid border with a same-width dotted border using the page background.
+3. Filled alternate actions use `--background-darker` with `--white` text/icons. Keep their default border and shadow tied to the foreground ink; on hover, replace the solid border with a same-width, 2px dashed border colored with the page background.
 4. Use `--light` only for low-priority tracks or muted surface regions. Progress fill uses `--text`, matching the reference progress bar. Never set paragraph text in `--light`.
 5. Use `--white` only as foreground on dark/alternate surfaces. It is not a generic “surface” token.
 6. Do not invent additional colors for hover, focus, errors, or selection. Derive them from these roles, and add semantic tokens only when a role cannot be expressed accessibly from the base palette.
@@ -63,13 +63,19 @@ When translating to library tokens, map `--background` to page/surface, `--text`
 
 Fonts are optional assets. Components must remain legible with fallback fonts and must not require application-specific font files.
 
+### Icons
+
+- Use icons from `@lucide/svelte` for interface symbols such as close, chevron, calendar, check, navigation, and rating marks. Do not draw icons with Unicode characters, emoji, or CSS-generated text glyphs.
+- Icons inherit `currentColor` so they follow the text and inverse-surface tokens. Use a consistent 1em to 1.25em size and the default Lucide stroke unless the surrounding control needs a documented adjustment.
+- Mark decorative icons `aria-hidden="true"`. Icon-only buttons still need a visible or programmatic accessible name on the button itself; the icon does not provide the name.
+
 ### Shape, borders, and depth
 
 - Prefer square corners; avoid rounded pills and large radii.
 - Use solid 2px ink borders for buttons and fields.
 - Use a small, hard, offset shadow (about 3px) to give primary actions a tactile edge. The shadow color follows the foreground/border role.
 - Use dotted or dashed borders for upload/drop areas, article-like sections, and secondary separators. Reserve solid borders for controls and important boundaries.
-- On hover, replace the solid control border with a same-width dotted border. Do not keep the solid border and add a dotted/dashed outline around it. Change only `border-style` so dimensions do not shift. Reserve outlines for `:focus-visible`, where they provide a separate keyboard focus indicator.
+- On hover, replace the solid control border with a same-width, 2px dashed border, matching Uploadly. Do not keep the solid border and add a dotted/dashed outline around it. Change only `border-style` so dimensions do not shift. Reserve outlines for `:focus-visible`, where they provide a separate keyboard focus indicator.
 - Avoid soft elevation, translucent glass, and oversized shadows.
 
 ### Spacing and layout
@@ -84,10 +90,11 @@ Use fluid width and sensible max-widths. On narrow viewports, stack side-by-side
 
 - Buttons are rectangular, outlined, and text-forward, with a small hard offset shadow for the primary treatment.
 - Every button has a visible 2px `--text` border, including buttons inside toolbars, menubars, dialogs, and date controls. Use a transparent fill for ordinary actions and `--background-darker` with `--white` text for alternate actions. Add a 3px hard `--text` shadow to primary actions; do not leave a button looking like unframed text.
-- Match Uploadly’s control treatment: compact, uppercase action labels may use the display face, 2px solid borders become 2px dotted on hover without changing dimensions, and disabled controls retain their solid boundary. Keep body and field text in FragmentMono.
+- Alternate buttons keep their `--text` border at rest. On hover, change it to a same-width, 2px dashed border in `--background` while keeping the `--background-darker` fill and `--white` foreground.
+- Match Uploadly’s control treatment: compact, uppercase action labels may use the display face, 2px solid borders become 2px dashed on hover without changing dimensions, and disabled controls retain their solid boundary. Keep body and field text in FragmentMono.
 - Primary and alternate buttons should differ through semantic surface/foreground tokens, not unrelated visual systems.
 - Keep button text concise. Icon-only buttons need an accessible name and a visible focus indicator.
-- Hover replaces the solid border with a same-width dotted border; do not add a dotted outline while leaving the solid border in place. Disabled controls remain visually stable and use a not-allowed cursor where appropriate.
+- Hover replaces the solid border with a same-width, 2px dashed border; do not add a dashed outline while leaving the solid border in place. Disabled controls remain visually stable and use a not-allowed cursor where appropriate.
 - Links remain recognizable as links: underline by default or another persistent non-color cue. A dashed underline on hover is consistent with the reference.
 - Provide clear focus-visible styling. Do not make hover the only indication that a control is interactive.
 
@@ -95,9 +102,9 @@ Use fluid width and sensible max-widths. On narrow viewports, stack side-by-side
 
 - Use transparent or theme-surface backgrounds, square 2px borders, and monospace input text.
 - Inputs, selects, comboboxes, date/time segments, PIN cells, and other editable controls must have a visible 2px `--text` border. A transparent fill is intentional for fields because the page background shows through; the border is still required. If a primitive is split into parts, give its outer field or each independently operable part a clear boundary.
-- On hover and keyboard focus, replace the solid 2px field border with a dotted 2px border. Keep the control dimensions fixed and do not layer an outline over the solid border. This dotted border is the field’s visible focus treatment.
+- On hover and keyboard focus, replace the solid 2px field border with a dashed 2px border. Keep the control dimensions fixed and do not layer an outline over the solid border. This dashed border is the field’s visible focus treatment.
 - Labels must be persistent and programmatically associated; placeholders are examples, not labels.
-- Fields show keyboard focus by changing their solid border to dotted. Other interactive controls retain a clear `:focus-visible` outline. Never remove the browser focus indicator without replacing it.
+- Fields show keyboard focus by changing their solid border to dashed. Other interactive controls retain a clear `:focus-visible` outline. Never remove the browser focus indicator without replacing it.
 - Error, success, and disabled states must be explicit and themeable, with text or icons in addition to color.
 
 ### Panels, cards, and separators

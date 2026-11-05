@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { RatingGroup } from 'bits-ui';
+	import { Star } from '@lucide/svelte';
 	let {
 		label,
 		value = $bindable(0),
@@ -13,7 +14,7 @@
 	<RatingGroup.Root bind:value {max} {disabled} aria-label={label} class="rating-root">
 		{#each Array.from({ length: max }, (_, index) => index + 1) as index (index)}
 			<RatingGroup.Item {index} class="rating-item" aria-label={`${index} of ${max}`}>
-				★
+				<Star size={20} aria-hidden="true" />
 			</RatingGroup.Item>
 		{/each}
 	</RatingGroup.Root>

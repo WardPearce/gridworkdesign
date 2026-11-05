@@ -46,7 +46,7 @@
 	}
 
 	:global(.toggle-group-item:hover:not(:disabled)) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 
 	:global(.toggle-group-item:focus-visible) {

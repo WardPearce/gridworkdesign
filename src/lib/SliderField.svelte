@@ -90,7 +90,7 @@
 	}
 
 	:global(.slider-thumb:hover) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 
 	:global(.slider-root[data-disabled]) {

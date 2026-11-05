@@ -47,7 +47,7 @@
 		font: inherit;
 	}
 	:global(.combo-input:focus-visible) {
-		border-style: dotted;
+		border-style: dashed;
 		outline: none;
 	}
 	:global(.combo-content) {

@@ -32,7 +32,7 @@
 		font: inherit;
 	}
 	:global(.date-input:focus-within) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 	:global(.date-input [data-focused]) {
 		outline: 1px dashed var(--text);

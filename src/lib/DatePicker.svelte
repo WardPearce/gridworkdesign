@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { DatePicker as BitsDatePicker } from 'bits-ui';
+	import { CalendarDays, ChevronLeft, ChevronRight } from '@lucide/svelte';
 	import type { DateValue } from '@internationalized/date';
 	let { label = 'Choose date', value = $bindable() }: { label?: string; value?: DateValue } =
 		$props();
@@ -13,7 +14,7 @@
 				<BitsDatePicker.Segment {part} class="date-segment">{segmentValue}</BitsDatePicker.Segment>
 			{/each}
 			<BitsDatePicker.Trigger class="date-trigger" aria-label="Open calendar"
-				>▦</BitsDatePicker.Trigger
+				><CalendarDays size={18} aria-hidden="true" /></BitsDatePicker.Trigger
 			>
 		{/snippet}
 	</BitsDatePicker.Input>
@@ -22,11 +23,11 @@
 			{#snippet children({ months, weekdays })}
 				<BitsDatePicker.Header class="calendar-header">
 					<BitsDatePicker.PrevButton class="calendar-nav" aria-label="Previous month"
-						>←</BitsDatePicker.PrevButton
+						><ChevronLeft size={18} aria-hidden="true" /></BitsDatePicker.PrevButton
 					>
 					<BitsDatePicker.Heading class="calendar-heading" />
 					<BitsDatePicker.NextButton class="calendar-nav" aria-label="Next month"
-						>→</BitsDatePicker.NextButton
+						><ChevronRight size={18} aria-hidden="true" /></BitsDatePicker.NextButton
 					>
 				</BitsDatePicker.Header>
 				{#each months as month (month.value)}
@@ -78,7 +79,7 @@
 		font: inherit;
 	}
 	:global(.date-input:focus-within) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 	:global(.date-segment[data-focused]) {
 		background: var(--background-darker);

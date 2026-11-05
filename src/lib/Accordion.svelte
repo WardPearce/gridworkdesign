@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Accordion as BitsAccordion } from 'bits-ui';
+	import { Minus, Plus } from '@lucide/svelte';
 
 	type AccordionItem = {
 		value: string;
@@ -23,7 +24,10 @@
 			<BitsAccordion.Header class="accordion-heading">
 				<BitsAccordion.Trigger class="accordion-trigger">
 					<span>{item.title}</span>
-					<span class="accordion-icon" aria-hidden="true"></span>
+					<span class="accordion-icon" aria-hidden="true">
+						<Plus size={18} class="accordion-plus" />
+						<Minus size={18} class="accordion-minus" />
+					</span>
 				</BitsAccordion.Trigger>
 			</BitsAccordion.Header>
 			<BitsAccordion.Content class="accordion-content">
@@ -69,7 +73,7 @@
 	}
 
 	:global(.accordion-item:has(.accordion-trigger:hover)) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 
 	:global(.accordion-trigger:focus-visible) {
@@ -82,15 +86,18 @@
 		opacity: 0.55;
 	}
 
-	:global(.accordion-icon::before) {
-		content: '+';
-		display: block;
-		font-size: 1.25rem;
-		line-height: 1;
+	:global(.accordion-icon) {
+		display: inline-flex;
+		flex: 0 0 auto;
 	}
-
-	:global(.accordion-trigger[aria-expanded='true'] .accordion-icon::before) {
-		content: '−';
+	:global(.accordion-minus) {
+		display: none;
+	}
+	:global(.accordion-trigger[aria-expanded='true'] .accordion-plus) {
+		display: none;
+	}
+	:global(.accordion-trigger[aria-expanded='true'] .accordion-minus) {
+		display: block;
 	}
 
 	:global(.accordion-content) {

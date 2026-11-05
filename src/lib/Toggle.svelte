@@ -29,8 +29,7 @@
 	}
 
 	:global(.toggle:hover:not(:disabled)) {
-		outline: 1px dashed var(--text);
-		outline-offset: 2px;
+		border-style: dashed;
 	}
 
 	:global(.toggle:focus-visible) {

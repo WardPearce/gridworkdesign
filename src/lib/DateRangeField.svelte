@@ -38,7 +38,7 @@
 		font: inherit;
 	}
 	:global(.range-input:focus-within) {
-		border-style: dotted;
+		border-style: dashed;
 	}
 	:global(.range-input [data-focused]) {
 		outline: 1px dashed var(--text);

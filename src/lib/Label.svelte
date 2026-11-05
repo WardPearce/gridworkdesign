@@ -8,5 +8,10 @@
 <BitsLabel.Root class="label" {...rest}>{@render children()}</BitsLabel.Root>
 
 <style>
-	:global(.label) { display: inline-block; color: var(--text); font: inherit; font-weight: 700; }
+	:global(.label) {
+		display: inline-block;
+		color: var(--text);
+		font: inherit;
+		font-weight: 700;
+	}
 </style>
