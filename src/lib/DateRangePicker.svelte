@@ -150,6 +150,10 @@
 		font-size: 0.75rem;
 	}
 	:global(.calendar-day) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
 		min-width: 2.5rem;
 		min-height: 2.5rem;
 		border: 1px solid transparent;
@@ -163,6 +167,12 @@
 	:global(.calendar-day[data-selection-end]) {
 		background: var(--background-darker);
 		color: var(--white);
+	}
+	:global(.calendar-day[data-selected]:hover:not([data-disabled])),
+	:global(.calendar-day[data-selection-start]:hover:not([data-disabled])),
+	:global(.calendar-day[data-selection-end]:hover:not([data-disabled])) {
+		border-color: var(--background);
+		border-style: dashed;
 	}
 	:global(.calendar-day[data-highlighted]) {
 		outline: 1px dashed var(--text);

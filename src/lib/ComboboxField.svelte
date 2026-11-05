@@ -66,8 +66,8 @@
 		cursor: pointer;
 	}
 	:global(.combo-item[data-highlighted]) {
-		outline: 1px dashed var(--text);
-		outline-offset: -4px;
+		background: var(--background-darker);
+		color: var(--white);
 	}
 	:global(.combo-item[data-disabled]) {
 		opacity: 0.55;

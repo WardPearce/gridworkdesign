@@ -1,5 +1,6 @@
 <script lang="ts">
  import Tooltip from '../../../lib/Tooltip.svelte';
+ import Button from '../../../lib/Button.svelte';
  import ComponentDocs, { type Prop } from "../../../lib/ComponentDocs.svelte";
  let accepted = $state(false); let enabled = $state(true); let pinned = $state(false); let value = $state(''); let sliderValue = $state(40);
  const items = [{ value: 'one', title: 'First section', label: 'First', content: 'First panel content.' }, { value: 'two', title: 'Second section', label: 'Second', content: 'Second panel content.' }];
@@ -14,6 +15,6 @@
   { name: 'children', type: 'Snippet', required: true, defaultValue: '—', description: 'Trigger contents.' },
 ];
 </script>
-<ComponentDocs name="Tooltip" {summary} {props} usage={'<Tooltip label="More information"><button>Help</button></Tooltip>'}>
- {#snippet example()}<Tooltip label="More information"><button>Help</button></Tooltip>{/snippet}
+<ComponentDocs name="Tooltip" {summary} {props} usage={'<Tooltip label="More information"><Button>Help</Button></Tooltip>'}>
+ {#snippet example()}<Tooltip label="More information"><Button>Help</Button></Tooltip>{/snippet}
 </ComponentDocs>

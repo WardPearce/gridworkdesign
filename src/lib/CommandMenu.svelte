@@ -58,8 +58,8 @@
 		cursor: pointer;
 	}
 	:global(.command-item[data-selected]) {
-		outline: 1px dashed var(--text);
-		outline-offset: -3px;
+		background: var(--background-darker);
+		color: var(--white);
 	}
 	:global(.command-item[data-disabled]) {
 		opacity: 0.55;

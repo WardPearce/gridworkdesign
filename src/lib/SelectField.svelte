@@ -88,8 +88,8 @@
 	}
 
 	:global(.select-item[data-highlighted]) {
-		outline: 1px dashed var(--text);
-		outline-offset: -4px;
+		background: var(--background-darker);
+		color: var(--white);
 	}
 
 	:global(.select-item[data-disabled]) {

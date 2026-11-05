@@ -101,11 +101,20 @@
 		font-size: 0.75rem;
 	}
 	:global(.calendar-day) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
 		border-color: transparent;
 	}
 	:global(.calendar-day:hover:not([data-disabled])) {
 		border-color: var(--text);
 		border-style: dashed;
+	}
+	:global(.calendar-day[data-selected]:hover:not([data-disabled])) {
+		border-color: var(--background);
 	}
 	:global(.calendar-day[data-selected]) {
 		background: var(--background-darker);

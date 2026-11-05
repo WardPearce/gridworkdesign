@@ -55,8 +55,8 @@
 		cursor: pointer;
 	}
 	:global(.context-item[data-highlighted]) {
-		outline: 1px dashed var(--text);
-		outline-offset: -3px;
+		background: var(--background-darker);
+		color: var(--white);
 	}
 	:global(.context-item[data-disabled]) {
 		opacity: 0.55;
