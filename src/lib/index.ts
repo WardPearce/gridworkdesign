@@ -31,6 +31,7 @@ export { default as Progress } from './Progress.svelte';
 export { default as RadioChoices } from './RadioChoices.svelte';
 export { default as RangeCalendar } from './RangeCalendar.svelte';
 export { default as Rating } from './Rating.svelte';
+export { default as Root } from './Root.svelte';
 export { default as RatingGroup } from './RatingGroup.svelte';
 export { default as ScrollArea } from './ScrollArea.svelte';
 export { default as SelectField } from './SelectField.svelte';

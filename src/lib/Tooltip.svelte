@@ -8,7 +8,9 @@
 	<BitsTooltip.Root>
 		<BitsTooltip.Trigger class="tooltip-trigger">{@render children?.()}</BitsTooltip.Trigger>
 		<BitsTooltip.Portal>
-			<BitsTooltip.Content class="tooltip-content" sideOffset={6}>{label}</BitsTooltip.Content>
+			<BitsTooltip.Content class="tooltip-content ui-motion-enter" sideOffset={6}
+				>{label}</BitsTooltip.Content
+			>
 		</BitsTooltip.Portal>
 	</BitsTooltip.Root>
 </BitsTooltip.Provider>

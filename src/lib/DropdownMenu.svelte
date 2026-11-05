@@ -15,7 +15,7 @@
 		>{label}<ChevronDown size={16} aria-hidden="true" /></BitsMenu.Trigger
 	>
 	<BitsMenu.Portal>
-		<BitsMenu.Content class="menu-content" sideOffset={6}>
+		<BitsMenu.Content class="menu-content ui-motion-enter" sideOffset={6}>
 			{#each items as item (item.label)}
 				<BitsMenu.Item class="menu-item" disabled={item.disabled} onSelect={item.onSelect}
 					>{item.label}</BitsMenu.Item

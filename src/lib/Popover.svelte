@@ -7,7 +7,7 @@
 <BitsPopover.Root>
 	<BitsPopover.Trigger class="popover-trigger">{trigger}</BitsPopover.Trigger>
 	<BitsPopover.Portal>
-		<BitsPopover.Content class="popover-content" sideOffset={8}>
+		<BitsPopover.Content class="popover-content ui-motion-enter" sideOffset={8}>
 			{@render children?.()}
 			<BitsPopover.Arrow class="popover-arrow" />
 		</BitsPopover.Content>

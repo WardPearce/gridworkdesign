@@ -19,8 +19,8 @@
 <BitsDialog.Root>
 	<BitsDialog.Trigger class="ui-button">{trigger}</BitsDialog.Trigger>
 	<BitsDialog.Portal>
-		<BitsDialog.Overlay class="dialog-overlay" />
-		<BitsDialog.Content class="dialog-content">
+		<BitsDialog.Overlay class="dialog-overlay ui-motion-enter" />
+		<BitsDialog.Content class="dialog-content ui-motion-enter">
 			<div class="dialog-heading">
 				<BitsDialog.Title class="dialog-title">{title}</BitsDialog.Title>
 				<BitsDialog.Close class="dialog-close" aria-label="Close dialog"

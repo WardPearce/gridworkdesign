@@ -18,8 +18,8 @@
 <BitsAlert.Root>
 	<BitsAlert.Trigger class="alert-trigger">{trigger}</BitsAlert.Trigger>
 	<BitsAlert.Portal>
-		<BitsAlert.Overlay class="alert-overlay" />
-		<BitsAlert.Content class="alert-content">
+		<BitsAlert.Overlay class="alert-overlay ui-motion-enter" />
+		<BitsAlert.Content class="alert-content ui-motion-enter">
 			<BitsAlert.Title class="alert-title">{title}</BitsAlert.Title>
 			<BitsAlert.Description class="alert-description">{description}</BitsAlert.Description>
 			<div class="alert-actions">

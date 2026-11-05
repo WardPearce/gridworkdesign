@@ -15,7 +15,7 @@
 		<BitsMenubar.Menu>
 			<BitsMenubar.Trigger class="menubar-trigger" onmousedown={(event) => event.preventDefault()}>{menu.label}</BitsMenubar.Trigger>
 			<BitsMenubar.Portal>
-				<BitsMenubar.Content class="menubar-content">
+				<BitsMenubar.Content class="menubar-content ui-motion-enter">
 					{#each menu.items as item (item.label)}<BitsMenubar.Item
 							class="menubar-item"
 							disabled={item.disabled}

@@ -26,7 +26,7 @@
 			<ChevronDown size={16} aria-hidden="true" />
 		</Select.Trigger>
 		<Select.Portal>
-			<Select.Content class="select-content" sideOffset={4}>
+			<Select.Content class="select-content ui-motion-enter" sideOffset={4}>
 				<Select.Viewport>
 					{#each options as option (option.value)}
 						<Select.Item value={option.value} disabled={option.disabled} class="select-item">

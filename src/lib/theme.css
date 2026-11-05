@@ -66,6 +66,31 @@ h6 {
 	--white: rgb(236 236 236); --background: rgb(54 12 12); --light: #863434; --text: rgb(194 122 122); --background-darker: rgb(88 14 14);
 }
 
+@keyframes ui-motion-enter {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes ui-motion-exit {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+.ui-motion-enter[data-state='open'] {
+	animation: ui-motion-enter 140ms ease-out both;
+}
+
+.ui-motion-enter[data-state='closed'] {
+	animation: ui-motion-exit 100ms ease-in both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ui-motion-enter[data-state='open'],
+	.ui-motion-enter[data-state='closed'] {
+		animation: none;
+	}
+}
+
 *,
 *::before,
 *::after {

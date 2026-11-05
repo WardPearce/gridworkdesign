@@ -56,7 +56,6 @@
 		box-shadow: none !important;
 		background: var(--background-darker);
 		color: var(--white);
-		animation: segment-pulse 1.6s ease-in-out infinite;
 	}
 	:global(.range-input [data-focused]),
 	:global(.range-input [data-focused]:focus),
@@ -65,9 +64,5 @@
 		box-shadow: none !important;
 		background: var(--background-darker);
 		color: var(--white);
-		animation: segment-pulse 1.6s ease-in-out infinite;
-	}
-	@keyframes segment-pulse {
-		50% { background: var(--background-darker); color: var(--white); }
 	}
 </style>

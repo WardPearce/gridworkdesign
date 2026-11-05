@@ -24,7 +24,7 @@
 			><CalendarDays size={18} aria-hidden="true" /></BitsPicker.Trigger
 		>
 	</div>
-	<BitsPicker.Content class="range-content" sideOffset={4}>
+	<BitsPicker.Content class="range-content ui-motion-enter" sideOffset={4}>
 		<BitsPicker.Calendar class="range-calendar">
 			{#snippet children({ months, weekdays })}
 				<BitsPicker.Header class="calendar-header">

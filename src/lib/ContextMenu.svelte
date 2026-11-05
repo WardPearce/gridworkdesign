@@ -11,7 +11,7 @@
 <BitsMenu.Root>
 	<BitsMenu.Trigger class="context-target">{@render children?.()}</BitsMenu.Trigger>
 	<BitsMenu.Portal>
-		<BitsMenu.Content class="context-content">
+		<BitsMenu.Content class="context-content ui-motion-enter">
 			{#each items as item (item.label)}
 				<BitsMenu.Item class="context-item" disabled={item.disabled} onSelect={item.onSelect}
 					>{item.label}</BitsMenu.Item

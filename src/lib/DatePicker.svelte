@@ -18,7 +18,7 @@
 			>
 		{/snippet}
 	</BitsDatePicker.Input>
-	<BitsDatePicker.Content class="date-content" sideOffset={4}>
+	<BitsDatePicker.Content class="date-content ui-motion-enter" sideOffset={4}>
 		<BitsDatePicker.Calendar class="date-calendar">
 			{#snippet children({ months, weekdays })}
 				<BitsDatePicker.Header class="calendar-header">

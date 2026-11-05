@@ -126,8 +126,14 @@ Use Bits UI for behavior such as dialogs, popovers, menus, tabs, accordions, and
 ## 4. Interaction and motion
 
 - Provide visible `:focus-visible` treatment on every interactive component.
-- Hover and pressed states should be immediate and restrained. Avoid animation that delays feedback or distracts from data entry.
-- Respect `prefers-reduced-motion`; motion should be optional and brief.
+- Keep motion functional, sparse, and consistent with the direct, utilitarian visual language. Use it to clarify a state change or preserve spatial context, never as decoration or a prerequisite for understanding.
+- Prefer quick opacity or small positional transitions for overlays and content entering or leaving. Avoid large travel, scale/bounce, parallax, blur, and decorative looping motion.
+- Keep control feedback immediate: avoid delayed starts and use short durations (roughly 100–200 ms as a starting range, tuned to the component) with simple easing. Do not animate routine field updates or progress in ways that obscure the current value.
+- Use CSS transitions for simple state feedback and Svelte's `transition:` for DOM entry/exit. Use `animate:` only for meaningful reordering in keyed each blocks. Prefer Svelte's built-ins; avoid adding an animation dependency for the library's restrained needs.
+- Respect `prefers-reduced-motion` everywhere. Remove non-essential spatial movement and looping animation; use an instant state change or minimal opacity change when continuity still helps. Preserve the final state and all functionality.
+- Avoid automatically repeating motion. Any essential or user-requested ongoing animation needs an obvious pause/stop control where applicable.
+- Motion must not replace text, semantic state, focus indication, or status announcements. Keep accessible state correct throughout transitions; confirm dismissal and focus restoration for overlays.
+- Use theme tokens for colors and existing crisp borders/surfaces. Do not add glow, blur, gradients, or soft elevation to make motion visible.
 - Do not communicate state through color alone. Include text, shape, iconography, or semantics as appropriate.
 - For async actions, show progress and completion/error status near the triggering control, with announcements for assistive technology when the status changes.
 
@@ -162,6 +168,7 @@ Before considering a component complete, review it against this short checklist:
 - Does it use shared tokens and work in every theme?
 - Are all interactive states visible and stable?
 - Does it retain Bits UI accessibility and keyboard behavior?
+- If it animates, does it honor `prefers-reduced-motion` and keep state and functionality clear without motion?
 - Does it reflow at narrow widths and avoid relying on color alone?
 
 ## 7. Scope and source notes
