@@ -89,6 +89,12 @@
 		outline-offset: 3px;
 	}
 
+	:global(.slider-thumb:focus:not(:focus-visible)),
+	:global(.slider-thumb:active) {
+		outline: none;
+		border-style: solid;
+	}
+
 	:global(.slider-thumb:hover) {
 		border-style: dashed;
 	}

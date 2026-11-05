@@ -7,7 +7,13 @@
 <div class="time-field">
 	<BitsTimeField.Root bind:value>
 		<BitsTimeField.Label class="time-label">{label}</BitsTimeField.Label>
-		<BitsTimeField.Input class="time-input" />
+		<BitsTimeField.Input class="time-input">
+			{#snippet children({ segments })}
+				{#each segments as { part, value }, index (`${part}-${index}`)}
+					<BitsTimeField.Segment {part}>{value}</BitsTimeField.Segment>
+				{/each}
+			{/snippet}
+		</BitsTimeField.Input>
 	</BitsTimeField.Root>
 </div>
 
@@ -32,11 +38,30 @@
 		font: inherit;
 	}
 	:global(.time-input:focus-within) {
-		border-style: dashed;
+		border-style: solid;
+		outline: none !important;
+		box-shadow: none !important;
 	}
-	:global(.time-input [data-focused]) {
-		outline: 1px dashed var(--text);
+	:global(.time-input:focus),
+	:global(.time-input:focus-visible) { outline: none !important; box-shadow: none !important; }
+	:global(.time-input :focus),
+	:global(.time-input :focus-visible) {
+		outline: none !important;
+		box-shadow: none !important;
 		background: var(--background-darker);
 		color: var(--white);
+		animation: segment-pulse 1.6s ease-in-out infinite;
+	}
+	:global(.time-input [data-focused]),
+	:global(.time-input [data-focused]:focus),
+	:global(.time-input [data-focused]:focus-visible) {
+		outline: none !important;
+		box-shadow: none !important;
+		background: var(--background-darker);
+		color: var(--white);
+		animation: segment-pulse 1.6s ease-in-out infinite;
+	}
+	@keyframes segment-pulse {
+		50% { background: var(--background-darker); color: var(--white); }
 	}
 </style>

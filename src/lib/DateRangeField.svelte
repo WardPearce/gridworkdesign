@@ -9,12 +9,18 @@
 	<BitsField.Label class="range-label">{label}</BitsField.Label>
 	<BitsField.Input type="start" class="range-input">
 		{#snippet children({ segments })}
-			{#each segments as { part }, index (index)}
-				<BitsField.Segment {part} />
+			{#each segments as { part, value }, index (`${part}-${index}`)}
+				<BitsField.Segment {part}>{value}</BitsField.Segment>
 			{/each}
 		{/snippet}
 	</BitsField.Input>
-	<BitsField.Input type="end" class="range-input" />
+	<BitsField.Input type="end" class="range-input">
+		{#snippet children({ segments })}
+			{#each segments as { part, value }, index (`${part}-${index}`)}
+				<BitsField.Segment {part}>{value}</BitsField.Segment>
+			{/each}
+		{/snippet}
+	</BitsField.Input>
 </BitsField.Root>
 
 <style>
@@ -38,11 +44,30 @@
 		font: inherit;
 	}
 	:global(.range-input:focus-within) {
-		border-style: dashed;
+		border-style: solid;
+		outline: none !important;
+		box-shadow: none !important;
 	}
-	:global(.range-input [data-focused]) {
-		outline: 1px dashed var(--text);
+	:global(.range-input:focus),
+	:global(.range-input:focus-visible) { outline: none !important; box-shadow: none !important; }
+	:global(.range-input :focus),
+	:global(.range-input :focus-visible) {
+		outline: none !important;
+		box-shadow: none !important;
 		background: var(--background-darker);
 		color: var(--white);
+		animation: segment-pulse 1.6s ease-in-out infinite;
+	}
+	:global(.range-input [data-focused]),
+	:global(.range-input [data-focused]:focus),
+	:global(.range-input [data-focused]:focus-visible) {
+		outline: none !important;
+		box-shadow: none !important;
+		background: var(--background-darker);
+		color: var(--white);
+		animation: segment-pulse 1.6s ease-in-out infinite;
+	}
+	@keyframes segment-pulse {
+		50% { background: var(--background-darker); color: var(--white); }
 	}
 </style>

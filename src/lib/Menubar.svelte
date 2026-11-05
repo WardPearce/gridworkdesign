@@ -13,7 +13,7 @@
 <BitsMenubar.Root class="menubar">
 	{#each menus as menu (menu.label)}
 		<BitsMenubar.Menu>
-			<BitsMenubar.Trigger class="menubar-trigger">{menu.label}</BitsMenubar.Trigger>
+			<BitsMenubar.Trigger class="menubar-trigger" onmousedown={(event) => event.preventDefault()}>{menu.label}</BitsMenubar.Trigger>
 			<BitsMenubar.Portal>
 				<BitsMenubar.Content class="menubar-content">
 					{#each menu.items as item (item.label)}<BitsMenubar.Item

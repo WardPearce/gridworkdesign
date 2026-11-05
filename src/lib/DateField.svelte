@@ -7,7 +7,13 @@
 <div class="date-field">
 	<BitsDateField.Root bind:value>
 		<BitsDateField.Label class="date-label">{label}</BitsDateField.Label>
-		<BitsDateField.Input class="date-input" />
+		<BitsDateField.Input class="date-input">
+			{#snippet children({ segments })}
+				{#each segments as { part, value }, index (`${part}-${index}`)}
+					<BitsDateField.Segment {part}>{value}</BitsDateField.Segment>
+				{/each}
+			{/snippet}
+		</BitsDateField.Input>
 	</BitsDateField.Root>
 </div>
 
@@ -32,11 +38,30 @@
 		font: inherit;
 	}
 	:global(.date-input:focus-within) {
-		border-style: dashed;
+		border-style: solid;
+		outline: none !important;
+		box-shadow: none !important;
 	}
-	:global(.date-input [data-focused]) {
-		outline: 1px dashed var(--text);
+	:global(.date-input:focus),
+	:global(.date-input:focus-visible) { outline: none !important; box-shadow: none !important; }
+	:global(.date-input :focus),
+	:global(.date-input :focus-visible) {
+		outline: none !important;
+		box-shadow: none !important;
 		background: var(--background-darker);
 		color: var(--white);
+		animation: segment-pulse 1.6s ease-in-out infinite;
+	}
+	:global(.date-input [data-focused]),
+	:global(.date-input [data-focused]:focus),
+	:global(.date-input [data-focused]:focus-visible) {
+		outline: none !important;
+		box-shadow: none !important;
+		background: var(--background-darker);
+		color: var(--white);
+		animation: segment-pulse 1.6s ease-in-out infinite;
+	}
+	@keyframes segment-pulse {
+		50% { background: var(--background-darker); color: var(--white); }
 	}
 </style>

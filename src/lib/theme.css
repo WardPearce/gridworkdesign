@@ -71,3 +71,8 @@ h6 {
 *::after {
 	box-sizing: border-box;
 }
+
+::selection {
+	background: var(--text);
+	color: var(--background);
+}
