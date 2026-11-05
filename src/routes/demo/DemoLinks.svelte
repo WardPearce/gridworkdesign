@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 
-	const demos = [{ name: 'playwright', href: resolve('/demo/playwright') }];
+	const demos = [
+		{ name: 'accordion', href: resolve('/demo/accordion') },
+		{ name: 'playwright', href: resolve('/demo/playwright') }
+	];
 </script>
 
 <!--
