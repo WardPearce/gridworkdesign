@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { DatePicker as BitsDatePicker } from 'bits-ui';
-	import { CalendarDays, ChevronLeft, ChevronRight } from '@lucide/svelte';
+	import { ChevronLeft, ChevronRight } from '@lucide/svelte';
 	import type { DateValue } from '@internationalized/date';
 	let { label = 'Choose date', value = $bindable() }: { label?: string; value?: DateValue } =
 		$props();
@@ -13,9 +13,6 @@
 			{#each segments as { part, value: segmentValue }, index (`${part}-${index}`)}
 				<BitsDatePicker.Segment {part} class="date-segment">{segmentValue}</BitsDatePicker.Segment>
 			{/each}
-			<BitsDatePicker.Trigger class="date-trigger" aria-label="Open calendar"
-				><CalendarDays size={18} aria-hidden="true" /></BitsDatePicker.Trigger
-			>
 		{/snippet}
 	</BitsDatePicker.Input>
 	<BitsDatePicker.Content class="date-content ui-motion-enter" sideOffset={4}>
@@ -71,7 +68,7 @@
 		width: fit-content;
 		min-height: 2.75rem;
 		align-items: center;
-		gap: 0.15rem;
+		gap: 0.5rem;
 		padding: 0.4rem 0.65rem;
 		border: 2px solid var(--text);
 		background: transparent;
@@ -85,7 +82,6 @@
 		background: var(--background-darker);
 		color: var(--white);
 	}
-	:global(.date-trigger),
 	:global(.calendar-nav) {
 		display: inline-flex;
 		min-width: 2.5rem;
@@ -163,8 +159,4 @@
 	}
 	:global(.calendar-day:focus-visible),
 	:global(.calendar-nav:focus-visible),
-	:global(.date-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
-	}
 </style>
