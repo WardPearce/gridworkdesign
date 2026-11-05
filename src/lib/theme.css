@@ -101,3 +101,32 @@ h6 {
 	background: var(--text);
 	color: var(--background);
 }
+
+/* Keep native page and component scrollbars in step with the active theme. */
+* {
+	scrollbar-color: var(--light) var(--background);
+	scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+	width: 0.7rem;
+	height: 0.7rem;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+	border: 2px solid var(--background);
+	border-radius: 999px;
+	background: var(--light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--background-darker);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--background);
+}
