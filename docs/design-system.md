@@ -55,13 +55,12 @@ When translating to library tokens, map `--background` to page/surface, `--text`
 
 ### Typography
 
-- **Body and control text:** FragmentMono, with a system monospace fallback.
-- **Display/brand text:** a display face for a product wordmark and select prominent labels; use a system monospace fallback if the font is unavailable.
+- **Display headings:** Use Space Mono for headings (`h1`–`h6`) and prominent display labels. Its distinctive retro-tech forms provide a freely licensed monospace display voice. Bundle the font with the project; if it cannot load, fall back to a system monospace stack.
+- **Supporting text:** Use FragmentMono for subheadings, paragraphs, labels, controls, captions, and utility copy. Bundle it with the project and fall back to a system monospace stack.
+- **Hierarchy:** Establish levels with size, line-height, and ink shade. Keep heading text in the primary `--text` color; supporting text may use a documented muted ink token derived from `--text` (never `--light`, which is reserved for tracks/surfaces). Preserve readable contrast in every theme.
+- **Suggested scale:** Display title 2.5rem/1.1; page heading 2rem/1.2; section heading 1.5rem/1.25; subsection heading 1.125rem/1.35; body 0.9375rem/1.6; supporting/caption 0.8125rem/1.5. Treat these as defaults that consuming applications can override.
 - **Voice:** short, literal labels; sentence case for explanatory content; uppercase only where the reference intentionally uses it for prominent action labels.
-- **Hierarchy:** use size, weight, spacing, and borders before introducing extra font families or decorative treatments.
-- **Metrics:** The body baseline is `0.875rem` with `1.5rem` line-height and slight letter spacing. Its heading scale is intentionally large; a component library should expose a compact, practical scale and avoid forcing page-level heading sizes on consumers.
-
-Fonts are optional assets. Components must remain legible with fallback fonts and must not require application-specific font files.
+- Fonts must ship as local project assets and include a remote font URL as a secondary source. Keep system fallbacks so the interface remains legible offline or when either source fails.
 
 ### Icons
 

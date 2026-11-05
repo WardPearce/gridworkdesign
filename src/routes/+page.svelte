@@ -43,12 +43,14 @@
 	import TimeField from '../lib/TimeField.svelte';
 	import TimeRangeField from '../lib/TimeRangeField.svelte';
 	import Tooltip from '../lib/Tooltip.svelte';
+	import ThemeSelector from '../lib/ThemeSelector.svelte';
 
 	let accepted = $state(true);
 	let notifications = $state(false);
 	let selectedRadio = $state('plain');
 	let selectedToggle = $state('left');
 	let pin = $state('');
+	let theme = $state<'IBM' | 'NewsPaper' | 'BurntWood' | 'Hacker' | 'PurpleDaydream' | 'BloodRed'>('IBM');
 
 	const items = [
 		{
@@ -100,6 +102,10 @@
 </svelte:head>
 
 <main>
+	<nav class="theme-controls" aria-label="Theme controls">
+		<span>Theme</span>
+		<ThemeSelector bind:value={theme} />
+	</nav>
 	<header>
 		<p class="eyebrow">S V E L T E / U I</p>
 		<h1>Component library</h1>

@@ -42,5 +42,6 @@ export { default as TimeField } from './TimeField.svelte';
 export { default as TimeRangeField } from './TimeRangeField.svelte';
 export { default as Toggle } from './Toggle.svelte';
 export { default as ToggleGroup } from './ToggleGroup.svelte';
+export { default as ThemeSelector } from './ThemeSelector.svelte';
 export { default as Toolbar } from './Toolbar.svelte';
 export { default as Tooltip } from './Tooltip.svelte';
