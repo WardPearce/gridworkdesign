@@ -19,6 +19,7 @@ export { default as DateRangePicker } from './DateRangePicker.svelte';
 export { default as Dialog } from './Dialog.svelte';
 export { default as DropdownMenu } from './DropdownMenu.svelte';
 export { default as Label } from './Label.svelte';
+export { default as InlineList } from './InlineList.svelte';
 export { default as LinkPreview } from './LinkPreview.svelte';
 export { default as Menu } from './Menu.svelte';
 export { default as Menubar } from './Menubar.svelte';
