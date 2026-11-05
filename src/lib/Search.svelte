@@ -1,0 +1,75 @@
+<script lang="ts">
+	import { Combobox } from 'bits-ui';
+	import { Search as SearchIcon } from '@lucide/svelte';
+	let {
+		suggestions = [],
+		value = $bindable(''),
+		placeholder = 'Search',
+		...attributes
+	}: {
+		suggestions?: string[];
+		value?: string;
+		placeholder?: string;
+	} & Omit<import('svelte/elements').HTMLInputAttributes, 'class' | 'type' | 'list' | 'value' | 'placeholder'> = $props();
+</script>
+
+<Combobox.Root type="single" bind:value>
+	<div class="search-wrap">
+		<span class="search-icon"><SearchIcon size={16} aria-hidden="true" /></span>
+		<Combobox.Input class="search-input" {placeholder} aria-label={attributes['aria-label'] ?? placeholder} {...attributes} />
+	</div>
+	{#if suggestions.length}
+		<Combobox.Portal>
+			<Combobox.Content class="search-content" sideOffset={4}>
+				<Combobox.Viewport>
+					{#each suggestions as suggestion (suggestion)}
+						<Combobox.Item value={suggestion} class="search-item">{suggestion}</Combobox.Item>
+					{/each}
+				</Combobox.Viewport>
+			</Combobox.Content>
+		</Combobox.Portal>
+	{/if}
+</Combobox.Root>
+
+<style>
+	.search-wrap {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		gap: 0.625rem;
+		width: 100%;
+		min-height: 2.75rem;
+		padding: 0 0.75rem;
+		border: 2px solid var(--text);
+		background: transparent;
+		color: var(--text);
+	}
+	.search-wrap:focus-within { border-style: dashed; }
+	.search-icon { display: inline-flex; flex: 0 0 auto; align-items: center; }
+	:global(.search-input) {
+		box-sizing: border-box;
+		flex: 1;
+		min-width: 0;
+		min-height: calc(2.75rem - 4px);
+		padding: 0.5rem 0;
+		border: 0;
+		outline: 0;
+		background: transparent;
+		color: inherit;
+		font: inherit;
+	}
+	:global(.search-input::placeholder) { color: var(--text); opacity: 0.65; }
+	:global(.search-content) {
+		z-index: 50;
+		width: var(--bits-combobox-anchor-width);
+		min-width: var(--bits-select-anchor-width);
+		max-height: min(18rem, var(--bits-select-content-available-height));
+		overflow: auto;
+		border: 2px solid var(--text);
+		background: var(--background);
+		color: var(--text);
+		box-shadow: 3px 3px 0 var(--text);
+	}
+	:global(.search-item) { min-height: 2.75rem; padding: 0.6rem 0.75rem; cursor: pointer; }
+	:global(.search-item[data-highlighted]) { background: var(--background-darker); color: var(--white); }
+</style>

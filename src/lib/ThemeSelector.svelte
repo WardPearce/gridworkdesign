@@ -2,11 +2,11 @@
 	import { ChevronDown, Sun } from '@lucide/svelte';
 	import { Select } from 'bits-ui';
 
-	export type Theme = 'IBM' | 'NewsPaper' | 'BurntWood' | 'Hacker' | 'PurpleDaydream' | 'BloodRed';
+	export type Theme = 'Gridwork' | 'NewsPaper' | 'BurntWood' | 'Hacker' | 'PurpleDaydream' | 'BloodRed';
 	type Mode = 'rotate' | 'dropdown';
-	const themes: Theme[] = ['IBM', 'NewsPaper', 'BurntWood', 'Hacker', 'PurpleDaydream', 'BloodRed'];
+	const themes: Theme[] = ['Gridwork', 'NewsPaper', 'BurntWood', 'Hacker', 'PurpleDaydream', 'BloodRed'];
 	const themeLabels: Record<Theme, string> = {
-		IBM: 'IBM',
+		Gridwork: 'Gridwork',
 		NewsPaper: 'NewsPaper',
 		BurntWood: 'BurntWood',
 		Hacker: 'Hacker',
@@ -15,7 +15,7 @@
 	};
 
 	let {
-		value = $bindable<Theme>('IBM'),
+		value = $bindable<Theme>('Gridwork'),
 		name,
 		mode = 'rotate'
 	}: { value?: Theme; name?: string; mode?: Mode } = $props();

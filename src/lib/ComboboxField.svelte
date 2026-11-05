@@ -52,6 +52,7 @@
 	}
 	:global(.combo-content) {
 		z-index: 50;
+		width: var(--bits-combobox-anchor-width);
 		min-width: var(--bits-select-anchor-width);
 		max-height: min(18rem, var(--bits-select-content-available-height));
 		overflow: auto;

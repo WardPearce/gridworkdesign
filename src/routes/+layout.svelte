@@ -12,12 +12,18 @@
 </Root>
 
 <style>
+	:global(body) { margin: 0; }
+	:global(#app), :global(body > div) { min-height: 100vh; }
 	.docs-theme-control {
+		position: absolute;
+		top: 0.75rem;
+		right: 1.5rem;
+		z-index: 2;
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
 		gap: 0.75rem;
-		padding: 0.75rem 1.5rem;
+		padding: 0;
 		color: var(--text);
 	}
 </style>

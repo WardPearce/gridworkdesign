@@ -10,7 +10,7 @@
 
  const summary = 'ThemeSelector component with accessible behavior and configurable props';
  const props: Prop[] = [
-  { name: 'value', type: 'Theme', required: false, defaultValue: 'IBM', description: 'Bindable theme choice.' },
+  { name: 'value', type: 'Theme', required: false, defaultValue: 'Gridwork', description: 'Bindable theme choice.' },
   { name: 'name', type: 'string', required: false, defaultValue: '—', description: 'Form name.' },
 ];
 </script>

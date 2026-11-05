@@ -48,3 +48,5 @@ export { default as ToggleGroup } from './ToggleGroup.svelte';
 export { default as ThemeSelector } from './ThemeSelector.svelte';
 export { default as Toolbar } from './Toolbar.svelte';
 export { default as Tooltip } from './Tooltip.svelte';
+export { default as Search } from './Search.svelte';
+export { default as Sidebar } from './Sidebar.svelte';

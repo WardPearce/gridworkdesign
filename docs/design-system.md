@@ -32,7 +32,7 @@ The reference palettes are:
 
 | Theme          | `--white`          | `--background`     | `--light` | `--text`           | `--background-darker` |
 | -------------- | ------------------ | ------------------ | --------- | ------------------ | --------------------- |
-| IBM (default)  | `rgb(236 236 236)` | `rgb(182 180 180)` | `#999999` | `rgb(56 56 56)`    | `rgb(71 70 70)`       |
+| Gridwork (default)  | `rgb(236 236 236)` | `rgb(182 180 180)` | `#999999` | `rgb(56 56 56)`    | `rgb(71 70 70)`       |
 | NewsPaper      | `rgb(170 166 166)` | `rgb(136 135 135)` | `#747373` | `rgb(27 27 27)`    | `rgb(49 49 49)`       |
 | BurntWood      | `rgb(255 255 255)` | `rgb(26 25 25)`    | `#494444` | `rgb(240 232 232)` | `rgb(26 25 25)`       |
 | Hacker         | `rgb(236 236 236)` | `#072004`          | `#0f3813` | `rgb(178 230 176)` | `rgb(11 78 8)`        |
@@ -49,7 +49,7 @@ Apply the roles consistently:
 6. Do not invent additional colors for hover, focus, errors, or selection. Derive them from these roles, and add semantic tokens only when a role cannot be expressed accessibly from the base palette.
 7. Never hard-code a theme’s RGB values inside a component. Components consume CSS custom properties so palette switching changes the whole component family together.
 
-The library ships its IBM defaults in `src/lib/theme.css`. Import this stylesheet once at the application root, or import the package entry point so its defaults are included. A host theme can override the five custom properties on `:root` or a theme container. Do not rely on fallback values declared only on the page body: portaled Bits UI content is rendered outside component subtrees and must inherit the same defined tokens.
+The library ships its Gridwork defaults in `src/lib/theme.css`. Import this stylesheet once at the application root, or import the package entry point so its defaults are included. A host theme can override the five custom properties on `:root` or a theme container. Do not rely on fallback values declared only on the page body: portaled Bits UI content is rendered outside component subtrees and must inherit the same defined tokens.
 
 When translating to library tokens, map `--background` to page/surface, `--text` to foreground/border/focus, `--white` to inverse foreground, `--light` to muted surface/track, and `--background-darker` to alternate surface. Keep semantic aliases if needed, but preserve these base-role meanings. Check text and control contrast in every shipped theme before adding it; some reference palette combinations may need adjustment for accessible small text while preserving their hue and contrast character.
 
