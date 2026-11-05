@@ -48,10 +48,18 @@ h6 {
 	--white: rgb(236 236 236);
 	--light: #999999;
 	--background-darker: rgb(71 70 70);
+	--paper-grain: rgb(255 255 255 / 3.5%);
 }
 
 :root[data-theme='NewsPaper'] {
 	--white: rgb(170 166 166); --background: rgb(136 135 135); --light: #747373; --text: rgb(27 27 27); --background-darker: rgb(49 49 49);
+}
+
+/* A quiet, theme-tinted paper grain shared by every palette. */
+body {
+	background-color: var(--background);
+	background-image: radial-gradient(var(--paper-grain) 0.55px, transparent 0.75px);
+	background-size: 5px 5px;
 }
 :root[data-theme='BurntWood'] {
 	--white: #fff; --background: rgb(26 25 25); --light: #494444; --text: rgb(240 232 232); --background-darker: rgb(26 25 25);
