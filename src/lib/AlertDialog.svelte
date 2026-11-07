@@ -64,6 +64,10 @@
 		top: 50%;
 		left: 50%;
 		width: min(28rem, calc(100vw - 2rem));
+		height: auto;
+		min-height: 0;
+		max-height: calc(100dvh - 2rem);
+		overflow: auto;
 		transform: translate(-50%, -50%);
 		padding: 1.25rem;
 		border: 2px solid var(--text);

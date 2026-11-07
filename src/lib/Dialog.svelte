@@ -68,6 +68,8 @@
 		top: 50%;
 		left: 50%;
 		width: min(32rem, calc(100vw - 2rem));
+		height: auto;
+		min-height: 0;
 		max-height: calc(100dvh - 2rem);
 		overflow: auto;
 		transform: translate(-50%, -50%);
