@@ -109,7 +109,9 @@
 	}
 
 	:global(.accordion-content) {
-		padding: 0 1rem 1rem;
+		padding: 1rem;
+		border-top: 2px solid var(--text);
+		background: var(--background);
 		color: var(--text);
 	}
 
