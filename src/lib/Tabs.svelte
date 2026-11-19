@@ -49,6 +49,7 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.tabs-trigger[data-state='active']) {
 		border-color: var(--text);
@@ -57,22 +58,27 @@
 		background: var(--background-darker);
 		color: var(--white);
 		font-weight: 700;
-		box-shadow:
-			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
-			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.tabs-trigger:hover:not(:disabled)) {
+	:global(
+		.tabs-trigger:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
 		text-decoration: underline;
-		text-decoration-style: dashed;
+		text-decoration-style: solid;
 		text-underline-offset: 0.2em;
 	}
-	:global(.tabs-trigger[data-state='active']:hover:not(:disabled)) {
+	:global(
+		.tabs-trigger[data-state='active']:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not(:disabled)
+	) {
 		border-bottom-color: var(--background);
 	}
 	:global(.tabs-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: -4px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.tabs-trigger:disabled) {
 		opacity: 0.55;
@@ -82,8 +88,13 @@
 		padding: 1rem;
 		border: 2px solid var(--text);
 		border-top: 0;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.tabs-content p) {
 		margin: 0;
+	}
+
+	:global(.tabs-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

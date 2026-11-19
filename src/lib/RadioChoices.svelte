@@ -46,19 +46,17 @@
 		border-radius: 50%;
 		background: transparent;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 
 	:global(.radio-item[data-state='checked']) {
 		background: var(--background-darker);
-		box-shadow:
-			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
-			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
+		box-shadow: var(--shadow-inset);
 	}
 
 	:global(.radio-item:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	:global(.radio-item:disabled) {
@@ -76,5 +74,9 @@
 
 	:global(.radio-item[data-state='checked']) .radio-dot {
 		transform: scale(1);
+	}
+
+	:global(.radio-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

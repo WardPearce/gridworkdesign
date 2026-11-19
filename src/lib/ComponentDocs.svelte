@@ -11,6 +11,7 @@
 	};
 	const slugs = [
 		'foundations',
+		'grid',
 		'accordion',
 		'alert-dialog',
 		'aspect-ratio',
@@ -175,7 +176,8 @@
 	}
 	.preview {
 		padding: 1.5rem;
-		border: 2px dashed var(--text);
+		border: 2px solid var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	pre {
 		overflow: auto;
@@ -183,6 +185,7 @@
 		background: var(--background-darker);
 		color: var(--white);
 		border: 2px solid var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	table {
 		width: 100%;

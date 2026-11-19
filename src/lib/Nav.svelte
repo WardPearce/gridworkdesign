@@ -46,7 +46,6 @@
 		{#each items as item (item.href)}
 			<li>
 				<!-- URLs belong to the consuming app and may be external. -->
-				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 				<a href={item.href} aria-current={active(item) ? 'page' : undefined}>
 					{#if item.icon}<item.icon size={19} aria-hidden="true" />{/if}
 					<span class="label">{item.label}</span>
@@ -127,13 +126,13 @@
 		text-decoration: none;
 		box-shadow: var(--shadow-raised);
 	}
-	a:hover {
+	a:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not([data-disabled] *) {
 		border-color: var(--text);
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
 	}
 	a:focus-visible {
 		outline: var(--focus-ring);
-		outline-offset: 2px;
+		outline-offset: var(--focus-ring-offset);
 	}
 	a[aria-current='page'] {
 		background: var(--background-darker);
@@ -156,6 +155,7 @@
 		padding: 0.1rem 0.3rem;
 		border: 1px solid currentColor;
 		font-size: 0.7rem;
+		box-shadow: var(--shadow-raised);
 	}
 	.bottom ul {
 		justify-content: space-evenly;

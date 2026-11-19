@@ -1,5 +1,4 @@
 <script lang="ts">
- /* eslint-disable svelte/no-navigation-without-resolve -- Consumer-owned URLs can be external. */
 	import { ChevronLeft, ChevronRight, Menu, Search, X } from '@lucide/svelte';
 	let {
 		items,
@@ -71,7 +70,6 @@
 		<nav aria-label={title}>
 			{#each filtered as item (item.href)}
 				<!-- Library links may be external; callers supply resolved application URLs. -->
-				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 				<a
 					href={item.href}
 					aria-current={currentPath === item.href ? 'page' : undefined}
@@ -153,13 +151,15 @@
 	button:active {
 		box-shadow: var(--shadow-inset);
 	}
-	button:hover {
-		border-style: dashed;
+	button:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+			[data-disabled] *
+		) {
+		box-shadow: var(--shadow-hover);
 	}
 	button:focus-visible,
 	a:focus-visible {
 		outline: var(--focus-ring);
-		outline-offset: 3px;
+		outline-offset: var(--focus-ring-offset);
 	}
 	.navigation {
 		min-height: 0;
@@ -178,7 +178,7 @@
 	}
 	.filter:focus-within {
 		outline: var(--focus-ring);
-		outline-offset: 3px;
+		outline-offset: var(--focus-ring-offset);
 	}
 	input {
 		width: 100%;
@@ -230,9 +230,9 @@
 		flex: 1;
 		overflow-wrap: anywhere;
 	}
-	a:hover {
+	a:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not([data-disabled] *) {
 		border-color: var(--text);
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
 	}
 	a[aria-current='page'] {
 		background: var(--background-darker);
@@ -242,7 +242,7 @@
 	}
 	a[aria-current='page'] .link-light {
 		background: var(--white);
-		box-shadow: 0 0 5px color-mix(in srgb, var(--white) 45%, transparent);
+		box-shadow: var(--shadow-inset);
 	}
 	.empty {
 		margin: 0;
@@ -307,5 +307,9 @@
 		nav {
 			max-height: 55dvh;
 		}
+	}
+
+	button:active:not(:disabled):not([data-disabled]) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

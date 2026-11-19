@@ -51,9 +51,12 @@
 		border: 2px solid var(--text);
 		background: transparent;
 		color: var(--text);
+		box-shadow: var(--shadow-inset);
 	}
 	.search-wrap:focus-within {
-		border-style: dashed;
+		box-shadow: var(--shadow-inset);
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	.search-icon {
 		display: inline-flex;
@@ -85,15 +88,20 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px 0 var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.search-item) {
 		min-height: 2.75rem;
 		padding: 0.6rem 0.75rem;
 		cursor: pointer;
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.search-item[data-highlighted]) {
 		background: var(--background-darker);
 		color: var(--white);
+	}
+
+	:global(.search-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

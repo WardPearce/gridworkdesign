@@ -30,6 +30,7 @@
 		min-height: 2.75rem;
 		align-items: center;
 		gap: 0.75rem;
+		padding: 0.5rem 0.75rem;
 		color: var(--text);
 		cursor: pointer;
 	}
@@ -45,24 +46,26 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 
-	:global(.check-box:hover:not(:disabled)) {
-		border-style: dashed;
+	:global(
+		.check-box:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 
 	:global(.check-box[data-state='checked']) {
 		background: var(--background-darker);
 		color: var(--white);
-		box-shadow:
-			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
-			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
+		box-shadow: var(--shadow-inset);
 	}
 
 	:global(.check-box:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	:global(.check-box:disabled) {
@@ -79,5 +82,9 @@
 
 	:global(.check-box[data-state='checked']) .check-mark {
 		visibility: visible;
+	}
+
+	:global(.check-box:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

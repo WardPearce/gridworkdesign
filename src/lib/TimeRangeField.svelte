@@ -43,14 +43,13 @@
 		background: transparent;
 		color: var(--text);
 		font: inherit;
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.range-input:focus-within) {
-		border-style: solid;
-		outline: none !important;
-		box-shadow: none !important;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.range-input:focus),
-	:global(.range-input:focus-visible) { outline: none !important; box-shadow: none !important; }
 	:global(.range-input :focus),
 	:global(.range-input :focus-visible) {
 		outline: none !important;

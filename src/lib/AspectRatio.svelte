@@ -11,6 +11,7 @@
 		width: 100%;
 		overflow: hidden;
 		border: 2px solid var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.aspect-ratio > *) {
 		width: 100%;

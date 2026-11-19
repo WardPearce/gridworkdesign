@@ -27,6 +27,7 @@
 		max-height: var(--scroll-max-height);
 		overflow: hidden;
 		border: 2px solid var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.scroll-viewport) {
 		width: 100%;
@@ -38,6 +39,7 @@
 		user-select: none;
 		padding: 2px;
 		background: var(--light);
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.scrollbar[data-orientation='vertical']) {
 		width: 0.875rem;
@@ -50,8 +52,10 @@
 		position: relative;
 		flex: 1;
 		background: var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.scroll-corner) {
 		background: var(--light);
+		box-shadow: var(--shadow-inset);
 	}
 </style>

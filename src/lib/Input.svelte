@@ -33,10 +33,13 @@
 		border: 2px solid var(--text);
 		background: transparent;
 		color: var(--text);
+		box-shadow: var(--shadow-inset);
 	}
 
 	.input-wrap:focus-within {
-		border-style: dashed;
+		box-shadow: var(--shadow-inset);
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	.input {

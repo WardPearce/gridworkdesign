@@ -7,6 +7,7 @@ export { default as AspectRatio } from './AspectRatio.svelte';
 export { default as Avatar } from './Avatar.svelte';
 export { default as Button } from './Button.svelte';
 export { default as Card } from './Card.svelte';
+export { default as Grid } from './Grid.svelte';
 export { default as Calendar } from './Calendar.svelte';
 export { default as Checkbox } from './Checkbox.svelte';
 export { default as Collapsible } from './Collapsible.svelte';

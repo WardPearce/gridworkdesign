@@ -37,14 +37,18 @@
 		color: var(--white);
 		font: inherit;
 		cursor: pointer;
-		box-shadow: 3px 3px var(--text);
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.dropdown-menu-trigger:hover) {
-		border-style: dashed;
+	:global(
+		.dropdown-menu-trigger:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.dropdown-menu-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.dropdown-menu-content) {
 		z-index: var(--layer-popup);
@@ -53,7 +57,7 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.dropdown-menu-item) {
 		display: flex;
@@ -62,6 +66,7 @@
 		padding: 0.5rem 0.75rem;
 		outline: none;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.dropdown-menu-item[data-highlighted]) {
 		background: var(--background-darker);
@@ -70,5 +75,13 @@
 	:global(.dropdown-menu-item[data-disabled]) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+
+	:global(.dropdown-menu-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
+	}
+
+	:global(.dropdown-menu-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

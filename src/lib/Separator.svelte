@@ -15,7 +15,8 @@
 		height: 0;
 		margin: 1rem 0;
 		border: 0;
-		border-top: 1px dotted var(--text);
+		border-top: 1px solid var(--text);
+		box-shadow: 0 1px var(--depth-highlight);
 	}
 	:global(.separator[data-orientation='vertical']) {
 		display: inline-block;
@@ -23,7 +24,8 @@
 		height: 1.5rem;
 		margin: 0 0.75rem;
 		border: 0;
-		border-left: 1px dotted var(--text);
+		border-left: 1px solid var(--text);
+		box-shadow: 1px 0 var(--depth-highlight);
 		vertical-align: middle;
 	}
 </style>

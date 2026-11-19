@@ -45,6 +45,7 @@
 	:global(.accordion-item) {
 		border: 2px solid var(--text);
 		border-bottom: 0;
+		box-shadow: var(--shadow-raised);
 	}
 
 	:global(.accordion-item:last-child) {
@@ -70,15 +71,22 @@
 		font-weight: 700;
 		text-align: left;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 
-	:global(.accordion-item:has(.accordion-trigger:hover)) {
-		border-style: dashed;
+	:global(
+		.accordion-item:has(
+			.accordion-trigger:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+					[data-disabled] *
+				)
+		)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 
 	:global(.accordion-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: -5px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	:global(.accordion-trigger:disabled) {
@@ -107,5 +115,9 @@
 
 	:global(.accordion-content p) {
 		margin: 0;
+	}
+
+	:global(.accordion-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

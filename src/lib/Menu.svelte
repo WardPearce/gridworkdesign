@@ -35,10 +35,11 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.simple-menu-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.simple-menu-content) {
 		z-index: var(--layer-popup);
@@ -47,7 +48,7 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.simple-menu-item) {
 		display: flex;
@@ -56,6 +57,7 @@
 		padding: 0.5rem 0.75rem;
 		outline: none;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.simple-menu-item[data-highlighted]) {
 		background: var(--background-darker);
@@ -64,5 +66,13 @@
 	:global(.simple-menu-item[data-disabled]) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+
+	:global(.simple-menu-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
+	}
+
+	:global(.simple-menu-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

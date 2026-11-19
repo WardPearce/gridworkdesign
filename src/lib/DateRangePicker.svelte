@@ -89,9 +89,12 @@
 		background: transparent;
 		color: var(--text);
 		font: inherit;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.range-input:focus-within) {
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.range-segment[data-focused]) {
 		background: var(--background-darker);
@@ -110,16 +113,21 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.calendar-nav:hover:not(:disabled)) {
-		border-style: dashed;
+	:global(
+		.calendar-nav:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.range-content) {
 		z-index: var(--layer-popup);
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px 0 var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.range-calendar) {
 		padding: 1rem;
@@ -161,21 +169,35 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.calendar-day[data-selected]),
 	:global(.calendar-day[data-selection-start]),
 	:global(.calendar-day[data-selection-end]) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.calendar-day[data-selected]:hover:not([data-disabled])),
-	:global(.calendar-day[data-selection-start]:hover:not([data-disabled])),
-	:global(.calendar-day[data-selection-end]:hover:not([data-disabled])) {
+	:global(
+		.calendar-day[data-selected]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not([data-disabled])
+	),
+	:global(
+		.calendar-day[data-selection-start]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not([data-disabled])
+	),
+	:global(
+		.calendar-day[data-selection-end]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not([data-disabled])
+	) {
 		border-color: var(--background);
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.calendar-day[data-highlighted]) {
-		outline: 1px dashed var(--text);
+		outline: 1px solid var(--text);
 	}
 	:global(.calendar-day[data-today]) {
 		border-color: var(--text);
@@ -183,7 +205,11 @@
 	:global(.calendar-day:focus-visible),
 	:global(.calendar-nav:focus-visible),
 	:global(.range-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
+	}
+
+	:global(.calendar-day:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

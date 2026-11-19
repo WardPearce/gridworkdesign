@@ -23,13 +23,18 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.popover-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
-	:global(.popover-trigger:hover:not(:disabled)) {
-		border-style: dashed;
+	:global(
+		.popover-trigger:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.popover-content) {
 		z-index: var(--layer-popup);
@@ -38,10 +43,14 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.popover-arrow) {
 		fill: var(--background);
 		stroke: var(--text);
+	}
+
+	:global(.popover-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

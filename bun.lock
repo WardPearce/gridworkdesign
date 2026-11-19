@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "design",
+      "name": "grindworkdesign",
       "dependencies": {
         "@lucide/svelte": "^1.68.0",
         "bits-ui": "^2.20.6",

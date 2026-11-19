@@ -42,31 +42,46 @@
 		font: inherit;
 		font-size: 1.5rem;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.rating-field-item[data-highlighted]),
 	:global(.rating-field-item[data-state='active']) {
 		background: var(--background-darker);
 		color: var(--white);
-		box-shadow:
-			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
-			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.rating-field-item:hover:not(:disabled)) {
+	:global(
+		.rating-field-item:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
 		background: color-mix(in srgb, var(--background-darker) 50%, var(--white));
 		color: var(--text);
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
 	}
-	:global(.rating-field-item[data-highlighted]:hover:not(:disabled)),
-	:global(.rating-field-item[data-state='active']:hover:not(:disabled)) {
+	:global(
+		.rating-field-item[data-highlighted]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not(:disabled)
+	),
+	:global(
+		.rating-field-item[data-state='active']:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not(:disabled)
+	) {
 		color: var(--text);
 		background: color-mix(in srgb, var(--background-darker) 50%, var(--white));
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.rating-field-item:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.rating-root[data-disabled]) {
 		opacity: 0.55;
+	}
+
+	:global(.rating-field-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

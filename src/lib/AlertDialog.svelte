@@ -42,15 +42,24 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.alert-trigger:hover:not(:disabled)),
-	:global(.alert-button:hover:not(:disabled)) {
-		border-style: dashed;
+	:global(
+		.alert-trigger:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	),
+	:global(
+		.alert-button:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.alert-trigger:focus-visible),
 	:global(.alert-button:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.alert-overlay) {
 		position: fixed;
@@ -73,7 +82,7 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 4px 4px var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.alert-title) {
 		margin: 0;
@@ -94,7 +103,11 @@
 		background: var(--background-darker);
 		color: var(--white);
 	}
-	:global(.alert-confirm:hover:not(:disabled)) {
+	:global(
+		.alert-confirm:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
 		border-color: var(--background);
 	}
 </style>

@@ -16,6 +16,7 @@
 		color: var(--text);
 		font: inherit;
 		resize: vertical;
+		box-shadow: var(--shadow-inset);
 	}
 	.textarea::placeholder {
 		color: inherit;
@@ -23,7 +24,7 @@
 	}
 	.textarea:focus-visible {
 		outline: var(--focus-ring);
-		outline-offset: 3px;
+		outline-offset: var(--focus-ring-offset);
 	}
 	.textarea:disabled {
 		opacity: 0.55;

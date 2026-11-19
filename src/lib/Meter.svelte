@@ -32,6 +32,7 @@
 		overflow: hidden;
 		border: 2px solid var(--text);
 		background: var(--light);
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.meter-fill) {
 		display: block;

@@ -59,7 +59,7 @@
 			previousPointerAngle = angle;
 			return;
 		}
-		let degrees = ((angle + 90 + 180) % 360 + 360) % 360 - 180;
+		let degrees = ((((angle + 90 + 180) % 360) + 360) % 360) - 180;
 		const normalized = Math.min(1, Math.max(0, (degrees + 135) / 270));
 		const rawValue = min + normalized * (max - min);
 		value = Math.min(max, Math.max(min, min + Math.round((rawValue - min) / step) * step));
@@ -122,14 +122,16 @@
 		aria-valuenow={clampedValue}
 		aria-valuetext={`${clampedValue}`}
 		aria-disabled={disabled}
-		disabled={disabled}
+		{disabled}
 		onpointerdown={onPointerDown}
 		onpointermove={onPointerMove}
 		onpointerup={onPointerUp}
 		onpointercancel={onPointerUp}
 		onkeydown={onKeyDown}
 	>
-		{#if showValue}<span class="dial-value" aria-hidden="true">{mode === 'endless' ? value : clampedValue}</span>{/if}
+		{#if showValue}<span class="dial-value" aria-hidden="true"
+				>{mode === 'endless' ? value : clampedValue}</span
+			>{/if}
 	</button>
 </div>
 
@@ -144,13 +146,26 @@
 		color: var(--text);
 		font-family: 'FragmentMono', monospace;
 	}
-	.dial-field-xs { --dial-field-size: 7rem; }
-	.dial-field-sm { --dial-field-size: 8.75rem; }
-	.dial-field-md { --dial-field-size: 10.5rem; }
-	.dial-field-lg { --dial-field-size: 12.25rem; }
-	.dial-field-xl { --dial-field-size: 14rem; }
+	.dial-field-xs {
+		--dial-field-size: 7rem;
+	}
+	.dial-field-sm {
+		--dial-field-size: 8.75rem;
+	}
+	.dial-field-md {
+		--dial-field-size: 10.5rem;
+	}
+	.dial-field-lg {
+		--dial-field-size: 12.25rem;
+	}
+	.dial-field-xl {
+		--dial-field-size: 14rem;
+	}
 
-	.dial-label { align-self: end; font-size: 0.875rem; }
+	.dial-label {
+		align-self: end;
+		font-size: 0.875rem;
+	}
 	.notch-ring {
 		position: absolute;
 		top: 2rem;
@@ -188,11 +203,28 @@
 		user-select: none;
 		cursor: grab;
 	}
-	.dial:hover { border-style: dashed; }
-	.dial:focus-visible { outline: 2px dashed var(--text); outline-offset: 4px; }
-	.dial:active, .dial.dragging { cursor: grabbing; }
-	.dial:disabled { opacity: 0.55; cursor: not-allowed; }
-	.dial-value { color: var(--white); font: inherit; font-size: 1.125rem; }
+	.dial:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+			[data-disabled] *
+		) {
+		box-shadow: var(--shadow-hover);
+	}
+	.dial:focus-visible {
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
+	}
+	.dial:active,
+	.dial.dragging {
+		cursor: grabbing;
+	}
+	.dial:disabled {
+		opacity: 0.55;
+		cursor: not-allowed;
+	}
+	.dial-value {
+		color: var(--white);
+		font: inherit;
+		font-size: 1.125rem;
+	}
 	.dial::before {
 		position: absolute;
 		inset: 0.22rem;
@@ -205,6 +237,8 @@
 		pointer-events: none;
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.dial { transition: none; }
+		.dial {
+			transition: none;
+		}
 	}
 </style>

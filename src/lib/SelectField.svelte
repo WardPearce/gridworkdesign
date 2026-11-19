@@ -68,10 +68,13 @@
 		font: inherit;
 		text-align: left;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 
 	:global(.select-trigger:focus-visible) {
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	:global(.select-content) {
@@ -82,13 +85,14 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px 0 var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 
 	:global(.select-item) {
 		min-height: 2.75rem;
 		padding: 0.6rem 0.75rem;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 
 	:global(.select-item[data-highlighted]) {
@@ -99,5 +103,13 @@
 	:global(.select-item[data-disabled]) {
 		cursor: not-allowed;
 		opacity: 0.55;
+	}
+
+	:global(.select-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
+	}
+
+	:global(.select-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

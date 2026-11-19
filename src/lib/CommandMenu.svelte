@@ -31,6 +31,7 @@
 		max-width: 24rem;
 		border: 2px solid var(--text);
 		color: var(--text);
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.command-input) {
 		box-sizing: border-box;
@@ -44,8 +45,8 @@
 		font: inherit;
 	}
 	:global(.command-input:focus-visible) {
-		border-bottom-style: dotted;
-		outline: none;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.command-list) {
 		max-height: 16rem;
@@ -56,10 +57,12 @@
 		min-height: 2.75rem;
 		padding: 0.6rem 0.75rem;
 		cursor: pointer;
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.command-item[data-selected]) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.command-item[data-disabled]) {
 		opacity: 0.55;
@@ -67,5 +70,9 @@
 	}
 	:global(.command-empty) {
 		padding: 0.75rem;
+	}
+
+	:global(.command-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

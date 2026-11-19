@@ -26,13 +26,18 @@
 		color: var(--text);
 		font: inherit;
 		cursor: help;
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.tooltip-trigger:hover) {
-		border-style: dashed;
+	:global(
+		.tooltip-trigger:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.tooltip-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.tooltip-content) {
 		z-index: var(--layer-popup);
@@ -42,5 +47,6 @@
 		background: var(--background-darker);
 		color: var(--white);
 		font-size: 0.8125rem;
+		box-shadow: var(--shadow-floating);
 	}
 </style>

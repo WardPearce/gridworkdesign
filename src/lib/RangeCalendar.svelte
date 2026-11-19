@@ -57,6 +57,7 @@
 		padding: 1rem;
 		border: 2px solid var(--text);
 		color: var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.calendar-header) {
 		display: flex;
@@ -77,6 +78,7 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.calendar-nav) {
 		display: inline-flex;
@@ -84,8 +86,12 @@
 		justify-content: center;
 		padding: 0;
 	}
-	:global(.calendar-nav:hover:not(:disabled)) {
-		border-style: dashed;
+	:global(
+		.calendar-nav:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.calendar-grid) {
 		border-collapse: collapse;
@@ -111,18 +117,35 @@
 		height: 100%;
 		border-color: transparent;
 	}
-	:global(.calendar-day:hover:not([data-disabled])) {
+	:global(
+		.calendar-day:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not([data-disabled])
+	) {
 		border-color: var(--text);
-		border-style: dashed;
+		box-shadow: var(--shadow-hover);
 	}
-	:global(.calendar-day[data-selected]:hover:not([data-disabled])),
-	:global(.calendar-day[data-selection-start]:hover:not([data-disabled])),
-	:global(.calendar-day[data-selection-end]:hover:not([data-disabled])) {
+	:global(
+		.calendar-day[data-selected]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not([data-disabled])
+	),
+	:global(
+		.calendar-day[data-selection-start]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not([data-disabled])
+	),
+	:global(
+		.calendar-day[data-selection-end]:hover:not(:disabled):not([data-disabled]):not(
+				[aria-disabled='true']
+			):not([data-disabled] *):not([data-disabled])
+	) {
 		border-color: var(--background);
 	}
 	:global(.calendar-day[data-selected]) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.calendar-day[data-selection-start]),
 	:global(.calendar-day[data-selection-end]) {
@@ -131,8 +154,8 @@
 	}
 	:global(.calendar-day:focus-visible),
 	:global(.calendar-nav:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.calendar-day[data-disabled]),
 	:global(.calendar-day[data-outside-month]) {

@@ -34,7 +34,6 @@
 :root {
 	--font-display: 'SpaceMono', 'Space Mono', ui-monospace, monospace;
 	--font-body: 'FragmentMono', 'Fragment Mono', ui-monospace, monospace;
-	--text-muted: color-mix(in srgb, var(--text) 96%, var(--background));
 }
 
 h1,
@@ -54,6 +53,20 @@ h6 {
 	--light: #999999;
 	--background-darker: rgb(71 70 70);
 	--paper-grain: rgb(255 255 255 / 3.5%);
+
+	/* Semantic roles stay linked to the active palette for custom compositions. */
+	--surface: var(--background);
+	--surface-subtle: color-mix(in srgb, var(--background) 92%, var(--text));
+	--surface-muted: var(--light);
+	--surface-inverse: var(--background-darker);
+	--foreground: var(--text);
+	--foreground-muted: color-mix(in srgb, var(--text) 68%, var(--background));
+	--foreground-inverse: var(--white);
+	--border: var(--text);
+	--border-subtle: color-mix(in srgb, var(--text) 22%, transparent);
+	--accent: var(--background-darker);
+	--accent-foreground: var(--white);
+	--text-muted: var(--foreground-muted);
 }
 
 :root[data-theme='NewsPaper'] {
@@ -175,14 +188,21 @@ body {
 :root {
 	--control-height: 2.75rem;
 	--border-width: 2px;
-	--focus-ring: 2px dashed var(--text);
+	--focus-ring: 3px solid var(--text);
+	--focus-ring-offset: -2px;
+	/* Physical depth stays dark even when a theme uses light foreground ink. */
+	--depth-shadow: rgb(0 0 0 / 32%);
+	--depth-highlight: color-mix(in srgb, var(--white) 24%, transparent);
 	--shadow-raised:
-		inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-		inset 0 -3px 5px color-mix(in srgb, var(--text) 42%, transparent),
-		0 4px 7px color-mix(in srgb, var(--text) 35%, transparent);
-	--shadow-inset:
-		inset 0 2px 5px color-mix(in srgb, var(--text) 45%, transparent),
-		inset 0 -1px 1px color-mix(in srgb, var(--white) 18%, transparent);
+		inset 0 1px 1px var(--depth-highlight), inset 0 -2px 3px var(--depth-shadow),
+		0 3px 5px var(--depth-shadow);
+	--shadow-hover:
+		inset 0 2px 2px var(--depth-highlight), inset 0 -2px 3px var(--depth-shadow),
+		0 5px 8px var(--depth-shadow);
+	--shadow-inset: inset 0 2px 5px var(--depth-shadow), inset 0 -1px 1px var(--depth-highlight);
+	--shadow-floating:
+		inset 0 1px 1px var(--depth-highlight), 0 4px 8px var(--depth-shadow),
+		0 12px 24px var(--depth-shadow);
 	--layer-overlay: 50;
 	--layer-dialog: 51;
 	--layer-popup: 60;

@@ -60,14 +60,22 @@
 		background: transparent;
 		font: inherit;
 		font-size: 1.25rem;
+		box-shadow: var(--shadow-inset);
 	}
 
-	:global(.pin-input:not([data-disabled]) .pin-cell:hover) {
-		border-style: dashed;
+	:global(
+		.pin-input:not([data-disabled])
+			.pin-cell:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 
 	:global(.pin-cell[data-active]) {
-		border-style: dashed;
+		box-shadow: var(--shadow-inset);
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	:global(.pin-input[data-disabled]) {

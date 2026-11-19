@@ -24,6 +24,7 @@
 		border: 2px solid var(--text);
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.avatar-image) {
 		width: 100%;

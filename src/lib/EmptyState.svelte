@@ -18,9 +18,10 @@
 		justify-items: center;
 		gap: 1rem;
 		padding: 2rem;
-		border: 2px dashed var(--text);
+		border: 2px solid var(--text);
 		text-align: center;
 		color: var(--text);
+		box-shadow: var(--shadow-inset);
 	}
 	h3,
 	p {

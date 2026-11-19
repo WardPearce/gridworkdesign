@@ -30,12 +30,19 @@
 		padding: 0.5rem 0.875rem;
 		color: var(--text);
 		text-underline-offset: 0.2em;
+		border: 1px solid var(--text);
+		background: var(--background);
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.nav-link:hover) {
-		text-decoration-style: dashed;
+	:global(
+		.nav-link:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.nav-link:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: -3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 </style>

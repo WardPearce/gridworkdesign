@@ -25,6 +25,7 @@
 		max-width: 100%;
 		border: 2px solid var(--text);
 		padding: 0.25rem;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.toolbar [role='group']) {
 		display: flex;
@@ -40,20 +41,30 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.toolbar-button[aria-pressed='true']) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.toolbar-button:hover) {
-		border-style: dashed;
+	:global(
+		.toolbar-button:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.toolbar-button:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.toolbar-button:disabled) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+
+	:global(.toolbar-button:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

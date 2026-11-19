@@ -32,21 +32,19 @@
 		height: 1.75rem;
 		flex: 0 0 auto;
 		border: 2px solid var(--text);
-		background: var(--background-darker);
+		background: var(--light);
 		cursor: pointer;
+		box-shadow: var(--shadow-inset);
 	}
 
 	:global(.switch-root[data-state='checked']) {
-		background: var(--background-darker);
-		box-shadow:
-			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
-			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
+		background: var(--text);
+		box-shadow: var(--shadow-inset);
 	}
 
 	:global(.switch-root:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 
 	:global(.switch-root:disabled) {
@@ -61,15 +59,16 @@
 		width: 1rem;
 		height: 1rem;
 		background: var(--white);
-		box-shadow:
-			inset 0 1px 1px color-mix(in srgb, var(--background) 42%, transparent),
-			inset 0 -2px 2px color-mix(in srgb, var(--text) 34%, transparent),
-			0 1px 2px color-mix(in srgb, var(--text) 45%, transparent);
+		box-shadow: var(--shadow-raised);
 	}
 
 	:global(.switch-root[data-state='checked'] .switch-thumb) {
 		left: auto;
 		right: 0.2rem;
-		background: var(--white);
+		background: var(--background);
+	}
+
+	:global(.switch-root:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

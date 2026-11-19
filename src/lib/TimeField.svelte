@@ -36,14 +36,13 @@
 		background: transparent;
 		color: var(--text);
 		font: inherit;
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.time-input:focus-within) {
-		border-style: solid;
-		outline: none !important;
-		box-shadow: none !important;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.time-input:focus),
-	:global(.time-input:focus-visible) { outline: none !important; box-shadow: none !important; }
 	:global(.time-input :focus),
 	:global(.time-input :focus-visible) {
 		outline: none !important;

@@ -33,20 +33,30 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.pagination-button[data-selected]) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow: var(--shadow-inset);
 	}
-	:global(.pagination-button:hover:not(:disabled)) {
-		border-style: dashed;
+	:global(
+		.pagination-button:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			):not(:disabled)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.pagination-button:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 2px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.pagination-button:disabled) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+
+	:global(.pagination-button:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

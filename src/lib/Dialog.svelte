@@ -47,16 +47,24 @@
 		color: var(--text);
 		font: inherit;
 		cursor: pointer;
-		box-shadow: 3px 3px var(--text);
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.ui-button:hover),
-	:global(.dialog-close:hover) {
-		border-style: dashed;
+	:global(
+		.ui-button:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			)
+	),
+	:global(
+		.dialog-close:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
+				[data-disabled] *
+			)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.ui-button:focus-visible),
 	:global(.dialog-close:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.dialog-overlay) {
 		position: fixed;
@@ -79,7 +87,7 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 4px 4px var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	.dialog-heading {
 		display: flex;

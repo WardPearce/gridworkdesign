@@ -34,8 +34,8 @@ export default defineConfig(
 		}
 	},
 	{
-		// Override or add rule settings here, such as:
-		// 'svelte/button-has-type': 'error'
-		rules: {}
+		// Reusable navigation accepts consumer-resolved URLs, including external links.
+		files: ['src/lib/Nav.svelte', 'src/lib/Sidebar.svelte'],
+		rules: { 'svelte/no-navigation-without-resolve': 'off' }
 	}
 );

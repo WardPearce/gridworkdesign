@@ -22,6 +22,7 @@
 <style>
 	:global(.collapsible) {
 		border: 2px solid var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.collapsible-trigger) {
 		display: flex;
@@ -38,15 +39,26 @@
 		font-weight: 700;
 		text-align: left;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
-	:global(.collapsible:has(.collapsible-trigger:hover)) {
-		border-style: dashed;
+	:global(
+		.collapsible:has(
+			.collapsible-trigger:hover:not(:disabled):not([data-disabled]):not(
+					[aria-disabled='true']
+				):not([data-disabled] *)
+		)
+	) {
+		box-shadow: var(--shadow-hover);
 	}
 	:global(.collapsible-trigger:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: -5px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.collapsible-content) {
 		padding: 0 0.9rem 0.9rem;
+	}
+
+	:global(.collapsible-trigger:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

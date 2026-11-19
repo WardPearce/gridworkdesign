@@ -27,15 +27,16 @@
 		width: 100%;
 		min-height: 3rem;
 		padding: 0.75rem;
-		border: 1px dashed var(--text);
+		border: 1px solid var(--text);
 		background: transparent;
 		color: var(--text);
 		font: inherit;
 		text-align: left;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.context-target:focus-visible) {
-		outline: 2px dashed var(--text);
-		outline-offset: 3px;
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.context-content) {
 		z-index: var(--layer-popup);
@@ -44,7 +45,7 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.context-item) {
 		display: flex;
@@ -53,6 +54,7 @@
 		padding: 0.5rem 0.75rem;
 		outline: none;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.context-item[data-highlighted]) {
 		background: var(--background-darker);
@@ -61,5 +63,9 @@
 	:global(.context-item[data-disabled]) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+
+	:global(.context-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

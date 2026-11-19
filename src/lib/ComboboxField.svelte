@@ -9,7 +9,15 @@
 		name,
 		disabled = false,
 		required = false
-	}: { label: string; options: Option[]; value?: string; placeholder?: string; name?: string; disabled?: boolean; required?: boolean } = $props();
+	}: {
+		label: string;
+		options: Option[];
+		value?: string;
+		placeholder?: string;
+		name?: string;
+		disabled?: boolean;
+		required?: boolean;
+	} = $props();
 </script>
 
 <div class="combo-field">
@@ -48,10 +56,12 @@
 		background: transparent;
 		color: var(--text);
 		font: inherit;
+		box-shadow: var(--shadow-inset);
 	}
 	:global(.combo-input:focus-visible) {
-		border-style: dashed;
-		outline: none;
+		box-shadow: var(--shadow-inset);
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.combo-content) {
 		z-index: var(--layer-popup);
@@ -62,12 +72,13 @@
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
-		box-shadow: 3px 3px 0 var(--text);
+		box-shadow: var(--shadow-floating);
 	}
 	:global(.combo-item) {
 		min-height: 2.75rem;
 		padding: 0.6rem 0.75rem;
 		cursor: pointer;
+		box-shadow: var(--shadow-raised);
 	}
 	:global(.combo-item[data-highlighted]) {
 		background: var(--background-darker);
@@ -76,5 +87,9 @@
 	:global(.combo-item[data-disabled]) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+
+	:global(.combo-item:active:not(:disabled):not([data-disabled])) {
+		box-shadow: var(--shadow-inset);
 	}
 </style>

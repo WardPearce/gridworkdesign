@@ -16,7 +16,10 @@
 	} = $props();
 </script>
 
-<article class={`card ${alternate ? 'card-alternate' : ''} ${className}`} data-alternate={alternate || undefined}>
+<article
+	class={`card ${alternate ? 'card-alternate' : ''} ${className}`}
+	data-alternate={alternate || undefined}
+>
 	{#if header}
 		<header class="card-header">{@render header()}</header>
 	{/if}
@@ -31,6 +34,7 @@
 		border: 2px solid var(--text);
 		background: transparent;
 		color: var(--text);
+		box-shadow: var(--shadow-raised);
 	}
 
 	.card[data-alternate='true'] {
@@ -54,6 +58,6 @@
 	}
 
 	.card-footer {
-		border-top: 2px dotted var(--text);
+		border-top: 2px solid var(--text);
 	}
 </style>
