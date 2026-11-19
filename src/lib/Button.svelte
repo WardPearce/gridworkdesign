@@ -18,15 +18,22 @@
 <style>
 	:global(.button) {
 		display: inline-flex;
-		min-height: 2.75rem;
+		min-height: var(--control-height);
+		gap: 0.5rem;
 		align-items: center;
 		justify-content: center;
 		padding: 0.55rem 0.9rem;
-		border: 2px solid var(--text);
+		border: var(--border-width) solid var(--text);
 		background: transparent;
 		color: var(--text);
 		box-shadow: var(--shadow-raised);
 		font: inherit;
+		font-size: var(--type-small);
+		line-height: 1.35;
+		white-space: nowrap;
+		transition:
+			box-shadow 140ms ease-out,
+			transform 140ms ease-out;
 		text-decoration: none;
 		cursor: pointer;
 	}
@@ -41,6 +48,7 @@
 			):not(:disabled)
 	) {
 		box-shadow: var(--shadow-hover);
+		transform: translate(-1px, -1px);
 	}
 	:global(
 		.button.alternate:hover:not(:disabled):not([data-disabled]):not([aria-disabled='true']):not(
@@ -54,7 +62,7 @@
 		outline-offset: var(--focus-ring-offset);
 	}
 	:global(.button:active:not(:disabled)) {
-		transform: none;
+		transform: translate(1px, 1px);
 		box-shadow: var(--shadow-inset);
 	}
 	:global(.button.alternate:active:not(:disabled)) {
@@ -63,5 +71,14 @@
 	:global(.button:disabled) {
 		opacity: 0.55;
 		cursor: not-allowed;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		:global(.button) {
+			transition: none;
+		}
+		:global(.button:hover:not(:disabled)),
+		:global(.button:active:not(:disabled)) {
+			transform: none;
+		}
 	}
 </style>

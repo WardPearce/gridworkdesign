@@ -28,9 +28,9 @@
 		align-items: center;
 		gap: 0.625rem;
 		width: 100%;
-		min-height: 2.75rem;
+		min-height: var(--control-height);
 		padding: 0 0.75rem;
-		border: 2px solid var(--text);
+		border: var(--border-width) solid var(--text);
 		background: transparent;
 		color: var(--text);
 		box-shadow: var(--shadow-inset);
@@ -46,17 +46,18 @@
 		box-sizing: border-box;
 		flex: 1;
 		min-width: 0;
-		min-height: calc(2.75rem - 4px);
+		min-height: calc(var(--control-height) - 2 * var(--border-width));
 		padding: 0.5rem 0;
 		border: 0;
 		outline: 0;
 		background: transparent;
 		color: inherit;
 		font: inherit;
+		font-size: max(1rem, 16px);
 	}
 
 	.input::placeholder {
-		color: var(--text);
+		color: var(--foreground-muted);
 		opacity: 1;
 	}
 

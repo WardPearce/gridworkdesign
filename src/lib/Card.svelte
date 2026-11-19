@@ -6,18 +6,24 @@
 		header,
 		footer,
 		class: className = '',
-		alternate = false
+		alternate = false,
+		flush = false,
+		stretch = false,
+		interactive = false
 	}: {
 		children: Snippet;
 		header?: Snippet;
 		footer?: Snippet;
 		class?: string;
 		alternate?: boolean;
+		flush?: boolean;
+		stretch?: boolean;
+		interactive?: boolean;
 	} = $props();
 </script>
 
 <article
-	class={`card ${alternate ? 'card-alternate' : ''} ${className}`}
+	class={`card ${alternate ? 'card-alternate' : ''} ${flush ? 'card-flush' : ''} ${stretch ? 'card-stretch' : ''} ${interactive ? 'card-interactive' : ''} ${className}`}
 	data-alternate={alternate || undefined}
 >
 	{#if header}
@@ -35,6 +41,28 @@
 		background: transparent;
 		color: var(--text);
 		box-shadow: var(--shadow-raised);
+	}
+	.card-stretch {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+	}
+	.card-stretch .card-body {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+	}
+	.card-flush .card-body {
+		padding: 0;
+	}
+	.card-interactive {
+		transition:
+			box-shadow 140ms ease-out,
+			transform 140ms ease-out;
+	}
+	.card-interactive:hover {
+		box-shadow: var(--shadow-hover);
+		transform: translateY(-2px);
 	}
 
 	.card[data-alternate='true'] {
@@ -59,5 +87,13 @@
 
 	.card-footer {
 		border-top: 2px solid var(--text);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.card-interactive {
+			transition: none;
+		}
+		.card-interactive:hover {
+			transform: none;
+		}
 	}
 </style>

@@ -60,7 +60,7 @@ h6 {
 	--surface-muted: var(--light);
 	--surface-inverse: var(--background-darker);
 	--foreground: var(--text);
-	--foreground-muted: color-mix(in srgb, var(--text) 68%, var(--background));
+	--foreground-muted: color-mix(in srgb, var(--text) 82%, var(--background));
 	--foreground-inverse: var(--white);
 	--border: var(--text);
 	--border-subtle: color-mix(in srgb, var(--text) 22%, transparent);
@@ -186,6 +186,9 @@ body {
 }
 
 :root {
+	--type-body: 0.9375rem;
+	--type-small: 0.8125rem;
+	--type-caption: 0.75rem;
 	--control-height: 2.75rem;
 	--border-width: 2px;
 	--focus-ring: 3px solid var(--text);

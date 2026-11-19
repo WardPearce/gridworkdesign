@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import {
 		ArrowRight,
 		Cpu,
@@ -70,6 +71,7 @@
 	let query = $state('');
 	let cartCount = $state(0);
 	let addedProduct = $state('');
+	let newsletterSent = $state(false);
 	let visibleProducts = $derived(
 		products.filter((product) => {
 			const matchesCategory = category === 'All gear' || product.category === category;
@@ -105,7 +107,7 @@
 	</div>
 
 	<header class="site-header">
-		<a class="wordmark" href="/example" aria-label="Byte and Bazaar home">
+		<a class="wordmark" href={resolve('/example')} aria-label="Byte and Bazaar home">
 			<span class="wordmark-mark" aria-hidden="true">b.</span>
 			<span>byte <span class="wordmark-amp">&amp;</span> bazaar</span>
 		</a>
@@ -206,9 +208,9 @@
 			</div>
 
 			{#if visibleProducts.length}
-				<Grid minColumnWidth="17rem" class="product-grid">
+				<Grid minColumnWidth="14.25rem" class="product-grid">
 					{#each visibleProducts as product (product.name)}
-						<Card class="product-card">
+						<Card class="product-card" flush stretch interactive>
 							{#snippet header()}
 								<div class="product-card-top">
 									<span>{product.category}</span>{#if product.label}<Badge>{product.label}</Badge
@@ -264,20 +266,34 @@
 				<h2 id="newsletter-title">A little joy in your inbox.</h2>
 				<p>New finds, desk inspiration, and zero weird spam. Pinky promise.</p>
 			</div>
-			<form onsubmit={(event) => event.preventDefault()}>
+			<form
+				onsubmit={(event) => {
+					event.preventDefault();
+					newsletterSent = true;
+				}}
+			>
 				<label for="newsletter-email">Your email address</label>
 				<div class="newsletter-form">
-					<Input id="newsletter-email" type="email" placeholder="you@example.com" required /><Button
-						variant="alternate"
-						type="submit">Count me in <ArrowRight size={16} aria-hidden="true" /></Button
+					<Input
+						id="newsletter-email"
+						type="email"
+						placeholder="you@example.com"
+						autocomplete="email"
+						required
+					/><Button variant="alternate" type="submit"
+						>Count me in
+						<ArrowRight size={16} aria-hidden="true" /></Button
 					>
 				</div>
+				{#if newsletterSent}<p class="newsletter-status" role="status">
+						Thanks for your interest. Signups are not connected yet.
+					</p>{/if}
 			</form>
 		</section>
 	</main>
 
 	<footer class="site-footer">
-		<a class="wordmark footer-mark" href="/example"
+		<a class="wordmark footer-mark" href={resolve('/example')}
 			><span class="wordmark-mark" aria-hidden="true">b.</span><span
 				>byte <span class="wordmark-amp">&amp;</span> bazaar</span
 			></a
@@ -367,7 +383,6 @@
 	}
 	.storefront :global(.cart-button) {
 		gap: 0.5rem;
-		min-height: 40px;
 		padding: 0.4rem 0.65rem;
 		font-size: 0.78rem;
 	}
@@ -637,17 +652,12 @@
 		background: var(--surface-subtle);
 	}
 	.search-box :global(.input-wrap) {
-		min-height: 42px;
 		padding: 0;
 		border: 0;
 		box-shadow: none;
 	}
 	.search-box :global(.input-wrap:focus-within) {
 		outline-offset: 1px;
-	}
-	.search-box :global(.input) {
-		min-height: 40px;
-		font-size: 0.76rem;
 	}
 	.search-box :global(.input::placeholder) {
 		color: var(--foreground-muted);
@@ -664,7 +674,6 @@
 		gap: 0.5rem;
 	}
 	.filters :global(.button) {
-		min-height: 36px;
 		padding: 0.4rem 0.72rem;
 		font-size: 0.72rem;
 	}
@@ -772,7 +781,6 @@
 		font: 0.62rem var(--font-body);
 	}
 	.product-buy :global(.button) {
-		min-height: 36px;
 		padding: 0.4rem 0.6rem;
 		font-size: 0.68rem;
 		white-space: nowrap;
@@ -914,9 +922,6 @@
 		.desktop-nav {
 			display: none;
 		}
-		.storefront :global(.cart-button) :global(.button) {
-			min-height: 36px;
-		}
 		.storefront :global(.cart-button) {
 			font-size: 0.7rem;
 		}
@@ -1050,6 +1055,265 @@
 		.product-buy {
 			align-items: center;
 			flex-direction: row;
+		}
+	}
+	/* Storefront rules build on the library's monochrome palette and tactile controls. */
+	.storefront {
+		--store-space: clamp(1.25rem, 4vw, 4rem);
+		--store-small: var(--type-small);
+		--store-body: var(--type-body);
+		width: min(100%, 1440px);
+		padding-inline: var(--store-space);
+	}
+	.storefront :global(a:focus-visible) {
+		outline: var(--focus-ring);
+		outline-offset: 4px;
+	}
+	.site-header {
+		gap: 1.25rem;
+	}
+	.desktop-nav a {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		font-size: var(--store-small);
+	}
+	.hero {
+		grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
+		gap: clamp(1.5rem, 3vw, 3.5rem);
+	}
+	.hero-copy {
+		padding-left: 0;
+	}
+	.hero h1 {
+		font-size: clamp(3rem, 5.1vw, 4.8rem);
+		line-height: 1.03;
+	}
+	.hero-description {
+		font-size: var(--store-body);
+		line-height: 1.65;
+	}
+	.hero-link {
+		min-height: 44px;
+		font-size: var(--store-small);
+	}
+	.hero-art {
+		width: 100%;
+	}
+	.perks {
+		padding-inline: 0;
+		gap: 1rem;
+	}
+	.perks p {
+		font-size: 0.76rem;
+	}
+	.perks strong {
+		font-size: 0.8rem;
+	}
+	.shop-section {
+		padding: clamp(3.25rem, 6vw, 5rem) 0;
+	}
+	.section-intro {
+		font-size: var(--store-small);
+		line-height: 1.5;
+	}
+	.search-box {
+		min-width: 245px;
+		background: var(--surface-subtle);
+	}
+	.search-box:focus-within {
+		outline: var(--focus-ring);
+		outline-offset: 2px;
+	}
+	.search-box :global(.input-wrap:focus-within) {
+		outline: 0;
+	}
+	.filters :global(.button) {
+		padding-inline: 0.85rem;
+		font-size: 0.76rem;
+	}
+	.result-count {
+		font-size: 0.75rem;
+		white-space: nowrap;
+	}
+	.storefront :global(.product-card) :global(.card-header) {
+		min-height: 36px;
+	}
+	.product-art {
+		height: 180px;
+		flex: 0 0 auto;
+	}
+	.product-card-top :global(.badge) {
+		font-size: 0.62rem;
+	}
+	.rating {
+		font-size: 0.72rem;
+	}
+	.rating span {
+		font-size: 0.67rem;
+	}
+	.product-info {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding: 1rem;
+	}
+	.product-info h3 {
+		font-size: 1rem;
+		line-height: 1.3;
+	}
+	.product-info > p {
+		min-height: 0;
+		margin: 0.55rem 0 1rem;
+		font-size: 0.78rem;
+		line-height: 1.55;
+	}
+	.product-buy {
+		margin-top: auto;
+	}
+	.price {
+		font-size: 1rem;
+		white-space: nowrap;
+	}
+	.price del {
+		font-size: 0.7rem;
+	}
+	.product-buy :global(.button) {
+		padding-inline: 0.7rem;
+		font-size: 0.74rem;
+	}
+	.newsletter {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+		gap: 2rem;
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+	}
+	.newsletter p:not(.eyebrow),
+	.newsletter form label {
+		font-size: 0.78rem;
+		line-height: 1.5;
+	}
+	.newsletter form {
+		min-width: 0;
+	}
+	.newsletter-form :global(.input-wrap) {
+		min-width: 0;
+	}
+	.newsletter-status {
+		margin-top: 0.6rem !important;
+		color: var(--foreground) !important;
+	}
+	.site-footer p,
+	.site-footer > span {
+		font-size: 0.72rem;
+	}
+	@media (max-width: 1100px) {
+		.hero {
+			gap: 1.5rem;
+		}
+		.hero h1 {
+			font-size: clamp(2.7rem, 5.7vw, 4rem);
+		}
+		.storefront :global(.product-grid) {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.newsletter {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 650px) {
+		.storefront {
+			--store-space: 1rem;
+		}
+		.announcement {
+			min-height: 44px;
+			padding: 0.4rem 0;
+			font-size: 0.68rem;
+			line-height: 1.4;
+			text-align: center;
+		}
+		.site-header {
+			flex-wrap: wrap;
+			gap: 0 1rem;
+			padding: 0.65rem 0;
+		}
+		.desktop-nav {
+			display: flex;
+			order: 3;
+			width: 100%;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 0 0.75rem;
+			border-top: 1px solid var(--border-subtle);
+		}
+		.desktop-nav a {
+			min-height: 42px;
+			font-size: 0.7rem;
+		}
+		.hero {
+			grid-template-columns: 1fr;
+			gap: 0;
+			padding-top: 2.5rem;
+		}
+		.hero h1 {
+			font-size: clamp(2.7rem, 11.5vw, 4.3rem);
+		}
+		.hero-art {
+			min-height: 300px;
+		}
+		.perks {
+			gap: 1rem;
+		}
+		.shop-heading {
+			gap: 1.4rem;
+		}
+		.search-box {
+			min-width: 0;
+		}
+		.shop-tools {
+			gap: 0.8rem;
+		}
+		.filters {
+			width: 100%;
+		}
+		.filters :global(.button) {
+			font-size: 0.72rem;
+		}
+		.storefront :global(.product-grid) {
+			grid-template-columns: 1fr;
+		}
+		.product-art {
+			height: 200px;
+		}
+		.product-card-top {
+			flex-direction: row;
+			align-items: center;
+		}
+		.product-info {
+			padding: 1rem;
+		}
+		.product-info h3 {
+			font-size: 1rem;
+		}
+		.product-info > p {
+			font-size: 0.8rem;
+		}
+		.product-buy {
+			flex-direction: row;
+			align-items: center;
+		}
+		.product-buy :global(.button) {
+			width: auto;
+		}
+		.newsletter-form {
+			flex-direction: row;
+		}
+	}
+	@media (max-width: 420px) {
+		.newsletter-form {
+			flex-direction: column;
+		}
+		.newsletter-form :global(.button) {
+			width: 100%;
 		}
 	}
 </style>
