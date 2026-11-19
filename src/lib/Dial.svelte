@@ -145,6 +145,24 @@
 		gap: 0.5rem;
 		color: var(--text);
 		font-family: 'FragmentMono', monospace;
+		--dial-notch-shadow: drop-shadow(0 1px 1px color-mix(in srgb, var(--text) 35%, transparent));
+		--dial-active-notch-shadow: drop-shadow(
+			0 0 3px color-mix(in srgb, var(--white) 42%, transparent)
+		);
+		--dial-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
+			inset 0 -5px 7px color-mix(in srgb, var(--text) 55%, transparent),
+			0 10px 16px color-mix(in srgb, var(--text) 60%, transparent);
+	}
+	:global(:root[data-theme='BurntWood']) .dial-field,
+	:global(:root[data-theme='Hacker']) .dial-field,
+	:global(:root[data-theme='PurpleDaydream']) .dial-field,
+	:global(:root[data-theme='BloodRed']) .dial-field {
+		--dial-notch-shadow: drop-shadow(0 1px 1px color-mix(in srgb, var(--text) 12%, transparent));
+		--dial-active-notch-shadow: drop-shadow(
+			0 0 1px color-mix(in srgb, var(--white) 18%, transparent)
+		);
+		--dial-shadow: var(--shadow-raised);
 	}
 	.dial-field-xs {
 		--dial-field-size: 7rem;
@@ -177,11 +195,11 @@
 	}
 	.dial-notch {
 		fill: color-mix(in srgb, var(--text) 38%, var(--background));
-		filter: drop-shadow(0 1px 1px color-mix(in srgb, var(--text) 35%, transparent));
+		filter: var(--dial-notch-shadow);
 	}
 	.dial-notch.active {
 		fill: var(--white);
-		filter: drop-shadow(0 0 3px color-mix(in srgb, var(--white) 42%, transparent));
+		filter: var(--dial-active-notch-shadow);
 	}
 	.dial {
 		position: relative;
@@ -195,10 +213,7 @@
 		border-radius: 50%;
 		background: var(--background-darker);
 		color: var(--text);
-		box-shadow:
-			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
-			inset 0 -5px 7px color-mix(in srgb, var(--text) 55%, transparent),
-			0 10px 16px color-mix(in srgb, var(--text) 60%, transparent);
+		box-shadow: var(--dial-shadow);
 		touch-action: none;
 		user-select: none;
 		cursor: grab;
