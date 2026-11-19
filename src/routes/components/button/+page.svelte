@@ -14,6 +14,15 @@
   { name: 'children', type: 'Snippet', required: true, defaultValue: '—', description: 'Button contents.' },
 ];
 </script>
-<ComponentDocs name="Button" {summary} {props} usage={'<Button>Save changes</Button>'}>
- {#snippet example()}<Button>Save changes</Button>{/snippet}
+<ComponentDocs name="Button" {summary} {props} usage="<Button>Save changes</Button>\n<Button variant=&quot;alternate&quot;>Play</Button>">
+ {#snippet example()}
+  <div class="button-examples">
+   <Button>Save changes</Button>
+   <Button variant="alternate">Play</Button>
+  </div>
+ {/snippet}
 </ComponentDocs>
+
+<style>
+ .button-examples { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+</style>

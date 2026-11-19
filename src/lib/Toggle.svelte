@@ -26,6 +26,10 @@
 	:global(.toggle[data-state='on']) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
+			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
+			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
 	}
 
 	:global(.toggle:hover:not(:disabled)) {

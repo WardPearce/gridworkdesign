@@ -11,13 +11,13 @@
 </script>
 
 <BitsMenu.Root>
-	<BitsMenu.Trigger class="menu-trigger"
+	<BitsMenu.Trigger class="dropdown-menu-trigger"
 		>{label}<ChevronDown size={16} aria-hidden="true" /></BitsMenu.Trigger
 	>
 	<BitsMenu.Portal>
-		<BitsMenu.Content class="menu-content ui-motion-enter" sideOffset={6}>
+		<BitsMenu.Content class="dropdown-menu-content" sideOffset={6}>
 			{#each items as item (item.label)}
-				<BitsMenu.Item class="menu-item" disabled={item.disabled} onSelect={item.onSelect}
+				<BitsMenu.Item class="dropdown-menu-item" disabled={item.disabled} onSelect={item.onSelect}
 					>{item.label}</BitsMenu.Item
 				>
 			{/each}
@@ -26,7 +26,7 @@
 </BitsMenu.Root>
 
 <style>
-	:global(.menu-trigger) {
+	:global(.dropdown-menu-trigger) {
 		display: inline-flex;
 		min-height: 2.75rem;
 		align-items: center;
@@ -39,15 +39,15 @@
 		cursor: pointer;
 		box-shadow: 3px 3px var(--text);
 	}
-	:global(.menu-trigger:hover) {
+	:global(.dropdown-menu-trigger:hover) {
 		border-style: dashed;
 	}
-	:global(.menu-trigger:focus-visible) {
+	:global(.dropdown-menu-trigger:focus-visible) {
 		outline: 2px dashed var(--text);
 		outline-offset: 3px;
 	}
-	:global(.menu-content) {
-		z-index: 30;
+	:global(.dropdown-menu-content) {
+		z-index: var(--layer-popup);
 		min-width: 12rem;
 		padding: 0.25rem;
 		border: 2px solid var(--text);
@@ -55,7 +55,7 @@
 		color: var(--text);
 		box-shadow: 3px 3px var(--text);
 	}
-	:global(.menu-item) {
+	:global(.dropdown-menu-item) {
 		display: flex;
 		min-height: 2.75rem;
 		align-items: center;
@@ -63,11 +63,11 @@
 		outline: none;
 		cursor: pointer;
 	}
-	:global(.menu-item[data-highlighted]) {
+	:global(.dropdown-menu-item[data-highlighted]) {
 		background: var(--background-darker);
 		color: var(--white);
 	}
-	:global(.menu-item[data-disabled]) {
+	:global(.dropdown-menu-item[data-disabled]) {
 		opacity: 0.55;
 		cursor: not-allowed;
 	}

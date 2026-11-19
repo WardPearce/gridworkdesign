@@ -1,0 +1,165 @@
+- generic [ref=e2]:
+  - button "Change theme, currently Gridwork" [ref=e4] [cursor=pointer]:
+    - generic [ref=e11]: Gridwork
+  - generic [ref=e12]:
+    - complementary "Components" [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - strong [ref=e17]: Components
+          - generic [ref=e18]: "51"
+        - button "Collapse sidebar" [expanded] [ref=e19] [cursor=pointer]
+      - generic [ref=e22]:
+        - searchbox "Filter components" [ref=e27]
+        - navigation "Components" [ref=e28]:
+          - link "Accordion" [ref=e29] [cursor=pointer]:
+            - /url: /components/accordion
+          - link "Alert Dialog" [ref=e34] [cursor=pointer]:
+            - /url: /components/alert-dialog
+          - link "Aspect Ratio" [ref=e39] [cursor=pointer]:
+            - /url: /components/aspect-ratio
+          - link "Avatar" [ref=e44] [cursor=pointer]:
+            - /url: /components/avatar
+          - link "Button" [ref=e49] [cursor=pointer]:
+            - /url: /components/button
+          - link "Card" [ref=e54] [cursor=pointer]:
+            - /url: /components/card
+          - link "Calendar" [ref=e59] [cursor=pointer]:
+            - /url: /components/calendar
+          - link "Checkbox" [ref=e64] [cursor=pointer]:
+            - /url: /components/checkbox
+          - link "Collapsible" [ref=e69] [cursor=pointer]:
+            - /url: /components/collapsible
+          - link "Combobox Field" [ref=e74] [cursor=pointer]:
+            - /url: /components/combobox-field
+          - link "Command Menu" [ref=e79] [cursor=pointer]:
+            - /url: /components/command-menu
+          - link "Context Menu" [ref=e84] [cursor=pointer]:
+            - /url: /components/context-menu
+          - link "Date Field" [ref=e89] [cursor=pointer]:
+            - /url: /components/date-field
+          - link "Date Picker" [ref=e94] [cursor=pointer]:
+            - /url: /components/date-picker
+          - link "Date Range Field" [ref=e99] [cursor=pointer]:
+            - /url: /components/date-range-field
+          - link "Date Range Picker" [ref=e104] [cursor=pointer]:
+            - /url: /components/date-range-picker
+          - link "Dialog" [ref=e109] [cursor=pointer]:
+            - /url: /components/dialog
+          - link "Dial" [ref=e114] [cursor=pointer]:
+            - /url: /components/dial
+          - link "Dial Board" [ref=e119] [cursor=pointer]:
+            - /url: /components/dial-board
+          - link "Dropdown Menu" [ref=e124] [cursor=pointer]:
+            - /url: /components/dropdown-menu
+          - link "Inline List" [ref=e129] [cursor=pointer]:
+            - /url: /components/inline-list
+          - link "Input" [ref=e134] [cursor=pointer]:
+            - /url: /components/input
+          - link "Label" [ref=e139] [cursor=pointer]:
+            - /url: /components/label
+          - link "Link Preview" [ref=e144] [cursor=pointer]:
+            - /url: /components/link-preview
+          - link "Menu" [ref=e149] [cursor=pointer]:
+            - /url: /components/menu
+          - link "Menubar" [ref=e154] [cursor=pointer]:
+            - /url: /components/menubar
+          - link "Meter" [ref=e159] [cursor=pointer]:
+            - /url: /components/meter
+          - link "Navigation Menu" [ref=e164] [cursor=pointer]:
+            - /url: /components/navigation-menu
+          - link "Pagination" [ref=e169] [cursor=pointer]:
+            - /url: /components/pagination
+          - link "PIN Input" [ref=e174] [cursor=pointer]:
+            - /url: /components/pin-input
+          - link "Popover" [ref=e179] [cursor=pointer]:
+            - /url: /components/popover
+          - link "Progress" [ref=e184] [cursor=pointer]:
+            - /url: /components/progress
+          - link "Radio Choices" [ref=e189] [cursor=pointer]:
+            - /url: /components/radio-choices
+          - link "Range Calendar" [ref=e194] [cursor=pointer]:
+            - /url: /components/range-calendar
+          - link "Rating" [ref=e199] [cursor=pointer]:
+            - /url: /components/rating
+          - link "Rating Group" [ref=e204] [cursor=pointer]:
+            - /url: /components/rating-group
+          - link "Scroll Area" [ref=e209] [cursor=pointer]:
+            - /url: /components/scroll-area
+          - link "Search" [ref=e214] [cursor=pointer]:
+            - /url: /components/search
+          - link "Select Field" [ref=e219] [cursor=pointer]:
+            - /url: /components/select-field
+          - link "Separator" [ref=e224] [cursor=pointer]:
+            - /url: /components/separator
+          - link "Sidebar" [ref=e229] [cursor=pointer]:
+            - /url: /components/sidebar
+          - link "Slider Field" [ref=e234] [cursor=pointer]:
+            - /url: /components/slider-field
+          - link "Switch" [ref=e239] [cursor=pointer]:
+            - /url: /components/switch
+          - link "Tabs" [ref=e244] [cursor=pointer]:
+            - /url: /components/tabs
+          - link "Theme Selector" [ref=e249] [cursor=pointer]:
+            - /url: /components/theme-selector
+          - link "Time Field" [ref=e254] [cursor=pointer]:
+            - /url: /components/time-field
+          - link "Time Range Field" [ref=e259] [cursor=pointer]:
+            - /url: /components/time-range-field
+          - link "Toggle" [ref=e264] [cursor=pointer]:
+            - /url: /components/toggle
+          - link "Toggle Group" [ref=e269] [cursor=pointer]:
+            - /url: /components/toggle-group
+          - link "Toolbar" [ref=e274] [cursor=pointer]:
+            - /url: /components/toolbar
+          - link "Tooltip" [ref=e279] [cursor=pointer]:
+            - /url: /components/tooltip
+    - main [ref=e284]:
+      - link "← All components" [ref=e285] [cursor=pointer]:
+        - /url: /
+      - paragraph [ref=e286]: COMPONENT GUIDE
+      - heading "Input" [level=1] [ref=e287]
+      - paragraph [ref=e288]: Text input with optional prefix and suffix icon content.
+      - generic [ref=e289]:
+        - heading "Example" [level=2] [ref=e290]
+        - generic [ref=e291]:
+          - textbox "Search" [ref=e297]
+          - textbox "you@example.com" [ref=e299]
+        - code [ref=e305]: "<Input bind:value={query} placeholder=\"Search\">{#snippet prefix()}<Search size={16} />{/snippet}</Input>"
+      - generic [ref=e306]:
+        - heading "Props" [level=2] [ref=e307]
+        - table [ref=e309]:
+          - rowgroup [ref=e310]:
+            - row [ref=e311]:
+              - columnheader "Prop" [ref=e312]
+              - columnheader "Type" [ref=e313]
+              - columnheader "Default" [ref=e314]
+              - columnheader "Description" [ref=e315]
+          - rowgroup [ref=e316]:
+            - row [ref=e317]:
+              - rowheader "prefix" [ref=e318]
+              - cell [ref=e319]:
+                - code [ref=e320]: Snippet
+              - cell "—" [ref=e321]
+              - cell "Content displayed before the input, such as an icon." [ref=e322]
+            - row [ref=e323]:
+              - rowheader "suffix" [ref=e324]
+              - cell [ref=e325]:
+                - code [ref=e326]: Snippet
+              - cell "—" [ref=e327]
+              - cell "Content displayed after the input, such as an icon." [ref=e328]
+            - row [ref=e329]:
+              - rowheader "...attributes" [ref=e330]
+              - cell [ref=e331]:
+                - code [ref=e332]: HTMLInputAttributes
+              - cell "—" [ref=e333]
+              - cell "Native input attributes including type, placeholder, and name." [ref=e334]
+      - generic [ref=e335]:
+        - heading "Configuration" [level=2] [ref=e336]
+        - paragraph [ref=e337]: Pass props to configure labels, options, and behavior. Bind state when your screen needs to read or update a value; omit the binding for a self-managed control.
+        - code [ref=e339]: "<Input bind:value={query} placeholder=\"Search\">{#snippet prefix()}<Search size={16} />{/snippet}</Input>"
+      - generic [ref=e340]:
+        - heading "Accessibility and theming" [level=2] [ref=e341]
+        - paragraph [ref=e342]:
+          - text: Give controls descriptive labels and preserve visible keyboard focus. The component follows the active theme tokens from
+          - code [ref=e343]: theme.css
+          - text: .

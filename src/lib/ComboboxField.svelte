@@ -5,13 +5,16 @@
 		label,
 		options,
 		value = $bindable(''),
-		placeholder = 'Search options'
-	}: { label: string; options: Option[]; value?: string; placeholder?: string } = $props();
+		placeholder = 'Search options',
+		name,
+		disabled = false,
+		required = false
+	}: { label: string; options: Option[]; value?: string; placeholder?: string; name?: string; disabled?: boolean; required?: boolean } = $props();
 </script>
 
 <div class="combo-field">
 	<span class="combo-label">{label}</span>
-	<Combobox.Root type="single" bind:value>
+	<Combobox.Root type="single" bind:value {name} {disabled} {required}>
 		<Combobox.Input class="combo-input" {placeholder} aria-label={label} />
 		<Combobox.Portal>
 			<Combobox.Content class="combo-content" sideOffset={4}>
@@ -51,10 +54,10 @@
 		outline: none;
 	}
 	:global(.combo-content) {
-		z-index: 50;
+		z-index: var(--layer-popup);
 		width: var(--bits-combobox-anchor-width);
-		min-width: var(--bits-select-anchor-width);
-		max-height: min(18rem, var(--bits-select-content-available-height));
+		min-width: var(--bits-combobox-anchor-width);
+		max-height: min(18rem, var(--bits-combobox-content-available-height));
 		overflow: auto;
 		border: 2px solid var(--text);
 		background: var(--background);

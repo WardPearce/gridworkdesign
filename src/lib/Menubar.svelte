@@ -53,7 +53,7 @@
 		outline-offset: -4px;
 	}
 	:global(.menubar-content) {
-		z-index: 30;
+		z-index: var(--layer-popup);
 		min-width: 12rem;
 		padding: 0.25rem;
 		border: 2px solid var(--text);

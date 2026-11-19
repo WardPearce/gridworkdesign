@@ -1,0 +1,114 @@
+- generic [ref=f3e2]:
+  - button "Change theme, currently Gridwork" [ref=f3e4] [cursor=pointer]:
+    - generic [ref=f3e11]: Gridwork
+  - generic [ref=f3e12]:
+    - complementary "Components" [ref=f3e13]:
+      - generic [ref=f3e14]:
+        - generic [ref=f3e15]:
+          - strong [ref=f3e17]: Components
+          - generic [ref=f3e18]: "53"
+        - button "Browse" [ref=f3e19] [cursor=pointer]
+    - main [ref=f3e21]:
+      - link "← All components" [ref=f3e22] [cursor=pointer]:
+        - /url: /
+      - paragraph [ref=f3e23]: COMPONENT GUIDE
+      - heading "Nav" [level=1] [ref=f3e24]
+      - paragraph [ref=f3e25]: Raised top and bottom navigation with icons, badges, active states, and safe-area spacing.
+      - generic [ref=f3e26]:
+        - heading "Example" [level=2] [ref=f3e27]
+        - generic [ref=f3e29]:
+          - heading "Top navigation" [level=3] [ref=f3e30]
+          - navigation "Top navigation example" [ref=f3e31]:
+            - strong [ref=f3e33]: GRIDWORK
+            - list [ref=f3e34]:
+              - listitem [ref=f3e35]:
+                - link "Home" [ref=f3e36] [cursor=pointer]:
+                  - /url: "#home"
+              - listitem [ref=f3e42]:
+                - link "Discover" [ref=f3e43] [cursor=pointer]:
+                  - /url: "#discover"
+              - listitem [ref=f3e49]:
+                - link "Inbox 3" [ref=f3e50] [cursor=pointer]:
+                  - /url: "#inbox"
+                  - generic [ref=f3e54]: Inbox
+                  - generic [ref=f3e55]: "3"
+              - listitem [ref=f3e57]:
+                - link "Settings" [ref=f3e58] [cursor=pointer]:
+                  - /url: "#settings"
+          - generic [ref=f3e64]:
+            - paragraph [ref=f3e65]: Your content goes here.
+            - paragraph [ref=f3e66]: Use the same links in either placement.
+          - heading "Bottom navigation" [level=3] [ref=f3e67]
+          - navigation "Bottom navigation example" [ref=f3e68]:
+            - list [ref=f3e69]:
+              - listitem [ref=f3e70]:
+                - link "Home" [ref=f3e71] [cursor=pointer]:
+                  - /url: "#home"
+              - listitem [ref=f3e77]:
+                - link "Discover" [ref=f3e78] [cursor=pointer]:
+                  - /url: "#discover"
+              - listitem [ref=f3e84]:
+                - link "Inbox 3" [ref=f3e85] [cursor=pointer]:
+                  - /url: "#inbox"
+                  - generic [ref=f3e89]: Inbox
+                  - generic [ref=f3e90]: "3"
+              - listitem [ref=f3e92]:
+                - link "Settings" [ref=f3e93] [cursor=pointer]:
+                  - /url: "#settings"
+        - code [ref=f3e100]: "<Nav {items} currentPath={page.url.pathname} placement=\"bottom\" sticky />"
+      - generic [ref=f3e101]:
+        - heading "Props" [level=2] [ref=f3e102]
+        - table [ref=f3e104]:
+          - rowgroup [ref=f3e105]:
+            - row [ref=f3e106]:
+              - columnheader "Prop" [ref=f3e107]
+              - columnheader "Type" [ref=f3e108]
+              - columnheader "Default" [ref=f3e109]
+              - columnheader "Description" [ref=f3e110]
+          - rowgroup [ref=f3e111]:
+            - row [ref=f3e112]:
+              - rowheader "itemsrequired" [ref=f3e113]
+              - cell [ref=f3e114]:
+                - code [ref=f3e115]: NavItem[]
+              - cell "—" [ref=f3e116]
+              - cell "Links with labels, optional Lucide-compatible icons, badges, and exact/prefix matching." [ref=f3e117]
+            - row [ref=f3e118]:
+              - rowheader "currentPath" [ref=f3e119]
+              - cell [ref=f3e120]:
+                - code [ref=f3e121]: string
+              - cell "''" [ref=f3e122]
+              - cell "Active URL path; pass the router pathname for page links." [ref=f3e123]
+            - row [ref=f3e124]:
+              - rowheader "placement" [ref=f3e125]
+              - cell [ref=f3e126]:
+                - code [ref=f3e127]: "'top' | 'bottom'"
+              - cell "top" [ref=f3e128]
+              - cell "Horizontal top bar or stacked bottom navigation." [ref=f3e129]
+            - row [ref=f3e130]:
+              - rowheader "sticky" [ref=f3e131]
+              - cell [ref=f3e132]:
+                - code [ref=f3e133]: boolean
+              - cell "false" [ref=f3e134]
+              - cell "Stick to the chosen edge within its scroll container. Render a bottom bar after page content." [ref=f3e135]
+            - row [ref=f3e136]:
+              - rowheader "label" [ref=f3e137]
+              - cell [ref=f3e138]:
+                - code [ref=f3e139]: string
+              - cell "Main navigation" [ref=f3e140]
+              - cell "Accessible landmark name; use distinct names for multiple navs." [ref=f3e141]
+            - row [ref=f3e142]:
+              - rowheader "brand / actions" [ref=f3e143]
+              - cell [ref=f3e144]:
+                - code [ref=f3e145]: Snippet
+              - cell "—" [ref=f3e146]
+              - cell "Optional branding and action areas." [ref=f3e147]
+      - generic [ref=f3e148]:
+        - heading "Configuration" [level=2] [ref=f3e149]
+        - paragraph [ref=f3e150]: Pass props to configure labels, options, and behavior. Bind state when your screen needs to read or update a value; omit the binding for a self-managed control.
+        - code [ref=f3e152]: "<Nav {items} currentPath={page.url.pathname} placement=\"bottom\" sticky />"
+      - generic [ref=f3e153]:
+        - heading "Accessibility and theming" [level=2] [ref=f3e154]
+        - paragraph [ref=f3e155]:
+          - text: Give controls descriptive labels and preserve visible keyboard focus. The component follows the active theme tokens from
+          - code [ref=f3e156]: theme.css
+          - text: .

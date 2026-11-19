@@ -8,19 +8,23 @@
 		options,
 		value = $bindable(''),
 		placeholder = 'Choose an option',
-		name
+		name,
+		disabled = false,
+		required = false
 	}: {
 		label: string;
 		options: Option[];
 		value?: string;
 		placeholder?: string;
 		name?: string;
+		disabled?: boolean;
+		required?: boolean;
 	} = $props();
 </script>
 
 <div class="select-field">
 	<span class="select-label">{label}</span>
-	<Select.Root type="single" bind:value {name}>
+	<Select.Root type="single" bind:value {name} {disabled} {required}>
 		<Select.Trigger class="select-trigger" aria-label={label}>
 			<Select.Value {placeholder} />
 			<ChevronDown size={16} aria-hidden="true" />
@@ -71,7 +75,7 @@
 	}
 
 	:global(.select-content) {
-		z-index: 50;
+		z-index: var(--layer-popup);
 		min-width: var(--bits-select-anchor-width);
 		max-height: min(18rem, var(--bits-select-content-available-height));
 		overflow: auto;

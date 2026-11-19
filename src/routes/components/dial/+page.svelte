@@ -5,6 +5,7 @@
 	let volume = $state(58);
 	let tuning = $state(12);
 	let level = $state(6);
+	let sizeValue = $state(50);
 	const summary = 'Circular rotary control for adjusting a bounded numeric value.';
 	const props: Prop[] = [
 		{ name: 'label', type: 'string', required: true, defaultValue: '—', description: 'Visible and accessible name for the dial.' },
@@ -13,6 +14,7 @@
 		{ name: 'max', type: 'number', required: false, defaultValue: '100', description: 'Maximum value.' },
 		{ name: 'step', type: 'number', required: false, defaultValue: '1', description: 'Amount changed by each keyboard step or endless rotation notch.' },
 		{ name: 'mode', type: "'endless' | 'notch' | 'fill'", required: false, defaultValue: "'notch'", description: 'Endless rotation, one selected notch, or cumulative notches through the selected value.' },
+		{ name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", required: false, defaultValue: "'md'", description: 'Scales the dial control from extra small to extra large.' },
 		{ name: 'showValue', type: 'boolean', required: false, defaultValue: 'false', description: 'Shows the current numeric value in the center of the dial.' },
 		{ name: 'disabled', type: 'boolean', required: false, defaultValue: 'false', description: 'Disables pointer and keyboard interaction.' }
 	];
@@ -25,9 +27,17 @@
 			<Dial label="Selected notch" bind:value={volume} showValue />
 			<Dial label="Filled notches" mode="fill" bind:value={level} max={24} />
 		</div>
+		<div class="dial-examples dial-size-examples">
+			<Dial label="Extra small" size="xs" bind:value={sizeValue} />
+			<Dial label="Small" size="sm" bind:value={sizeValue} />
+			<Dial label="Medium" size="md" bind:value={sizeValue} />
+			<Dial label="Large" size="lg" bind:value={sizeValue} />
+			<Dial label="Extra large" size="xl" bind:value={sizeValue} />
+		</div>
 	{/snippet}
 </ComponentDocs>
 
 <style>
 	.dial-examples { display: flex; flex-wrap: wrap; gap: 2rem; }
+	.dial-size-examples { align-items: end; gap: 1rem; }
 </style>

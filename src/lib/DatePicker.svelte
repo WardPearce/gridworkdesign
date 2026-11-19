@@ -99,7 +99,7 @@
 		border-style: dashed;
 	}
 	:global(.date-content) {
-		z-index: 50;
+		z-index: var(--layer-popup);
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);
@@ -158,5 +158,8 @@
 		border-color: var(--text);
 	}
 	:global(.calendar-day:focus-visible),
-	:global(.calendar-nav:focus-visible),
+	:global(.calendar-nav:focus-visible) {
+		outline: 2px dashed var(--text);
+		outline-offset: 3px;
+	}
 </style>

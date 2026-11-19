@@ -12,8 +12,13 @@
 </Root>
 
 <style>
-	:global(body) { margin: 0; }
-	:global(#app), :global(body > div) { min-height: 100vh; }
+	:global(body) {
+		margin: 0;
+	}
+	:global(#app),
+	:global(body > div) {
+		min-height: 100vh;
+	}
 	.docs-theme-control {
 		position: absolute;
 		top: 0.75rem;
@@ -25,5 +30,11 @@
 		gap: 0.75rem;
 		padding: 0;
 		color: var(--text);
+	}
+	@media (max-width: 760px) {
+		.docs-theme-control {
+			position: static;
+			padding: 0.75rem 1rem;
+		}
 	}
 </style>

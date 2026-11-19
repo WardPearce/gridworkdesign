@@ -37,7 +37,11 @@
 	}
 
 	:global(.switch-root[data-state='checked']) {
-		background: transparent;
+		background: var(--background-darker);
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
+			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
+			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
 	}
 
 	:global(.switch-root:focus-visible) {
@@ -57,11 +61,15 @@
 		width: 1rem;
 		height: 1rem;
 		background: var(--white);
+		box-shadow:
+			inset 0 1px 1px color-mix(in srgb, var(--background) 42%, transparent),
+			inset 0 -2px 2px color-mix(in srgb, var(--text) 34%, transparent),
+			0 1px 2px color-mix(in srgb, var(--text) 45%, transparent);
 	}
 
 	:global(.switch-root[data-state='checked'] .switch-thumb) {
 		left: auto;
 		right: 0.2rem;
-		background: var(--background-darker);
+		background: var(--white);
 	}
 </style>

@@ -4,7 +4,8 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/SpaceMono-Regular.ttf') format('truetype'),
+	src:
+		url('./fonts/SpaceMono-Regular.ttf') format('truetype'),
 		url('https://fonts.gstatic.com/s/spacemono/v17/i7dPIFZifjKcF5UAWdDRUEY.ttf') format('truetype');
 }
 
@@ -13,8 +14,10 @@
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url('/fonts/SpaceMono-Bold.ttf') format('truetype'),
-		url('https://fonts.gstatic.com/s/spacemono/v17/i7dMIFZifjKcF5UAWdDRaPpZYFI.ttf') format('truetype');
+	src:
+		url('./fonts/SpaceMono-Bold.ttf') format('truetype'),
+		url('https://fonts.gstatic.com/s/spacemono/v17/i7dMIFZifjKcF5UAWdDRaPpZYFI.ttf')
+			format('truetype');
 }
 
 @font-face {
@@ -22,14 +25,16 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/FragmentMono-Regular.ttf') format('truetype'),
-		url('https://fonts.gstatic.com/s/fragmentmono/v6/4iCr6K5wfMRRjxp0DA6-2CLnN4Q.ttf') format('truetype');
+	src:
+		url('./fonts/FragmentMono-Regular.ttf') format('truetype'),
+		url('https://fonts.gstatic.com/s/fragmentmono/v6/4iCr6K5wfMRRjxp0DA6-2CLnN4Q.ttf')
+			format('truetype');
 }
 
 :root {
 	--font-display: 'SpaceMono', 'Space Mono', ui-monospace, monospace;
 	--font-body: 'FragmentMono', 'Fragment Mono', ui-monospace, monospace;
-	--text-muted: color-mix(in srgb, var(--text) 78%, var(--background));
+	--text-muted: color-mix(in srgb, var(--text) 96%, var(--background));
 }
 
 h1,
@@ -52,7 +57,11 @@ h6 {
 }
 
 :root[data-theme='NewsPaper'] {
-	--white: rgb(170 166 166); --background: rgb(136 135 135); --light: #747373; --text: rgb(27 27 27); --background-darker: rgb(49 49 49);
+	--white: rgb(170 166 166);
+	--background: rgb(136 135 135);
+	--light: #747373;
+	--text: rgb(27 27 27);
+	--background-darker: rgb(49 49 49);
 }
 
 /* A quiet, theme-tinted paper grain shared by every palette. */
@@ -62,26 +71,50 @@ body {
 	background-size: 5px 5px;
 }
 :root[data-theme='BurntWood'] {
-	--white: #fff; --background: rgb(26 25 25); --light: #494444; --text: rgb(240 232 232); --background-darker: rgb(26 25 25);
+	--white: #fff;
+	--background: rgb(26 25 25);
+	--light: #494444;
+	--text: rgb(240 232 232);
+	--background-darker: rgb(26 25 25);
 }
 :root[data-theme='Hacker'] {
-	--white: rgb(236 236 236); --background: #072004; --light: #0f3813; --text: rgb(178 230 176); --background-darker: #0b4e08;
+	--white: rgb(236 236 236);
+	--background: #072004;
+	--light: #0f3813;
+	--text: rgb(178 230 176);
+	--background-darker: #0b4e08;
 }
 :root[data-theme='PurpleDaydream'] {
-	--white: rgb(236 236 236); --background: rgb(34 3 75); --light: #6734aa; --text: rgb(201 172 235); --background-darker: rgb(43 13 112);
+	--white: rgb(236 236 236);
+	--background: rgb(34 3 75);
+	--light: #6734aa;
+	--text: rgb(201 172 235);
+	--background-darker: rgb(43 13 112);
 }
 :root[data-theme='BloodRed'] {
-	--white: rgb(236 236 236); --background: rgb(54 12 12); --light: #863434; --text: rgb(194 122 122); --background-darker: rgb(88 14 14);
+	--white: rgb(236 236 236);
+	--background: rgb(54 12 12);
+	--light: #863434;
+	--text: rgb(194 122 122);
+	--background-darker: rgb(88 14 14);
 }
 
 @keyframes ui-motion-enter {
-	from { opacity: 0; }
-	to { opacity: 1; }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes ui-motion-exit {
-	from { opacity: 1; }
-	to { opacity: 0; }
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
 }
 
 .ui-motion-enter[data-state='open'] {
@@ -137,4 +170,20 @@ body {
 
 ::-webkit-scrollbar-corner {
 	background: var(--background);
+}
+
+:root {
+	--control-height: 2.75rem;
+	--border-width: 2px;
+	--focus-ring: 2px dashed var(--text);
+	--shadow-raised:
+		inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
+		inset 0 -3px 5px color-mix(in srgb, var(--text) 42%, transparent),
+		0 4px 7px color-mix(in srgb, var(--text) 35%, transparent);
+	--shadow-inset:
+		inset 0 2px 5px color-mix(in srgb, var(--text) 45%, transparent),
+		inset 0 -1px 1px color-mix(in srgb, var(--white) 18%, transparent);
+	--layer-overlay: 50;
+	--layer-dialog: 51;
+	--layer-popup: 60;
 }

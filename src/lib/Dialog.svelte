@@ -4,11 +4,13 @@
 	import type { Snippet } from 'svelte';
 
 	let {
+		open = $bindable(false),
 		trigger = 'Open dialog',
 		title,
 		description,
 		children
 	}: {
+		open?: boolean;
 		trigger?: string;
 		title: string;
 		description?: string;
@@ -16,7 +18,7 @@
 	} = $props();
 </script>
 
-<BitsDialog.Root>
+<BitsDialog.Root bind:open>
 	<BitsDialog.Trigger class="ui-button">{trigger}</BitsDialog.Trigger>
 	<BitsDialog.Portal>
 		<BitsDialog.Overlay class="dialog-overlay ui-motion-enter" />

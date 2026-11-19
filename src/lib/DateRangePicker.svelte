@@ -115,7 +115,7 @@
 		border-style: dashed;
 	}
 	:global(.range-content) {
-		z-index: 50;
+		z-index: var(--layer-popup);
 		border: 2px solid var(--text);
 		background: var(--background);
 		color: var(--text);

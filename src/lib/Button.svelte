@@ -3,11 +3,15 @@
 	let {
 		variant = 'primary',
 		children,
+		class: className = '',
 		...rest
-	}: { variant?: 'primary' | 'alternate'; children: import('svelte').Snippet } = $props();
+	}: { variant?: 'primary' | 'alternate'; children: import('svelte').Snippet } & Omit<
+		import('svelte/elements').HTMLButtonAttributes,
+		'children' | 'child'
+	> = $props();
 </script>
 
-<BitsButton.Root class={`button ${variant === 'alternate' ? 'alternate' : ''}`} {...rest}
+<BitsButton.Root class={['button', { alternate: variant === 'alternate' }, className]} {...rest}
 	>{@render children()}</BitsButton.Root
 >
 
@@ -29,6 +33,10 @@
 	:global(.button.alternate) {
 		background: var(--background-darker);
 		color: var(--white);
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 18%, transparent),
+			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
+			0 4px 8px color-mix(in srgb, var(--text) 45%, transparent);
 	}
 	:global(.button:hover:not(:disabled)) {
 		border-style: dashed;
@@ -43,6 +51,12 @@
 	:global(.button:active:not(:disabled)) {
 		transform: translate(2px, 2px);
 		box-shadow: 1px 1px 0 var(--text);
+	}
+	:global(.button.alternate:active:not(:disabled)) {
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 12%, transparent),
+			inset 0 -2px 3px color-mix(in srgb, var(--text) 48%, transparent),
+			0 1px 2px color-mix(in srgb, var(--text) 38%, transparent);
 	}
 	:global(.button:disabled) {
 		opacity: 0.55;

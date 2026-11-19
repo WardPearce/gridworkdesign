@@ -39,7 +39,7 @@
 		outline-offset: 3px;
 	}
 	:global(.preview-content) {
-		z-index: 30;
+		z-index: var(--layer-popup);
 		width: min(20rem, calc(100vw - 2rem));
 		padding: 1rem;
 		border: 2px solid var(--text);

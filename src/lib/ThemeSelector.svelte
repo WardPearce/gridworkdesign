@@ -1,10 +1,19 @@
 <script lang="ts">
 	import { ChevronDown, Sun } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 	import { Select } from 'bits-ui';
 
-	export type Theme = 'Gridwork' | 'NewsPaper' | 'BurntWood' | 'Hacker' | 'PurpleDaydream' | 'BloodRed';
+	export type Theme =
+		'Gridwork' | 'NewsPaper' | 'BurntWood' | 'Hacker' | 'PurpleDaydream' | 'BloodRed';
 	type Mode = 'rotate' | 'dropdown';
-	const themes: Theme[] = ['Gridwork', 'NewsPaper', 'BurntWood', 'Hacker', 'PurpleDaydream', 'BloodRed'];
+	const themes: Theme[] = [
+		'Gridwork',
+		'NewsPaper',
+		'BurntWood',
+		'Hacker',
+		'PurpleDaydream',
+		'BloodRed'
+	];
 	const themeLabels: Record<Theme, string> = {
 		Gridwork: 'Gridwork',
 		NewsPaper: 'NewsPaper',
@@ -20,6 +29,20 @@
 		mode = 'rotate'
 	}: { value?: Theme; name?: string; mode?: Mode } = $props();
 
+	onMount(() => {
+		const observer = new MutationObserver(() => {
+			const next = document.documentElement.dataset.theme;
+			if (next && themes.includes(next as Theme)) value = next as Theme;
+		});
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['data-theme']
+		});
+		return () => observer.disconnect();
+	});
+	$effect(() => {
+		document.documentElement.dataset.theme = value;
+	});
 	const applyTheme = (theme: Theme) => {
 		if (typeof document !== 'undefined') document.documentElement.dataset.theme = theme;
 	};
@@ -88,7 +111,7 @@
 		outline-offset: 3px;
 	}
 	:global(.theme-content) {
-		z-index: 50;
+		z-index: var(--layer-popup);
 		min-width: 12rem;
 		max-height: min(18rem, var(--bits-select-content-available-height));
 		overflow: auto;

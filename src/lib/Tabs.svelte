@@ -1,7 +1,12 @@
 <script lang="ts">
 	import { Tabs as BitsTabs } from 'bits-ui';
 
-	type TabItem = { value: string; label: string; content: string; disabled?: boolean };
+	type TabItem = {
+		value: string;
+		label: string;
+		content: string | import('svelte').Snippet;
+		disabled?: boolean;
+	};
 	let {
 		items,
 		value = $bindable(items[0]?.value),
@@ -19,7 +24,9 @@
 	</BitsTabs.List>
 	{#each items as item (item.value)}
 		<BitsTabs.Content value={item.value} class="tabs-content"
-			><p>{item.content}</p></BitsTabs.Content
+			>{#if typeof item.content === 'string'}<p>
+					{item.content}
+				</p>{:else}{@render item.content()}{/if}</BitsTabs.Content
 		>
 	{/each}
 </BitsTabs.Root>
@@ -47,7 +54,13 @@
 		border-color: var(--text);
 		border-bottom-color: var(--background);
 		margin-bottom: -2px;
+		background: var(--background-darker);
+		color: var(--white);
 		font-weight: 700;
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
+			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
+			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
 	}
 	:global(.tabs-trigger:hover:not(:disabled)) {
 		text-decoration: underline;

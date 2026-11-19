@@ -32,7 +32,7 @@
 		border-style: dashed;
 	}
 	:global(.popover-content) {
-		z-index: 20;
+		z-index: var(--layer-popup);
 		max-width: min(24rem, calc(100vw - 2rem));
 		padding: 1rem;
 		border: 2px solid var(--text);

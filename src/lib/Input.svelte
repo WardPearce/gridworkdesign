@@ -2,20 +2,22 @@
 	import type { Snippet } from 'svelte';
 
 	let {
+		value = $bindable<string | number | undefined>(undefined),
 		prefix,
 		suffix,
 		class: className = '',
 		...attributes
 	}: {
+		value?: string | number;
 		prefix?: Snippet;
 		suffix?: Snippet;
 		class?: string;
-	} & Omit<import('svelte/elements').HTMLInputAttributes, 'class'> = $props();
+	} & Omit<import('svelte/elements').HTMLInputAttributes, 'class' | 'prefix' | 'value'> = $props();
 </script>
 
 <span class="input-wrap">
 	{#if prefix}<span class="input-icon prefix">{@render prefix()}</span>{/if}
-	<input class="input {className}" {...attributes} />
+	<input bind:value class="input {className}" {...attributes} />
 	{#if suffix}<span class="input-icon suffix">{@render suffix()}</span>{/if}
 </span>
 
@@ -52,7 +54,7 @@
 
 	.input::placeholder {
 		color: var(--text);
-		opacity: 0.65;
+		opacity: 1;
 	}
 
 	.input-icon {

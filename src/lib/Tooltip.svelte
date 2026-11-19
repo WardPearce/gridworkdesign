@@ -35,7 +35,7 @@
 		outline-offset: 2px;
 	}
 	:global(.tooltip-content) {
-		z-index: 30;
+		z-index: var(--layer-popup);
 		max-width: min(20rem, calc(100vw - 2rem));
 		padding: 0.375rem 0.625rem;
 		border: 2px solid var(--text);

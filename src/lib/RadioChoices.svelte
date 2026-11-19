@@ -48,6 +48,14 @@
 		cursor: pointer;
 	}
 
+	:global(.radio-item[data-state='checked']) {
+		background: var(--background-darker);
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 14%, transparent),
+			inset 0 -3px 4px color-mix(in srgb, var(--text) 42%, transparent),
+			0 1px 2px color-mix(in srgb, var(--text) 35%, transparent);
+	}
+
 	:global(.radio-item:focus-visible) {
 		outline: 2px dashed var(--text);
 		outline-offset: 3px;
@@ -62,7 +70,7 @@
 		width: 0.65rem;
 		height: 0.65rem;
 		border-radius: 50%;
-		background: var(--text);
+		background: var(--white);
 		transform: scale(0);
 	}
 

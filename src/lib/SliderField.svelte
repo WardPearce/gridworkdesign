@@ -81,6 +81,10 @@
 		height: 1.75rem;
 		border: 2px solid var(--text);
 		background: var(--background);
+		box-shadow:
+			inset 0 2px 2px color-mix(in srgb, var(--white) 24%, transparent),
+			inset 0 -3px 3px color-mix(in srgb, var(--text) 32%, transparent),
+			0 2px 3px color-mix(in srgb, var(--text) 32%, transparent);
 		cursor: grab;
 	}
 

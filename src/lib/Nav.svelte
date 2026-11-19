@@ -1,0 +1,199 @@
+<script module lang="ts">
+	import type { Component } from 'svelte';
+	export type NavItem = {
+		label: string;
+		href: string;
+		icon?: Component<{ size?: number; 'aria-hidden'?: boolean | 'true' | 'false' }>;
+		badge?: string | number;
+		match?: 'exact' | 'prefix';
+	};
+</script>
+
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
+	let {
+		items,
+		currentPath = '',
+		placement = 'top',
+		sticky = false,
+		label = 'Main navigation',
+		brand,
+		actions,
+		class: className,
+		...rest
+	}: {
+		items: NavItem[];
+		currentPath?: string;
+		placement?: 'top' | 'bottom';
+		sticky?: boolean;
+		label?: string;
+		brand?: Snippet;
+		actions?: Snippet;
+	} & Omit<HTMLAttributes<HTMLElement>, 'children'> = $props();
+	function active(item: NavItem) {
+		const path = currentPath.replace(/\/$/, '') || '/';
+		const href = item.href.replace(/\/$/, '') || '/';
+		return (
+			path === href || (item.match === 'prefix' && href !== '/' && path.startsWith(`${href}/`))
+		);
+	}
+</script>
+
+<nav class={['navigation-bar', placement, { sticky }, className]} aria-label={label} {...rest}>
+	{#if brand}<div class="brand">{@render brand()}</div>{/if}
+	<ul>
+		{#each items as item (item.href)}
+			<li>
+				<!-- URLs belong to the consuming app and may be external. -->
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+				<a href={item.href} aria-current={active(item) ? 'page' : undefined}>
+					{#if item.icon}<item.icon size={19} aria-hidden="true" />{/if}
+					<span class="label">{item.label}</span>
+					{#if item.badge !== undefined}<span class="badge">{item.badge}</span>{/if}
+					<span class="indicator" aria-hidden="true"></span>
+				</a>
+			</li>
+		{/each}
+	</ul>
+	{#if actions}<div class="actions">{@render actions()}</div>{/if}
+</nav>
+
+<style>
+	.navigation-bar {
+		min-width: 0;
+		max-width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.75rem 1rem;
+		background: var(--background);
+		color: var(--text);
+		border-block: 2px solid var(--text);
+		box-shadow: var(--shadow-raised);
+	}
+	.sticky {
+		position: sticky;
+		z-index: 10;
+	}
+	.top.sticky {
+		top: 0;
+	}
+	.bottom.sticky {
+		bottom: 0;
+	}
+	.bottom {
+		padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+	}
+	.top {
+		padding-top: max(0.75rem, env(safe-area-inset-top));
+	}
+	.brand,
+	.actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex: 0 0 auto;
+	}
+	ul {
+		display: flex;
+		flex: 1;
+		align-items: stretch;
+		gap: 0.5rem;
+		min-width: 0;
+		margin: 0;
+		padding: 0.25rem;
+		overflow-x: auto;
+		list-style: none;
+		scrollbar-width: thin;
+	}
+	li {
+		display: flex;
+		flex: 0 0 auto;
+	}
+	a {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		min-height: 2.75rem;
+		padding: 0.6rem 0.85rem;
+		border: 1px solid color-mix(in srgb, var(--text) 55%, var(--background));
+		color: inherit;
+		background: var(--background);
+		font: inherit;
+		font-size: 0.875rem;
+		text-decoration: none;
+		box-shadow: var(--shadow-raised);
+	}
+	a:hover {
+		border-color: var(--text);
+		border-style: dashed;
+	}
+	a:focus-visible {
+		outline: var(--focus-ring);
+		outline-offset: 2px;
+	}
+	a[aria-current='page'] {
+		background: var(--background-darker);
+		color: var(--white);
+		box-shadow: var(--shadow-inset);
+	}
+	.indicator {
+		width: 0.3rem;
+		height: 0.3rem;
+		flex: 0 0 auto;
+		border-radius: 50%;
+		background: currentColor;
+		opacity: 0.35;
+	}
+	a[aria-current='page'] .indicator {
+		opacity: 1;
+		box-shadow: 0 0 4px currentColor;
+	}
+	.badge {
+		padding: 0.1rem 0.3rem;
+		border: 1px solid currentColor;
+		font-size: 0.7rem;
+	}
+	.bottom ul {
+		justify-content: space-evenly;
+	}
+	.bottom li {
+		flex: 1 0 auto;
+	}
+	.bottom a {
+		flex: 1;
+		flex-direction: column;
+		gap: 0.3rem;
+	}
+	.bottom .indicator {
+		position: absolute;
+		top: 0.25rem;
+		right: 0.3rem;
+	}
+	.bottom .badge {
+		position: absolute;
+		top: 0.2rem;
+		right: 0.6rem;
+	}
+	@media (max-width: 600px) {
+		.navigation-bar {
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			padding-inline: 0.5rem;
+		}
+		ul {
+			flex-basis: 100%;
+			order: 2;
+		}
+		.actions {
+			margin-left: auto;
+		}
+		a {
+			font-size: 0.75rem;
+			padding-inline: 0.65rem;
+		}
+	}
+</style>

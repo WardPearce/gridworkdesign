@@ -6,6 +6,7 @@
 		max = 100,
 		step = 1,
 		mode = 'notch',
+		size = 'md',
 		showValue = false,
 		disabled = false
 	}: {
@@ -15,6 +16,7 @@
 		max?: number;
 		step?: number;
 		mode?: 'endless' | 'notch' | 'fill';
+		size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 		showValue?: boolean;
 		disabled?: boolean;
 	} = $props();
@@ -95,7 +97,7 @@
 	}
 </script>
 
-<div class="dial-field">
+<div class={['dial-field', `dial-field-${size}`]}>
 	<span class="dial-label">{label}</span>
 	<svg class="notch-ring" viewBox="0 0 168 168" aria-hidden="true">
 		{#each notches as notch (notch.index)}
@@ -135,22 +137,26 @@
 	.dial-field {
 		position: relative;
 		display: inline-grid;
-		width: 10.5rem;
-		height: 12.5rem;
-		grid-template-rows: 1.5rem 10.5rem;
+		width: var(--dial-field-size);
+		grid-template-rows: 1.5rem var(--dial-field-size);
 		justify-items: center;
 		gap: 0.5rem;
 		color: var(--text);
 		font-family: 'FragmentMono', monospace;
 	}
+	.dial-field-xs { --dial-field-size: 7rem; }
+	.dial-field-sm { --dial-field-size: 8.75rem; }
+	.dial-field-md { --dial-field-size: 10.5rem; }
+	.dial-field-lg { --dial-field-size: 12.25rem; }
+	.dial-field-xl { --dial-field-size: 14rem; }
 
 	.dial-label { align-self: end; font-size: 0.875rem; }
 	.notch-ring {
 		position: absolute;
 		top: 2rem;
 		left: 0;
-		width: 10.5rem;
-		height: 10.5rem;
+		width: var(--dial-field-size);
+		height: var(--dial-field-size);
 		overflow: visible;
 		pointer-events: none;
 	}
@@ -167,8 +173,8 @@
 		z-index: 1;
 		align-self: center;
 		justify-self: center;
-		width: 8rem;
-		height: 8rem;
+		width: 76%;
+		height: 76%;
 		padding: 0;
 		border: 2px solid color-mix(in srgb, var(--text) 72%, var(--background-darker));
 		border-radius: 50%;

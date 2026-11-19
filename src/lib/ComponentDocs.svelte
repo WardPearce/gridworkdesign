@@ -9,8 +9,68 @@
 		defaultValue?: string;
 		description: string;
 	};
-	const slugs = ['accordion','alert-dialog','aspect-ratio','avatar','button','card','calendar','checkbox','collapsible','combobox-field','command-menu','context-menu','date-field','date-picker','date-range-field','date-range-picker','dialog','dropdown-menu','inline-list','input','label','link-preview','menu','menubar','meter','navigation-menu','pagination','pin-input','popover','progress','radio-choices','range-calendar','rating','rating-group','scroll-area','search','select-field','separator','sidebar','slider-field','switch','tabs','theme-selector','time-field','time-range-field','toggle','toggle-group','toolbar','tooltip'];
-	const items = slugs.map((slug) => ({ label: slug.split('-').map((part) => part === 'pin' ? 'PIN' : part[0].toUpperCase() + part.slice(1)).join(' '), href: `/components/${slug}` }));
+	const slugs = [
+		'foundations',
+		'accordion',
+		'alert-dialog',
+		'aspect-ratio',
+		'avatar',
+		'button',
+		'card',
+		'calendar',
+		'checkbox',
+		'collapsible',
+		'combobox-field',
+		'command-menu',
+		'context-menu',
+		'date-field',
+		'date-picker',
+		'date-range-field',
+		'date-range-picker',
+		'dialog',
+		'dial',
+		'dial-board',
+		'dropdown-menu',
+		'inline-list',
+		'input',
+		'label',
+		'link-preview',
+		'menu',
+		'menubar',
+		'meter',
+		'navigation-menu',
+		'nav',
+		'pagination',
+		'pin-input',
+		'popover',
+		'progress',
+		'radio-choices',
+		'range-calendar',
+		'rating',
+		'rating-group',
+		'scroll-area',
+		'search',
+		'select-field',
+		'separator',
+		'sidebar',
+		'slider-field',
+		'switch',
+		'tabs',
+		'theme-selector',
+		'time-field',
+		'time-range-field',
+		'toggle',
+		'toggle-group',
+		'toolbar',
+		'tooltip'
+	];
+	const items = slugs.map((slug) => ({
+		label: slug
+			.split('-')
+			.map((part) => (part === 'pin' ? 'PIN' : part[0].toUpperCase() + part.slice(1)))
+			.join(' '),
+		href: `/components/${slug}`
+	}));
 	let {
 		name,
 		summary,
@@ -24,7 +84,7 @@
 	><title>{name} · Svelte UI</title><meta name="description" content={summary} /></svelte:head
 >
 <div class="docs-layout">
-	<Sidebar title="Components" {items} currentPath={page.url.pathname} hideWhenCollapsed />
+	<Sidebar title="Components" {items} currentPath={page.url.pathname} />
 	<main class="docs">
 		<a href="/">← All components</a>
 		<p class="eyebrow">COMPONENT GUIDE</p>

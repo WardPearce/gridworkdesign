@@ -1,166 +1,311 @@
 <script lang="ts">
-	import { ChevronLeft, ChevronRight, Menu } from '@lucide/svelte';
-	let collapsed = $state(false);
+ /* eslint-disable svelte/no-navigation-without-resolve -- Consumer-owned URLs can be external. */
+	import { ChevronLeft, ChevronRight, Menu, Search, X } from '@lucide/svelte';
 	let {
 		items,
 		title = 'Navigation',
 		currentPath = '',
 		collapsible = true,
-		hideWhenCollapsed = false
+		collapsed = $bindable(false),
+		hideWhenCollapsed = false,
+		searchable = true
 	}: {
 		items: { label: string; href: string }[];
 		title?: string;
 		currentPath?: string;
 		collapsible?: boolean;
+		collapsed?: boolean;
 		hideWhenCollapsed?: boolean;
+		searchable?: boolean;
 	} = $props();
+	let query = $state('');
+	let mobileOpen = $state(false);
+	const navigationId = $props.id();
+	const filtered = $derived(
+		items.filter((item) => item.label.toLowerCase().includes(query.trim().toLowerCase()))
+	);
+	const compact = $derived(collapsible && collapsed);
 </script>
 
-<aside class="docs-sidebar" class:collapsed={collapsed && collapsible} class:hidden={collapsed && collapsible && hideWhenCollapsed}>
-	<div class="sidebar-heading">
-		<span class="sidebar-title">{title}</span>
+<aside class={['sidebar', { compact }]} aria-label={title}>
+	<div class="heading">
+		<div class="heading-label">
+			<span class="indicator" aria-hidden="true"></span><strong>{title}</strong><span class="count"
+				>{items.length}</span
+			>
+		</div>
 		{#if collapsible}<button
-				class="collapse-toggle"
+				class="collapse"
 				type="button"
-				aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+				aria-label={compact ? 'Expand sidebar' : 'Collapse sidebar'}
+				aria-expanded={!compact}
+				aria-controls={navigationId}
 				onclick={() => (collapsed = !collapsed)}
 			>
-				{#if collapsed}<ChevronRight size={18} />{:else}<ChevronLeft size={18} />{/if}
+				{#if compact}<ChevronRight size={18} />{:else}<ChevronLeft size={18} />{/if}
 			</button>{/if}
+		<button
+			class="mobile-toggle"
+			type="button"
+			aria-expanded={mobileOpen}
+			aria-controls={navigationId}
+			onclick={() => (mobileOpen = !mobileOpen)}><Menu size={18} /> Browse</button
+		>
 	</div>
-	<details class="mobile-nav">
-		<summary><Menu size={16} /> Browse {title.toLowerCase()}</summary>
-		<nav aria-label="Component documentation">
-			{#each items as item (item.href)}
-				<a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}
-					>{item.label}</a
+	<div
+		id={navigationId}
+		class={['navigation', { 'mobile-open': mobileOpen, tucked: compact && hideWhenCollapsed }]}
+	>
+		{#if searchable}<div class="filter">
+				<Search size={15} aria-hidden="true" />
+				<input
+					aria-label={`Filter ${title.toLowerCase()}`}
+					type="search"
+					placeholder="Find a component…"
+					bind:value={query}
+				/>
+				{#if query}<button type="button" aria-label="Clear filter" onclick={() => (query = '')}
+						><X size={14} /></button
+					>{/if}
+			</div>{/if}
+		<nav aria-label={title}>
+			{#each filtered as item (item.href)}
+				<!-- Library links may be external; callers supply resolved application URLs. -->
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+				<a
+					href={item.href}
+					aria-current={currentPath === item.href ? 'page' : undefined}
+					onclick={() => (mobileOpen = false)}
 				>
-			{/each}
+					<span class="link-light" aria-hidden="true"></span><span>{item.label}</span><ChevronRight
+						class="link-arrow"
+						size={14}
+						aria-hidden="true"
+					/>
+				</a>
+			{:else}<p class="empty" role="status">No matches for “{query}”.</p>{/each}
 		</nav>
-	</details>
-	<nav class="desktop-nav" aria-label="Component documentation">
-		{#each items as item (item.href)}
-			<a
-				href={item.href}
-				aria-current={currentPath === item.href ? 'page' : undefined}
-				title={collapsed ? item.label : undefined}>{item.label}</a
-			>
-		{/each}
-	</nav>
+	</div>
 </aside>
 
 <style>
-	.docs-sidebar {
-		box-sizing: border-box;
-		flex: 0 0 15rem;
-		width: 15rem;
+	.sidebar {
+		position: sticky;
+		top: 0;
+		align-self: flex-start;
+		display: flex;
+		flex-direction: column;
+		flex: 0 0 18rem;
+		width: 18rem;
+		max-height: 100dvh;
 		padding: 1rem;
 		border-right: 2px solid var(--text);
+		background: var(--background);
 		color: var(--text);
-		transition:
-			width 160ms ease,
-			flex-basis 160ms ease;
+		box-shadow: inset -3px 0 6px color-mix(in srgb, var(--text) 12%, transparent);
 	}
-	.sidebar-heading {
+	.heading {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.5rem;
-		margin-bottom: 0.75rem;
+		padding: 0.25rem 0 1rem;
 	}
-	.sidebar-title {
-		color: inherit;
-		font-size: 1.1rem;
-		font-weight: 700;
-		text-decoration: none;
+	.heading-label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		min-width: 0;
 	}
-	.collapse-toggle {
+	.heading strong {
+		overflow-wrap: anywhere;
+		font-size: 0.95rem;
+	}
+	.count {
+		font-size: 0.7rem;
+	}
+	.indicator,
+	.link-light {
+		flex: 0 0 auto;
+		width: 0.45rem;
+		height: 0.45rem;
+		border-radius: 50%;
+		background: var(--light);
+		box-shadow: var(--shadow-inset);
+	}
+	.indicator {
+		background: var(--text);
+	}
+	button {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-width: 2.25rem;
-		min-height: 2.25rem;
-		border: 1px solid var(--text);
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+		padding: 0.5rem;
+		border: 2px solid var(--text);
+		background: var(--background);
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+		box-shadow: var(--shadow-raised);
+	}
+	button:active {
+		box-shadow: var(--shadow-inset);
+	}
+	button:hover {
+		border-style: dashed;
+	}
+	button:focus-visible,
+	a:focus-visible {
+		outline: var(--focus-ring);
+		outline-offset: 3px;
+	}
+	.navigation {
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.filter {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.2rem 0.6rem;
+		min-height: 2.75rem;
+		border: 2px solid var(--text);
+		box-shadow: var(--shadow-inset);
+	}
+	.filter:focus-within {
+		outline: var(--focus-ring);
+		outline-offset: 3px;
+	}
+	input {
+		width: 100%;
+		min-width: 0;
+		border: 0;
+		outline: 0;
 		background: transparent;
 		color: inherit;
-		cursor: pointer;
+		font: inherit;
+		font-size: 0.8rem;
 	}
-	.desktop-nav {
+	input::placeholder {
+		color: inherit;
+		opacity: 1;
+	}
+	input::-webkit-search-cancel-button {
+		display: none;
+	}
+	.filter button {
+		min-width: 1.5rem;
+		min-height: 2rem;
+		padding: 0;
+		border: 0;
+		box-shadow: none;
+	}
+	nav {
 		display: grid;
-		gap: 0.15rem;
+		gap: 0.5rem;
+		min-height: 0;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding: 0.3rem 0.4rem 0.7rem 0.2rem;
+		scrollbar-gutter: stable;
 	}
-	.desktop-nav a,
-	.mobile-nav nav a {
-		display: block;
-		padding: 0.5rem 0.6rem;
+	a {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		min-height: 2.75rem;
+		padding: 0.6rem 0.7rem;
+		border: 1px solid color-mix(in srgb, var(--text) 50%, var(--background));
+		background: var(--background);
 		color: inherit;
 		text-decoration: none;
+		font-size: 0.8rem;
+		box-shadow: var(--shadow-raised);
 	}
-	.desktop-nav a:hover,
-	.mobile-nav nav a:hover {
-		text-decoration: underline;
+	a span:nth-child(2) {
+		flex: 1;
+		overflow-wrap: anywhere;
 	}
-	.desktop-nav a[aria-current='page'],
-	.mobile-nav nav a[aria-current='page'] {
+	a:hover {
+		border-color: var(--text);
+		border-style: dashed;
+	}
+	a[aria-current='page'] {
 		background: var(--background-darker);
 		color: var(--white);
+		border-color: var(--text);
+		box-shadow: var(--shadow-inset);
 	}
-	.mobile-nav {
+	a[aria-current='page'] .link-light {
+		background: var(--white);
+		box-shadow: 0 0 5px color-mix(in srgb, var(--white) 45%, transparent);
+	}
+	.empty {
+		margin: 0;
+		padding: 1rem 0.25rem;
+		font-size: 0.8rem;
+		overflow-wrap: anywhere;
+	}
+	.compact {
+		flex-basis: 13rem;
+		width: 13rem;
+		padding: 0.75rem;
+	}
+	.compact .heading-label .count,
+	.compact .heading-label .indicator {
 		display: none;
 	}
-	.collapsed {
-		flex-basis: 4rem;
-		width: 4rem;
-		padding-inline: 0.5rem;
-	}
-	.collapsed .sidebar-heading {
-		justify-content: center;
-	}
-	.collapsed .sidebar-title {
+	.tucked {
 		display: none;
 	}
-	.collapsed .desktop-nav a {
-		overflow: hidden;
-		padding-inline: 0.55rem;
-		white-space: nowrap;
-		font-size: 0;
+	.compact:has(.tucked) {
+		flex-basis: 4.5rem;
+		width: 4.5rem;
 	}
-	.collapsed .desktop-nav a::first-letter {
-		font-size: 1rem;
+	.compact:has(.tucked) .heading-label {
+		display: none;
+	}
+	.mobile-toggle {
+		display: none;
+		gap: 0.5rem;
 	}
 	@media (max-width: 760px) {
-		.docs-sidebar {
+		.sidebar,
+		.sidebar.compact,
+		.sidebar.compact:has(.tucked) {
+			position: relative;
 			width: 100%;
 			flex-basis: auto;
-			padding: 0.5rem 1rem;
+			max-height: none;
+			padding: 0.75rem 1rem;
 			border-right: 0;
 			border-bottom: 2px solid var(--text);
 		}
-		.sidebar-heading,
-		.desktop-nav {
+		.heading {
+			padding: 0;
+		}
+		.collapse {
 			display: none;
 		}
-		.mobile-nav {
-			display: block;
+		.mobile-toggle {
+			display: inline-flex;
 		}
-		.mobile-nav summary {
+		.compact:has(.tucked) .heading-label {
 			display: flex;
-			align-items: center;
-			gap: 0.5rem;
-			min-height: 2.5rem;
-			cursor: pointer;
-			font-weight: 700;
-			list-style: none;
 		}
-		.mobile-nav summary::-webkit-details-marker {
+		.navigation {
 			display: none;
+			margin-top: 1rem;
 		}
-		.mobile-nav nav {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
-			max-height: 55vh;
-			overflow: auto;
-			padding-block: 0.5rem;
+		.navigation.mobile-open {
+			display: flex;
+		}
+		nav {
+			max-height: 55dvh;
 		}
 	}
 </style>
