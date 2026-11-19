@@ -31,10 +31,18 @@
 		padding: 0;
 		color: var(--text);
 	}
-	@media (max-width: 760px) {
+	@media (max-width: 900px) {
 		.docs-theme-control {
 			position: static;
-			padding: 0.75rem 1rem;
+			width: min(100%, 1440px);
+			box-sizing: border-box;
+			margin-inline: auto;
+			padding: 0.75rem clamp(1rem, 4vw, 4rem);
+		}
+	}
+	@media (max-width: 760px) {
+		.docs-theme-control {
+			padding-inline: 1rem;
 		}
 	}
 </style>

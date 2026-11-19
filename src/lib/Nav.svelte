@@ -6,10 +6,12 @@
 		icon?: Component<{ size?: number; 'aria-hidden'?: boolean | 'true' | 'false' }>;
 		badge?: string | number;
 		match?: 'exact' | 'prefix';
+		onSelect?: () => void;
 	};
 </script>
 
 <script lang="ts">
+	import { Menu, X } from '@lucide/svelte';
 	import type { Snippet } from 'svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 	let {
@@ -31,6 +33,15 @@
 		brand?: Snippet;
 		actions?: Snippet;
 	} & Omit<HTMLAttributes<HTMLElement>, 'children'> = $props();
+	const navigationId = $props.id();
+	const menuToggleId = `${navigationId}-toggle`;
+	let menuOpen = $state(false);
+	function handleWindowKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && menuOpen) {
+			menuOpen = false;
+			document.getElementById(menuToggleId)?.focus();
+		}
+	}
 	function active(item: NavItem) {
 		const path = currentPath.replace(/\/$/, '') || '/';
 		const href = item.href.replace(/\/$/, '') || '/';
@@ -40,13 +51,35 @@
 	}
 </script>
 
+<svelte:window onkeydown={handleWindowKeydown} />
+
 <nav class={['navigation-bar', placement, { sticky }, className]} aria-label={label} {...rest}>
 	{#if brand}<div class="brand">{@render brand()}</div>{/if}
-	<ul>
-		{#each items as item (item.href)}
+	{#if placement === 'top'}
+		<button
+			id={menuToggleId}
+			class="menu-toggle"
+			type="button"
+			aria-label={`${menuOpen ? 'Close' : 'Open'} ${label.toLowerCase()}`}
+			aria-controls={navigationId}
+			aria-expanded={menuOpen}
+			onclick={() => (menuOpen = !menuOpen)}
+		>
+			{#if menuOpen}<X size={20} aria-hidden="true" />{:else}<Menu size={20} aria-hidden="true" />{/if}
+		</button>
+	{/if}
+	<ul id={navigationId} class={{ open: menuOpen }}>
+		{#each items as item (item.label)}
 			<li>
 				<!-- URLs belong to the consuming app and may be external. -->
-				<a href={item.href} aria-current={active(item) ? 'page' : undefined}>
+				<a
+					href={item.href}
+					aria-current={active(item) ? 'page' : undefined}
+					onclick={() => {
+						item.onSelect?.();
+						menuOpen = false;
+					}}
+				>
 					{#if item.icon}<item.icon size={19} aria-hidden="true" />{/if}
 					<span class="label">{item.label}</span>
 					{#if item.badge !== undefined}<span class="badge">{item.badge}</span>{/if}
@@ -157,6 +190,29 @@
 		font-size: 0.7rem;
 		box-shadow: var(--shadow-raised);
 	}
+	.menu-toggle {
+		display: none;
+		align-items: center;
+		justify-content: center;
+		width: 2.75rem;
+		min-height: 2.75rem;
+		padding: 0.5rem;
+		border: 1px solid var(--text);
+		background: var(--background);
+		color: inherit;
+		box-shadow: var(--shadow-raised);
+		cursor: pointer;
+	}
+	.menu-toggle:hover {
+		box-shadow: var(--shadow-hover);
+	}
+	.menu-toggle:active {
+		box-shadow: var(--shadow-inset);
+	}
+	.menu-toggle:focus-visible {
+		outline: var(--focus-ring);
+		outline-offset: var(--focus-ring-offset);
+	}
 	.bottom ul {
 		justify-content: space-evenly;
 	}
@@ -178,22 +234,70 @@
 		top: 0.2rem;
 		right: 0.6rem;
 	}
-	@media (max-width: 600px) {
-		.navigation-bar {
-			flex-wrap: wrap;
+	@media (max-width: 760px) {
+		.navigation-bar.top {
+			position: relative;
+			z-index: 11;
+			flex-wrap: nowrap;
 			gap: 0.5rem;
 			padding-inline: 0.5rem;
 		}
-		ul {
-			flex-basis: 100%;
-			order: 2;
+		.top .brand {
+			order: 0;
 		}
-		.actions {
+		.top .actions {
+			order: 1;
 			margin-left: auto;
 		}
-		a {
-			font-size: 0.75rem;
+		.top .menu-toggle {
+			display: inline-flex;
+			order: 2;
+			flex: 0 0 auto;
+		}
+		.top ul {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			z-index: 12;
+			display: none;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 0.25rem;
+			width: 100%;
+			max-height: min(70dvh, 24rem);
+			margin: 0;
+			padding: 0.5rem;
+			overflow-y: auto;
+			border: 2px solid var(--text);
+			background: var(--background);
+			box-shadow: var(--shadow-raised);
+		}
+		.top ul.open {
+			display: flex;
+		}
+		.top li {
+			flex: 0 0 auto;
+			width: 100%;
+		}
+		.top a {
+			width: 100%;
 			padding-inline: 0.65rem;
+			font-size: 0.75rem;
+			justify-content: flex-start;
+			white-space: normal;
+		}
+	}
+	@media (max-width: 600px) {
+		.navigation-bar.bottom {
+			gap: 0.25rem;
+			padding-inline: 0.5rem;
+		}
+		.bottom ul {
+			flex-basis: 100%;
+		}
+		.bottom a {
+			font-size: 0.75rem;
+			padding-inline: 0.5rem;
 		}
 	}
 </style>

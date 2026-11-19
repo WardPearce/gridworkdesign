@@ -14,7 +14,7 @@
 			type: 'NavItem[]',
 			required: true,
 			description:
-				'Links with labels, optional Lucide-compatible icons, badges, and exact/prefix matching.'
+				'Links with labels, optional Lucide-compatible icons, badges, exact/prefix matching, and selection callbacks.'
 		},
 		{
 			name: 'currentPath',
@@ -41,13 +41,18 @@
 			defaultValue: 'Main navigation',
 			description: 'Accessible landmark name; use distinct names for multiple navs.'
 		},
+		{
+			name: 'NavItem.onSelect',
+			type: '() => void',
+			description: 'Optional callback for selecting a link, useful for local filters and view changes.'
+		},
 		{ name: 'brand / actions', type: 'Snippet', description: 'Optional branding and action areas.' }
 	];
 </script>
 
 <ComponentDocs
 	name="Nav"
-	summary="Raised top and bottom navigation with icons, badges, active states, and safe-area spacing."
+	summary="Top navigation collapses into an accessible mobile dropdown; bottom navigation keeps safe-area spacing."
 	{props}
 	usage={'<Nav {items} currentPath={page.url.pathname} placement="bottom" sticky />'}
 >

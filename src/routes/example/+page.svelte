@@ -12,7 +12,7 @@
 		Star,
 		Truck
 	} from '@lucide/svelte';
-	import { Badge, Button, Card, Grid, Input } from '../../lib/index';
+	import { Badge, Button, Card, Grid, Input, Nav, type NavItem } from '../../lib/index';
 
 	type Category = 'All gear' | 'Laptops' | 'Desktops' | 'Accessories';
 	type Product = {
@@ -72,6 +72,12 @@
 	let cartCount = $state(0);
 	let addedProduct = $state('');
 	let newsletterSent = $state(false);
+	const navigationItems: NavItem[] = [
+		{ label: 'Shop all', href: '#shop', onSelect: () => (category = 'All gear') },
+		{ label: 'Laptops', href: '#shop', onSelect: () => (category = 'Laptops') },
+		{ label: 'Desktops', href: '#shop', onSelect: () => (category = 'Desktops') },
+		{ label: 'Our little promise', href: '#promise' }
+	];
 	let visibleProducts = $derived(
 		products.filter((product) => {
 			const matchesCategory = category === 'All gear' || product.category === category;
@@ -107,21 +113,21 @@
 	</div>
 
 	<header class="site-header">
-		<a class="wordmark" href={resolve('/example')} aria-label="Byte and Bazaar home">
-			<span class="wordmark-mark" aria-hidden="true">b.</span>
-			<span>byte <span class="wordmark-amp">&amp;</span> bazaar</span>
-		</a>
-		<nav class="desktop-nav" aria-label="Main navigation">
-			<a href="#shop">Shop all</a>
-			<a href="#shop" onclick={() => (category = 'Laptops')}>Laptops</a>
-			<a href="#shop" onclick={() => (category = 'Desktops')}>Desktops</a>
-			<a href="#promise">Our little promise</a>
-		</nav>
-		<Button class="cart-button" aria-label={`Shopping bag, ${cartCount} items`}>
-			<ShoppingBag size={17} aria-hidden="true" /> <span>Bag</span><span class="cart-count"
-				>{cartCount}</span
-			>
-		</Button>
+		<Nav items={navigationItems} class="storefront-nav" label="Main navigation">
+			{#snippet brand()}
+				<a class="wordmark" href={resolve('/example')} aria-label="Byte and Bazaar home">
+					<span class="wordmark-mark" aria-hidden="true">b.</span>
+					<span>byte <span class="wordmark-amp">&amp;</span> bazaar</span>
+				</a>
+			{/snippet}
+			{#snippet actions()}
+				<Button class="cart-button" aria-label={`Shopping bag, ${cartCount} items`}>
+					<ShoppingBag size={17} aria-hidden="true" /> <span>Bag</span><span class="cart-count"
+						>{cartCount}</span
+					>
+				</Button>
+			{/snippet}
+		</Nav>
 	</header>
 
 	<main>
@@ -335,12 +341,35 @@
 		color: var(--foreground-muted);
 	}
 	.site-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		min-height: 86px;
-		gap: 2rem;
 		border-bottom: 1px solid var(--border-subtle);
+	}
+	.storefront :global(.storefront-nav) {
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+	}
+	.storefront :global(.storefront-nav ul) {
+		justify-content: center;
+		gap: clamp(0.25rem, 1.2vw, 1rem);
+	}
+	.storefront :global(.storefront-nav li > a) {
+		min-height: 44px;
+		padding-inline: 0.6rem;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+		color: inherit;
+		font-size: var(--store-small, 0.78rem);
+		white-space: nowrap;
+	}
+	.storefront :global(.storefront-nav li > a:hover) {
+		border-color: transparent;
+		box-shadow: none;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.storefront :global(.storefront-nav .indicator) {
+		display: none;
 	}
 	.wordmark {
 		display: inline-flex;
@@ -366,17 +395,6 @@
 	.wordmark-amp {
 		color: var(--foreground-muted);
 	}
-	.desktop-nav {
-		display: flex;
-		align-items: center;
-		gap: clamp(1rem, 2.5vw, 2.5rem);
-	}
-	.desktop-nav a {
-		color: inherit;
-		text-decoration: none;
-		font-size: 0.78rem;
-	}
-	.desktop-nav a:hover,
 	.hero-link:hover {
 		text-decoration: underline;
 		text-underline-offset: 4px;
@@ -519,11 +537,12 @@
 		z-index: 1;
 		bottom: 54px;
 		left: 11%;
-		width: 51%;
+		width: 45%;
 		transform: rotate(-5deg);
 	}
 	.laptop-screen {
-		height: 173px;
+		box-sizing: border-box;
+		aspect-ratio: 16 / 9;
 		padding: 10px;
 		border: 8px solid var(--border);
 		border-bottom-width: 6px;
@@ -891,11 +910,26 @@
 		.monitor-screen {
 			height: 145px;
 		}
-		.laptop-screen {
-			height: 145px;
-		}
 		.product-art {
 			height: 220px;
+		}
+	}
+	@media (max-width: 800px) {
+		.hero {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 1.5rem;
+			min-height: 0;
+			padding: 36px 0;
+		}
+		.hero-copy {
+			padding: 0;
+		}
+		.hero-art {
+			min-height: clamp(260px, 42vw, 340px);
+		}
+		.newsletter {
+			grid-template-columns: 1fr;
+			gap: 1.4rem;
 		}
 	}
 	@media (max-width: 650px) {
@@ -908,19 +942,12 @@
 		.announcement-divider {
 			margin: 0 0.15rem;
 		}
-		.site-header {
-			min-height: 68px;
-			gap: 0.5rem;
-		}
 		.wordmark {
 			font-size: 0.85rem;
 		}
 		.wordmark-mark {
 			width: 27px;
 			height: 27px;
-		}
-		.desktop-nav {
-			display: none;
 		}
 		.storefront :global(.cart-button) {
 			font-size: 0.7rem;
@@ -955,10 +982,7 @@
 		.art-laptop {
 			bottom: 48px;
 			left: 9%;
-			width: 56%;
-		}
-		.laptop-screen {
-			height: 143px;
+			width: 50%;
 		}
 		.perks {
 			grid-template-columns: 1fr;
@@ -1068,15 +1092,6 @@
 	.storefront :global(a:focus-visible) {
 		outline: var(--focus-ring);
 		outline-offset: 4px;
-	}
-	.site-header {
-		gap: 1.25rem;
-	}
-	.desktop-nav a {
-		display: inline-flex;
-		align-items: center;
-		min-height: 44px;
-		font-size: var(--store-small);
 	}
 	.hero {
 		grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
@@ -1231,24 +1246,6 @@
 			line-height: 1.4;
 			text-align: center;
 		}
-		.site-header {
-			flex-wrap: wrap;
-			gap: 0 1rem;
-			padding: 0.65rem 0;
-		}
-		.desktop-nav {
-			display: flex;
-			order: 3;
-			width: 100%;
-			flex-wrap: wrap;
-			justify-content: space-between;
-			gap: 0 0.75rem;
-			border-top: 1px solid var(--border-subtle);
-		}
-		.desktop-nav a {
-			min-height: 42px;
-			font-size: 0.7rem;
-		}
 		.hero {
 			grid-template-columns: 1fr;
 			gap: 0;
@@ -1309,6 +1306,24 @@
 		}
 	}
 	@media (max-width: 420px) {
+		.hero h1 {
+			font-size: clamp(2.5rem, 12vw, 3.2rem);
+		}
+		.hero-art {
+			min-height: 260px;
+		}
+		.laptop-screen {
+			padding: 5px;
+			border-width: 5px;
+			border-bottom-width: 4px;
+		}
+		.laptop-window {
+			padding: 6px;
+		}
+		.laptop-window b {
+			margin-top: 0.45rem;
+			font-size: clamp(0.8rem, 5vw, 1.1rem);
+		}
 		.newsletter-form {
 			flex-direction: column;
 		}
