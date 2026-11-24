@@ -11,7 +11,7 @@
 		children
 	}: {
 		open?: boolean;
-		trigger?: string;
+		trigger?: string | null;
 		title: string;
 		description?: string;
 		children?: Snippet;
@@ -19,7 +19,9 @@
 </script>
 
 <BitsDialog.Root bind:open>
-	<BitsDialog.Trigger class="ui-button">{trigger}</BitsDialog.Trigger>
+	{#if trigger !== null}
+		<BitsDialog.Trigger class="ui-button">{trigger}</BitsDialog.Trigger>
+	{/if}
 	<BitsDialog.Portal>
 		<BitsDialog.Overlay class="dialog-overlay ui-motion-enter" />
 		<BitsDialog.Content class="dialog-content ui-motion-enter">
