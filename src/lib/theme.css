@@ -86,9 +86,15 @@ body {
 :root[data-theme='BurntWood'] {
 	--white: #fff;
 	--background: rgb(26 25 25);
-	--light: #494444;
+	--light: #353535;
 	--text: rgb(240 232 232);
-	--background-darker: rgb(26 25 25);
+	--background-darker: #202020;
+	--depth-shadow: rgb(0 0 0 / 64%);
+	--depth-highlight: rgb(255 225 210 / 12%);
+	--shadow-raised: 0 3px 8px var(--depth-shadow);
+	--shadow-hover: 0 5px 12px rgb(0 0 0 / 72%);
+	--shadow-inset: inset 0 2px 5px rgb(0 0 0 / 56%);
+	--shadow-floating: 0 6px 14px rgb(0 0 0 / 62%), 0 18px 32px rgb(0 0 0 / 48%);
 }
 :root[data-theme='Hacker'] {
 	--white: rgb(236 236 236);
@@ -96,6 +102,8 @@ body {
 	--light: #0f3813;
 	--text: rgb(178 230 176);
 	--background-darker: #0b4e08;
+	--depth-shadow: rgb(0 0 0 / 72%);
+	--depth-highlight: rgb(178 230 176 / 24%);
 }
 :root[data-theme='PurpleDaydream'] {
 	--white: rgb(236 236 236);
@@ -103,6 +111,8 @@ body {
 	--light: #6734aa;
 	--text: rgb(201 172 235);
 	--background-darker: rgb(43 13 112);
+	--depth-shadow: rgb(0 0 0 / 72%);
+	--depth-highlight: rgb(201 172 235 / 25%);
 }
 :root[data-theme='BloodRed'] {
 	--white: rgb(236 236 236);
@@ -110,6 +120,8 @@ body {
 	--light: #863434;
 	--text: rgb(194 122 122);
 	--background-darker: rgb(88 14 14);
+	--depth-shadow: rgb(0 0 0 / 72%);
+	--depth-highlight: rgb(255 170 170 / 24%);
 }
 
 @keyframes ui-motion-enter {
